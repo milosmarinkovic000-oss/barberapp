@@ -226,7 +226,7 @@ fun SalonManageScreen(contentPadding: PaddingValues, actions: ManageActions, vie
                                 TerminListItem(stringResource(R.string.manage_appearance), leadingIcon = TerminIcon.Palette, showChevron = true, onClick = actions.onAppearance)
                                 TerminDivider()
                             }
-                            val shareText = stringResource(R.string.manage_share_text, salon.name, Actions.salonLink(salon.slug.ifBlank { salon.id }))
+                            val shareText = stringResource(R.string.manage_share_text, salon.name, Actions.salonLink(salon.id))
                             val shareTitle = stringResource(R.string.manage_share)
                             TerminListItem(shareTitle, leadingIcon = TerminIcon.Share, onClick = { Actions.share(context, shareText, shareTitle) })
                         }

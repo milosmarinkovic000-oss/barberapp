@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Samo debug: ekran „Pregled stila“ (u release buildu ruta ne postoji). -->
+    <string name="debug_style_title">Pregled stila</string>
+    <string name="debug_style_intro">Izbor važi odmah u celoj aplikaciji i pamti se samo u debug buildu. Release uvek koristi ThemeConfig.Default.</string>
+    <string name="debug_reset">Vrati na izbor iz odeljka 0</string>
+    <string name="debug_group_style">Stil</string>
+    <string name="debug_group_palette">Paleta</string>
+    <string name="debug_group_custom">Sopstvena boja</string>
+    <string name="debug_group_type">Tipografija</string>
+    <string name="debug_group_roundness">Zaobljenje</string>
+    <string name="debug_group_density">Gustina</string>
+    <string name="debug_group_motion">Animacije</string>
+    <string name="debug_group_icons">Ikonice</string>
+    <string name="debug_group_card">Kartica salona</string>
+    <string name="debug_group_navigation">Navigacija</string>
+    <string name="debug_group_theme">Tema pri prvom pokretanju</string>
+    <string name="debug_group_features">Funkcije</string>
+    <string name="debug_specimen">Uzorak</string>
+    <string name="debug_specimen_title">Naslov ekrana</string>
+    <string name="debug_specimen_body">Tekst pasusa za proveru čitljivosti, proreda i kontrasta u izabranom stilu.</string>
+    <string name="debug_contrast">Kontrast teksta %1$s:1 · akcenta %2$s:1</string>
+</resources>

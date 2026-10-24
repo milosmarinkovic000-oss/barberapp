@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="debug_style_title">Style preview</string>
+    <string name="debug_style_intro">Choices apply immediately across the app and are stored only in debug builds. Release always uses ThemeConfig.Default.</string>
+    <string name="debug_reset">Reset to the section 0 choice</string>
+    <string name="debug_group_style">Style</string>
+    <string name="debug_group_palette">Palette</string>
+    <string name="debug_group_custom">Custom color</string>
+    <string name="debug_group_type">Typography</string>
+    <string name="debug_group_roundness">Roundness</string>
+    <string name="debug_group_density">Density</string>
+    <string name="debug_group_motion">Motion</string>
+    <string name="debug_group_icons">Icons</string>
+    <string name="debug_group_card">Salon card</string>
+    <string name="debug_group_navigation">Navigation</string>
+    <string name="debug_group_theme">Theme on first launch</string>
+    <string name="debug_group_features">Features</string>
+    <string name="debug_specimen">Specimen</string>
+    <string name="debug_specimen_title">Screen title</string>
+    <string name="debug_specimen_body">Paragraph text to check readability, line height and contrast in the selected style.</string>
+    <string name="debug_contrast">Text contrast %1$s:1 · accent %2$s:1</string>
+</resources>

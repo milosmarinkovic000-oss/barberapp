@@ -44,8 +44,6 @@ data class BookingRoute(
 
 @Serializable data object FavoritesRoute
 
-@Serializable data object SettingsRoute
-
 @Serializable data object AppearanceRoute
 
 @Serializable data object PrivacyRoute

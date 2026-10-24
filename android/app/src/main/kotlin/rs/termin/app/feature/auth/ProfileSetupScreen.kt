@@ -67,7 +67,8 @@ class ProfileSetupViewModel @Inject constructor(private val users: UserRepositor
 
     fun onPhoto(uri: Uri?) = state.update { it.copy(photo = uri) }
 
-    fun save(onDone: () -> Unit) {
+    /** Čuva ime (i fotografiju); aplikacija prelazi dalje čim profil dobije ime. */
+    fun save() {
         val name = state.value.name.trim()
         if (name.length < 2) {
             state.update { it.copy(nameError = true) }
@@ -78,7 +79,6 @@ class ProfileSetupViewModel @Inject constructor(private val users: UserRepositor
             try {
                 users.updateName(name)
                 state.value.photo?.let { users.updatePhoto(it) }
-                onDone()
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
@@ -92,7 +92,7 @@ class ProfileSetupViewModel @Inject constructor(private val users: UserRepositor
 
 /** Kratko podešavanje profila posle prve prijave: ime i (po želji) fotografija. */
 @Composable
-fun ProfileSetupScreen(onDone: () -> Unit, viewModel: ProfileSetupViewModel = hiltViewModel()) {
+fun ProfileSetupScreen(viewModel: ProfileSetupViewModel = hiltViewModel()) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val picker = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { viewModel.onPhoto(it) }
     val colors = TerminTheme.colors
@@ -123,9 +123,9 @@ fun ProfileSetupScreen(onDone: () -> Unit, viewModel: ProfileSetupViewModel = hi
             label = stringResource(R.string.setup_name_label),
             error = if (state.nameError) stringResource(R.string.setup_name_error) else null,
             keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words, imeAction = ImeAction.Done),
-            keyboardActions = KeyboardActions(onDone = { viewModel.save(onDone) }),
+            keyboardActions = KeyboardActions(onDone = { viewModel.save() }),
         )
         state.error?.let { Notice(stringResource(it.messageRes()), tone = NoticeTone.Error) }
-        TerminButton(stringResource(R.string.setup_finish), { viewModel.save(onDone) }, fullWidth = true, loading = state.saving)
+        TerminButton(stringResource(R.string.setup_finish), { viewModel.save() }, fullWidth = true, loading = state.saving)
     }
 }
