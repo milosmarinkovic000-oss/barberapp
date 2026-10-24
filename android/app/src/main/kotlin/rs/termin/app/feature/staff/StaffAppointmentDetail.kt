@@ -20,6 +20,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
@@ -186,7 +187,7 @@ class StaffAppointmentDetailViewModel @AssistedInject constructor(
 
     fun startReschedule() {
         val a = uiState.value.appointment.valueOrNull() ?: return
-        local.update { it.copy(reschedule = RescheduleState(date = LocalDate.ofInstant(a.start, BelgradeZone))) }
+        local.update { it.copy(reschedule = RescheduleState(date = a.start.atZone(BelgradeZone).toLocalDate())) }
         loadSlots()
     }
 
@@ -350,7 +351,7 @@ fun StaffAppointmentDetailScreen(appointmentId: String, onBack: (() -> Unit)?) {
                                 history.isEmpty() -> Text(stringResource(R.string.staff_history_empty), style = TerminTheme.type.callout, color = colors.textSecondary)
                                 else -> {
                                     val last = history.firstOrNull { it.start.isBefore(a.start) } ?: history.first()
-                                    Text(stringResource(R.string.staff_history_count, history.size, f.dayLong(f.date(last.start))), style = TerminTheme.type.callout, color = colors.textSecondary)
+                                    Text(pluralStringResource(R.plurals.staff_history_count, history.size, history.size, f.dayLong(f.date(last.start))), style = TerminTheme.type.callout, color = colors.textSecondary)
                                     TerminCard(Modifier.fillMaxWidth()) {
                                         history.take(HISTORY_SHOWN).forEachIndexed { i, h ->
                                             if (i > 0) TerminDivider()

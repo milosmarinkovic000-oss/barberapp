@@ -8,7 +8,11 @@
     <string name="search_view_list">Lista</string>
     <string name="search_view_map">Mapa</string>
     <string name="search_recent">Skorašnje pretrage</string>
-    <string name="search_results">%1$d rezultata</string>
+    <plurals name="search_results">
+        <item quantity="one">%1$d rezultat</item>
+        <item quantity="few">%1$d rezultata</item>
+        <item quantity="other">%1$d rezultata</item>
+    </plurals>
     <string name="search_empty_title">Ništa nismo našli</string>
     <string name="search_empty_message">Probaj drugi naziv ili ukloni neki filter.</string>
     <string name="search_reset_filters">Poništi filtere</string>
@@ -25,7 +29,6 @@
     <string name="search_distance_up_to">do %1$s</string>
     <string name="search_distance_needs_location">Za filter po rastojanju potrebna je približna lokacija.</string>
     <string name="search_apply">Prikaži rezultate</string>
-    <string name="search_map_no_key_title">Mapa nije dostupna</string>
     <string name="search_map_no_key">Mapa traži Google Maps ključ, a u ovom buildu ga nema. Saloni su ispod, a svaki možeš da otvoriš u Google Mapama.</string>
     <string name="search_select_salon">Izaberi salon sa liste da vidiš detalje.</string>
 </resources>

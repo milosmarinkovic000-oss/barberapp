@@ -18,11 +18,14 @@
     <string name="salon_policy_cancel">Otkazivanje i promena termina su mogući najkasnije %1$d h pre termina. Posle toga pozovi salon.</string>
     <string name="salon_policy_cancel_any">Otkazivanje i promena termina su mogući do početka termina.</string>
     <string name="salon_policy_notice">Termin može da se zakaže najranije %1$s unapred.</string>
-    <string name="salon_policy_horizon">Zakazivanje je otvoreno %1$d dana unapred.</string>
+    <plurals name="salon_policy_horizon">
+        <item quantity="one">Zakazivanje je otvoreno %1$d dan unapred.</item>
+        <item quantity="few">Zakazivanje je otvoreno %1$d dana unapred.</item>
+        <item quantity="other">Zakazivanje je otvoreno %1$d dana unapred.</item>
+    </plurals>
     <string name="salon_share_text">%1$s, %2$s — zakaži termin u aplikaciji Termin: %3$s</string>
     <string name="salon_share_title">Podeli salon</string>
     <string name="salon_services_selected">Izabrano: %1$d · %2$s · %3$s</string>
-    <string name="salon_service_select">Izaberi uslugu %1$s</string>
     <string name="salon_no_services">Salon još nije dodao usluge.</string>
     <string name="salon_no_stylists">Salon još nije dodao frizere.</string>
     <string name="salon_no_reviews_title">Još nema recenzija</string>

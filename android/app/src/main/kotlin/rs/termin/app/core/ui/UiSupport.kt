@@ -9,6 +9,7 @@ import androidx.annotation.StringRes
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
+import androidx.core.net.toUri
 import androidx.window.core.layout.WindowSizeClass
 import rs.termin.app.BuildConfig
 import rs.termin.app.R
@@ -66,19 +67,19 @@ fun isMediumOrWider(): Boolean =
 /** Sistemske radnje: poziv, put do salona, deljenje, kalendar, Custom Tab. */
 object Actions {
     fun call(context: Context, phone: String) {
-        start(context, Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phone")))
+        start(context, Intent(Intent.ACTION_DIAL, "tel:$phone".toUri()))
     }
 
     /** Navigacija u Google Mapama (ili bilo kojoj aplikaciji za mape). */
     fun directions(context: Context, location: GeoLocation?, address: String) {
         val destination = location?.let { "${it.latitude},${it.longitude}" } ?: Uri.encode(address)
-        val uri = Uri.parse("https://www.google.com/maps/dir/?api=1&destination=$destination")
+        val uri = "https://www.google.com/maps/dir/?api=1&destination=$destination".toUri()
         start(context, Intent(Intent.ACTION_VIEW, uri))
     }
 
     fun openInMaps(context: Context, location: GeoLocation?, label: String) {
         val query = location?.let { "${it.latitude},${it.longitude}(${Uri.encode(label)})" } ?: Uri.encode(label)
-        start(context, Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=$query")))
+        start(context, Intent(Intent.ACTION_VIEW, "geo:0,0?q=$query".toUri()))
     }
 
     fun share(context: Context, text: String, title: String) {
@@ -104,9 +105,9 @@ object Actions {
 
     fun openCustomTab(context: Context, url: String) {
         try {
-            CustomTabsIntent.Builder().setShowTitle(true).build().launchUrl(context, Uri.parse(url))
+            CustomTabsIntent.Builder().setShowTitle(true).build().launchUrl(context, url.toUri())
         } catch (e: ActivityNotFoundException) {
-            start(context, Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+            start(context, Intent(Intent.ACTION_VIEW, url.toUri()))
         }
     }
 

@@ -7,22 +7,15 @@
     <string name="action_cancel">Otkaži</string>
     <string name="action_close">Zatvori</string>
     <string name="action_save">Sačuvaj</string>
-    <string name="action_back">Nazad</string>
     <string name="action_continue">Nastavi</string>
     <string name="action_done">Gotovo</string>
     <string name="action_delete">Obriši</string>
-    <string name="action_edit">Izmeni</string>
-    <string name="action_add">Dodaj</string>
     <string name="action_call">Pozovi</string>
     <string name="action_share">Podeli</string>
     <string name="action_directions">Put do salona</string>
     <string name="action_open_maps">Otvori u Google Mapama</string>
     <string name="action_see_all">Vidi sve</string>
     <string name="action_confirm">Potvrdi</string>
-    <string name="action_yes">Da</string>
-    <string name="action_no">Ne</string>
-    <string name="action_settings">Podešavanja</string>
-    <string name="action_more">Još</string>
 
     <!-- Stanja ekrana -->
     <string name="state_loading">Učitavanje…</string>
@@ -30,7 +23,6 @@
     <string name="state_error_message">Nismo uspeli da učitamo podatke. Proveri vezu i pokušaj ponovo.</string>
     <string name="state_offline">Nema interneta. Prikazujemo sačuvane podatke.</string>
     <string name="state_offline_booking">Zakazivanje nije moguće bez interneta. Termin mora da potvrdi salon, a to traži vezu.</string>
-    <string name="state_offline_action">Ova radnja traži internet. Pokušaj ponovo kad se povežeš.</string>
 
     <!-- Greške sa servera -->
     <string name="error_slot_taken">Neko je upravo zauzeo ovaj termin. Izaberi neki od slobodnih ispod.</string>
@@ -84,7 +76,11 @@
     <!-- Pristupačnost -->
     <string name="cd_back">Nazad</string>
     <string name="cd_close">Zatvori</string>
-    <string name="cd_rating">Ocena %1$s od 5, %2$d recenzija</string>
+    <plurals name="cd_rating">
+        <item quantity="one">Ocena %1$s od 5, %2$d recenzija</item>
+        <item quantity="few">Ocena %1$s od 5, %2$d recenzije</item>
+        <item quantity="other">Ocena %1$s od 5, %2$d recenzija</item>
+    </plurals>
     <string name="cd_rating_no_reviews">Još nema ocena</string>
     <string name="cd_photo_of">Fotografija: %1$s</string>
     <string name="cd_favorite_add">Dodaj u omiljene</string>

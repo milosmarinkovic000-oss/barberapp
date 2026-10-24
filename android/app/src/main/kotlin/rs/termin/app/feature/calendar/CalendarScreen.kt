@@ -40,6 +40,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
@@ -72,8 +73,8 @@ import rs.termin.app.core.domain.model.BelgradeZone
 import rs.termin.app.core.domain.model.Stylist
 import rs.termin.app.core.domain.model.TimeOff
 import rs.termin.app.core.domain.model.TimeRange
-import rs.termin.app.core.ui.LocalImageUrls
 import rs.termin.app.core.ui.Loadable
+import rs.termin.app.core.ui.LocalImageUrls
 import rs.termin.app.core.ui.StatusPill
 import rs.termin.app.core.ui.formatter
 import rs.termin.app.core.ui.statusColors
@@ -111,7 +112,7 @@ fun CalendarScreen(
     var sheet by rememberSaveable(stateSaver = SheetRequestSaver) { mutableStateOf(null) }
     var counter by rememberSaveable { mutableStateOf(0) }
     val session = state.session
-    val today = LocalDate.ofInstant(state.now.takeIf { it != Instant.EPOCH } ?: Instant.now(), BelgradeZone)
+    val today = (state.now.takeIf { it != Instant.EPOCH } ?: Instant.now()).atZone(BelgradeZone).toLocalDate()
 
     fun open(block: Boolean, stylistId: String?, date: LocalDate, start: Instant?) {
         counter += 1
@@ -285,9 +286,9 @@ private fun DayGrid(
     val vertical = rememberScrollState()
     val horizontal = rememberScrollState()
     val density = LocalDensity.current
-    val isToday = LocalDate.ofInstant(now, BelgradeZone) == date
+    val isToday = now.atZone(BelgradeZone).toLocalDate() == date
     LaunchedEffect(date, hours.first) {
-        val hour = if (isToday) LocalTime.ofInstant(now, BelgradeZone).hour - 1 else hours.first
+        val hour = if (isToday) now.atZone(BelgradeZone).toLocalTime().hour - 1 else hours.first
         val px = with(density) { (HourHeight * (hour - hours.first).coerceAtLeast(0)).toPx() }
         vertical.scrollTo(px.toInt())
     }
@@ -499,7 +500,7 @@ private fun WeekAgenda(
     val spacing = TerminTheme.spacing
     val f = formatter
     val byDay = remember(data.appointments, now) {
-        data.appointments.filter { visibleInCalendar(it, now) }.groupBy { LocalDate.ofInstant(it.start, BelgradeZone) }
+        data.appointments.filter { visibleInCalendar(it, now) }.groupBy { it.start.atZone(BelgradeZone).toLocalDate() }
     }
     LazyColumn(
         Modifier.fillMaxSize(),
@@ -530,7 +531,7 @@ private fun WeekAgenda(
                                 if (list.isEmpty()) {
                                     stringResource(if (open) R.string.calendar_empty_day else R.string.calendar_closed)
                                 } else {
-                                    stringResource(R.string.calendar_week_count, list.size, f.price(revenue))
+                                    pluralStringResource(R.plurals.calendar_week_count, list.size, list.size, f.price(revenue))
                                 },
                                 style = TerminTheme.type.caption,
                                 color = colors.textSecondary,

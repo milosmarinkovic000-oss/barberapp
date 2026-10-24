@@ -6,6 +6,7 @@ import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
 import androidx.credentials.exceptions.GetCredentialCancellationException
 import androidx.credentials.exceptions.GetCredentialException
+import androidx.credentials.exceptions.NoCredentialException
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.firebase.FirebaseApp
@@ -161,6 +162,9 @@ class FirebaseAuthRepository @Inject constructor(
             CredentialManager.create(activity).getCredential(activity, request)
         } catch (e: GetCredentialCancellationException) {
             throw AuthError.Cancelled
+        } catch (e: NoCredentialException) {
+            // Na telefonu nema Google naloga: korisnik može da se prijavi brojem telefona.
+            throw AuthError.GoogleUnavailable
         } catch (e: GetCredentialException) {
             throw AuthError.GoogleUnavailable
         }

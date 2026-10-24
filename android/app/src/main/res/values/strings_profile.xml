@@ -29,7 +29,6 @@
     <string name="profile_demo_mode">Demo režim (lokalni Firebase emulatori)</string>
     <string name="profile_role_owner">Vlasnik salona</string>
     <string name="profile_role_stylist">Frizer</string>
-    <string name="profile_role_customer">Klijent</string>
 
     <string name="language_system">Jezik telefona</string>
     <string name="language_serbian">Srpski (latinica)</string>
@@ -62,7 +61,6 @@
     <string name="delete_confirm_label">Upiši OBRIŠI da potvrdiš</string>
     <string name="delete_confirm_word">OBRIŠI</string>
     <string name="delete_button">Trajno obriši nalog</string>
-    <string name="delete_done">Nalog je obrisan.</string>
 
     <string name="create_salon_title">Novi salon</string>
     <string name="create_salon_intro">Unesi osnovne podatke. Usluge, frizere, radno vreme i fotografije podešavaš posle, a salon se prikazuje klijentima tek kad ga objaviš.</string>
@@ -84,14 +82,12 @@
     <string name="favorites_stylists">Frizeri</string>
     <string name="favorites_empty_title">Još nema omiljenih</string>
     <string name="favorites_empty">Dodirni srce na salonu ili frizeru i ovde ćeš ih brzo pronaći.</string>
-    <string name="favorites_stylist_at">%1$s · %2$s</string>
 
     <string name="inbox_title">Obaveštenja</string>
     <string name="inbox_mark_all">Označi sve kao pročitano</string>
     <string name="inbox_empty_title">Nema obaveštenja</string>
     <string name="inbox_empty">Ovde stižu potvrde, podsetnici i poruke salona.</string>
     <string name="inbox_unread">Nepročitano</string>
-    <string name="inbox_deleted">Obaveštenje je obrisano</string>
 
     <string name="licenses_title">Licence otvorenog koda</string>
     <string name="licenses_intro">Termin koristi sledeće biblioteke i fontove otvorenog koda. Hvala autorima.</string>

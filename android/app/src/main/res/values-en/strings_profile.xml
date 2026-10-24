@@ -29,7 +29,6 @@
     <string name="profile_demo_mode">Demo mode (local Firebase emulators)</string>
     <string name="profile_role_owner">Salon owner</string>
     <string name="profile_role_stylist">Stylist</string>
-    <string name="profile_role_customer">Customer</string>
 
     <string name="language_system">Phone language</string>
     <string name="language_serbian">Srpski (latinica)</string>
@@ -62,7 +61,6 @@
     <string name="delete_confirm_label">Type DELETE to confirm</string>
     <string name="delete_confirm_word">DELETE</string>
     <string name="delete_button">Permanently delete account</string>
-    <string name="delete_done">Your account has been deleted.</string>
 
     <string name="create_salon_title">New salon</string>
     <string name="create_salon_intro">Enter the basics. You can set up services, stylists, hours and photos later; customers see the salon only after you publish it.</string>
@@ -84,14 +82,12 @@
     <string name="favorites_stylists">Stylists</string>
     <string name="favorites_empty_title">No favorites yet</string>
     <string name="favorites_empty">Tap the heart on a salon or stylist to find them here quickly.</string>
-    <string name="favorites_stylist_at">%1$s · %2$s</string>
 
     <string name="inbox_title">Notifications</string>
     <string name="inbox_mark_all">Mark all as read</string>
     <string name="inbox_empty_title">No notifications</string>
     <string name="inbox_empty">Confirmations, reminders and salon messages arrive here.</string>
     <string name="inbox_unread">Unread</string>
-    <string name="inbox_deleted">Notification deleted</string>
 
     <string name="licenses_title">Open source licenses</string>
     <string name="licenses_intro">Termin uses the following open source libraries and fonts. Thanks to their authors.</string>

@@ -69,8 +69,8 @@ import rs.termin.app.core.domain.repository.AuthRepository
 import rs.termin.app.core.domain.repository.SalonRepository
 import rs.termin.app.core.domain.repository.StaffRepository
 import rs.termin.app.core.domain.staffSession
-import rs.termin.app.core.ui.LocalImageUrls
 import rs.termin.app.core.ui.Loadable
+import rs.termin.app.core.ui.LocalImageUrls
 import rs.termin.app.core.ui.messageRes
 import javax.inject.Inject
 

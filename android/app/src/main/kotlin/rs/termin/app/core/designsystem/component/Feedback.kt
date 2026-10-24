@@ -74,7 +74,7 @@ fun SkeletonBox(modifier: Modifier = Modifier, shape: Shape = TerminTheme.radii.
 
 /** Skeleton nekoliko redova teksta. */
 @Composable
-fun SkeletonLines(lines: Int = 3, modifier: Modifier = Modifier) {
+fun SkeletonLines(lines: Int, modifier: Modifier = Modifier) {
     Column(modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
         repeat(lines) { i ->
             SkeletonBox(

@@ -196,7 +196,7 @@ fun BookingSuccessScreen(onDone: () -> Unit, viewModel: BookingSuccessViewModel 
                 TerminButton(stringResource(R.string.notifications_later), viewModel::notificationsAsked, variant = ButtonVariant.Text)
                 TerminButton(
                     stringResource(R.string.notifications_allow),
-                    { if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) permission.launch(Manifest.permission.POST_NOTIFICATIONS) },
+                    { permission.launch(Manifest.permission.POST_NOTIFICATIONS) },
                     variant = ButtonVariant.Tonal,
                     icon = TerminIcon.Notifications,
                 )

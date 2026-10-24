@@ -36,13 +36,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.ProgressBarRangeInfo
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.progressBarRangeInfo
-import androidx.compose.ui.semantics.ProgressBarRangeInfo
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
@@ -182,7 +183,7 @@ fun TerminDivider(modifier: Modifier = Modifier) {
 @Composable
 fun RatingSummary(average: Double, count: Int, averageText: String, countText: String, modifier: Modifier = Modifier, compact: Boolean = false) {
     val colors = TerminTheme.colors
-    val description = if (count == 0) stringResource(R.string.cd_rating_no_reviews) else stringResource(R.string.cd_rating, averageText, count)
+    val description = if (count == 0) stringResource(R.string.cd_rating_no_reviews) else pluralStringResource(R.plurals.cd_rating, count, averageText, count)
     Row(
         modifier = modifier.clearAndSetSemantics { contentDescription = description },
         verticalAlignment = Alignment.CenterVertically,

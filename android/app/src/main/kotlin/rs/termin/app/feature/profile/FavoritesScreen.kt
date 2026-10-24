@@ -27,8 +27,8 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -50,8 +50,8 @@ import rs.termin.app.core.domain.model.Salon
 import rs.termin.app.core.domain.model.Stylist
 import rs.termin.app.core.domain.repository.SalonRepository
 import rs.termin.app.core.domain.repository.UserRepository
-import rs.termin.app.core.ui.LocalImageUrls
 import rs.termin.app.core.ui.Loadable
+import rs.termin.app.core.ui.LocalImageUrls
 import rs.termin.app.core.ui.SalonCard
 import rs.termin.app.core.ui.loadable
 import java.time.Clock

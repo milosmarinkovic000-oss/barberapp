@@ -14,12 +14,13 @@
     <string name="calendar_block">Blokiraj vreme</string>
     <string name="calendar_empty_day">Nema termina za ovaj dan.</string>
     <string name="calendar_closed">Salon ne radi ovog dana.</string>
-    <string name="calendar_time_off">Nije dostupan</string>
     <string name="calendar_no_stylists">Dodaj frizere u timu da bi kalendar imao kolone.</string>
     <string name="calendar_add_team">Otvori tim</string>
-    <string name="calendar_week_count">%1$d termina · %2$s</string>
-    <string name="calendar_cd_slot">Slobodno u %1$s, %2$s. Dodirni za novi termin.</string>
-    <string name="calendar_legend">Legenda</string>
+    <plurals name="calendar_week_count">
+        <item quantity="one">%1$d termin · %2$s</item>
+        <item quantity="few">%1$d termina · %2$s</item>
+        <item quantity="other">%1$d termina · %2$s</item>
+    </plurals>
 
     <string name="manual_title">Novi termin</string>
     <string name="manual_stylist">Frizer</string>
@@ -35,7 +36,6 @@
     <string name="manual_pick_slot">Izaberi slobodno vreme</string>
     <string name="manual_no_slots">Nema slobodnog vremena ovog dana za izabrane usluge.</string>
     <string name="manual_save">Sačuvaj termin</string>
-    <string name="manual_saved">Termin je unet.</string>
     <string name="manual_error_name">Unesi ime klijenta</string>
     <string name="manual_error_services">Izaberi bar jednu uslugu</string>
 
@@ -52,7 +52,11 @@
     <string name="block_reason">Razlog (vidi samo osoblje)</string>
     <string name="block_save">Blokiraj</string>
     <string name="block_saved">Vreme je blokirano.</string>
-    <string name="block_conflicts">Vreme je blokirano, ali se %1$d termina preklapa sa njim. Otkaži ih ili pomeri iz kalendara.</string>
+    <plurals name="block_conflicts">
+        <item quantity="one">Vreme je blokirano, ali se %1$d termin preklapa sa njim. Otkaži ga ili pomeri iz kalendara.</item>
+        <item quantity="few">Vreme je blokirano, ali se %1$d termina preklapaju sa njim. Otkaži ih ili pomeri iz kalendara.</item>
+        <item quantity="other">Vreme je blokirano, ali se %1$d termina preklapa sa njim. Otkaži ih ili pomeri iz kalendara.</item>
+    </plurals>
     <string name="block_error_range">Kraj mora biti posle početka.</string>
     <string name="time_picker_title">Izaberi vreme</string>
     <string name="date_picker_title">Izaberi datum</string>
@@ -82,10 +86,12 @@
     <string name="staff_reschedule">Pomeri termin</string>
     <string name="staff_history">Istorija kod nas</string>
     <string name="staff_history_empty">Ovo je prva poseta.</string>
-    <string name="staff_history_count">%1$d poseta · poslednja %2$s</string>
-    <string name="staff_call_customer">Pozovi klijenta</string>
+    <plurals name="staff_history_count">
+        <item quantity="one">%1$d poseta · poslednja %2$s</item>
+        <item quantity="few">%1$d posete · poslednja %2$s</item>
+        <item quantity="other">%1$d poseta · poslednja %2$s</item>
+    </plurals>
     <string name="staff_status_updated">Status je promenjen.</string>
-    <string name="staff_no_salon">Nalog još nije povezan sa salonom.</string>
 
     <string name="manage_title">Salon</string>
     <string name="manage_published">Objavljen — vidljiv klijentima</string>
@@ -225,7 +231,11 @@
     <string name="stats_empty">Nema termina u ovom periodu.</string>
     <string name="stats_percent">%1$s%%</string>
     <string name="stats_week_of">Nedelja od %1$s</string>
-    <string name="stats_cd_bar">%1$s: %2$d termina</string>
+    <plurals name="stats_cd_bar">
+        <item quantity="one">%1$s: %2$d termin</item>
+        <item quantity="few">%1$s: %2$d termina</item>
+        <item quantity="other">%1$s: %2$d termina</item>
+    </plurals>
 
     <string name="reviews_title">Recenzije</string>
     <string name="reviews_empty">Još nema recenzija. Klijenti dobijaju poziv da ocene posetu posle termina.</string>
@@ -233,7 +243,6 @@
     <string name="reviews_edit_reply">Izmeni odgovor</string>
     <string name="reviews_reply_hint">Tvoj odgovor (javno vidljiv)</string>
     <string name="reviews_reply_send">Objavi odgovor</string>
-    <string name="reviews_your_reply">Odgovor salona</string>
 
     <string name="branding_title">Izgled salona</string>
     <string name="branding_cover">Naslovna fotografija</string>

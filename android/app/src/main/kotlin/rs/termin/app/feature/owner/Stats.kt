@@ -261,7 +261,7 @@ private fun BarChart(series: List<DayPoint>, period: StatsPeriod) {
     val grid = colors.divider
     val resources = LocalResources.current
     val description = remember(series, resources) {
-        series.joinToString("; ") { resources.getString(R.string.stats_cd_bar, f.dayShort(it.date), it.count) }
+        series.joinToString("; ") { resources.getQuantityString(R.plurals.stats_cd_bar, it.count, f.dayShort(it.date), it.count) }
     }
     Column(Modifier.semantics { contentDescription = description }) {
         val shown = selected ?: peak

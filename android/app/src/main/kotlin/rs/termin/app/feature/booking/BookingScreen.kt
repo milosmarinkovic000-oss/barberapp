@@ -91,8 +91,8 @@ import rs.termin.app.core.domain.model.DaySlots
 import rs.termin.app.core.domain.model.Slot
 import rs.termin.app.core.domain.model.Stylist
 import rs.termin.app.core.ui.Formatter
-import rs.termin.app.core.ui.LocalImageUrls
 import rs.termin.app.core.ui.Loadable
+import rs.termin.app.core.ui.LocalImageUrls
 import rs.termin.app.core.ui.formatter
 import rs.termin.app.core.ui.messageRes
 import rs.termin.app.feature.salon.PolicyText

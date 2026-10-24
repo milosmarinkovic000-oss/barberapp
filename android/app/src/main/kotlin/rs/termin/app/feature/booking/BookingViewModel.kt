@@ -359,7 +359,6 @@ class BookingViewModel @Inject constructor(
         if (hold != null && state.value.completedAppointmentId == null && hold.expiresAt.isAfter(Instant.now(clock))) {
             appScope.launch { runCatching { booking.releaseHold(hold.appointmentId) } }
         }
-        super.onCleared()
     }
 
     private companion object {

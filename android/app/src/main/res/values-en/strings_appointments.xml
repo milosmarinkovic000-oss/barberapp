@@ -14,7 +14,6 @@
     <string name="appointments_find_salon">Find a salon</string>
     <string name="appointments_empty_past">Your past visits will show up here.</string>
     <string name="appointments_book_again">Book again</string>
-    <string name="appointments_rate">Rate visit</string>
     <string name="appointments_select">Pick a booking from the list to see details.</string>
 
     <string name="appointment_title">Booking</string>

@@ -13,7 +13,6 @@
     <string name="booking_time_title">When suits you?</string>
     <string name="booking_review_title">Review and confirm</string>
     <string name="booking_next">Next</string>
-    <string name="booking_back">Back</string>
     <string name="booking_total">%1$s · %2$s</string>
     <string name="booking_total_label">Total</string>
     <string name="booking_no_selection">Pick at least one service</string>
@@ -31,7 +30,6 @@
     <string name="booking_hold_expired">Time to confirm ran out. Pick a slot again.</string>
     <string name="booking_holding">Holding your slot…</string>
     <string name="booking_slot">%1$s, %2$s</string>
-    <string name="booking_slot_stylists">Available: %1$s</string>
     <string name="booking_with_stylist">Stylist: %1$s</string>
     <string name="booking_any_assigned">We assign the stylist with the fewest bookings that day.</string>
     <string name="booking_note">Note for your stylist</string>
@@ -52,7 +50,6 @@
     <string name="success_share_text">I booked an appointment: %1$s, %2$s.</string>
     <string name="success_done">My bookings</string>
     <string name="success_calendar_title">%1$s — %2$s</string>
-    <string name="notifications_rationale_title">Want reminders?</string>
     <string name="notifications_rationale">We\'ll remind you the day before and two hours ahead, and let you know if the salon changes anything.</string>
     <string name="notifications_allow">Turn on notifications</string>
     <string name="notifications_later">Later</string>

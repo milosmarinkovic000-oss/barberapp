@@ -8,7 +8,10 @@
     <string name="search_view_list">List</string>
     <string name="search_view_map">Map</string>
     <string name="search_recent">Recent searches</string>
-    <string name="search_results">%1$d results</string>
+    <plurals name="search_results">
+        <item quantity="one">%1$d result</item>
+        <item quantity="other">%1$d results</item>
+    </plurals>
     <string name="search_empty_title">Nothing found</string>
     <string name="search_empty_message">Try another name or remove a filter.</string>
     <string name="search_reset_filters">Reset filters</string>
@@ -25,7 +28,6 @@
     <string name="search_distance_up_to">up to %1$s</string>
     <string name="search_distance_needs_location">The distance filter needs your approximate location.</string>
     <string name="search_apply">Show results</string>
-    <string name="search_map_no_key_title">Map unavailable</string>
     <string name="search_map_no_key">The map needs a Google Maps key and this build doesn\'t have one. Salons are listed below and each can be opened in Google Maps.</string>
     <string name="search_select_salon">Pick a salon from the list to see details.</string>
 </resources>

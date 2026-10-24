@@ -86,7 +86,7 @@ class AppointmentsViewModel @Inject constructor(
                     ticker,
                 ) { mine, waitlist, now ->
                     val (upcoming, past) = splitAppointments(mine, now)
-                    val today = LocalDate.ofInstant(now, BelgradeZone)
+                    val today = now.atZone(BelgradeZone).toLocalDate()
                     val activeWaitlist = waitlist.filter { it.status in setOf("waiting", "notified") && !it.date.isBefore(today) }
                     Loadable.Ready(AppointmentsLists(upcoming, past, activeWaitlist)) as Loadable<AppointmentsLists>
                 }.onStart { emit(Loadable.Loading) }.catch { emit(Loadable.Failed(it)) }

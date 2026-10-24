@@ -14,12 +14,12 @@
     <string name="calendar_block">Block time</string>
     <string name="calendar_empty_day">No bookings on this day.</string>
     <string name="calendar_closed">The salon is closed on this day.</string>
-    <string name="calendar_time_off">Unavailable</string>
     <string name="calendar_no_stylists">Add stylists to your team to see calendar columns.</string>
     <string name="calendar_add_team">Open team</string>
-    <string name="calendar_week_count">%1$d bookings · %2$s</string>
-    <string name="calendar_cd_slot">Free at %1$s, %2$s. Tap for a new booking.</string>
-    <string name="calendar_legend">Legend</string>
+    <plurals name="calendar_week_count">
+        <item quantity="one">%1$d booking · %2$s</item>
+        <item quantity="other">%1$d bookings · %2$s</item>
+    </plurals>
 
     <string name="manual_title">New booking</string>
     <string name="manual_stylist">Stylist</string>
@@ -35,7 +35,6 @@
     <string name="manual_pick_slot">Pick a free time</string>
     <string name="manual_no_slots">No free time on this day for the selected services.</string>
     <string name="manual_save">Save booking</string>
-    <string name="manual_saved">Booking added.</string>
     <string name="manual_error_name">Enter the customer name</string>
     <string name="manual_error_services">Select at least one service</string>
 
@@ -52,7 +51,10 @@
     <string name="block_reason">Reason (staff only)</string>
     <string name="block_save">Block</string>
     <string name="block_saved">Time blocked.</string>
-    <string name="block_conflicts">Time blocked, but %1$d bookings overlap with it. Cancel or move them from the calendar.</string>
+    <plurals name="block_conflicts">
+        <item quantity="one">Time blocked, but %1$d booking overlaps with it. Cancel or move it from the calendar.</item>
+        <item quantity="other">Time blocked, but %1$d bookings overlap with it. Cancel or move them from the calendar.</item>
+    </plurals>
     <string name="block_error_range">The end must be after the start.</string>
     <string name="time_picker_title">Pick a time</string>
     <string name="date_picker_title">Pick a date</string>
@@ -82,10 +84,11 @@
     <string name="staff_reschedule">Move booking</string>
     <string name="staff_history">History with us</string>
     <string name="staff_history_empty">This is the first visit.</string>
-    <string name="staff_history_count">%1$d visits · last %2$s</string>
-    <string name="staff_call_customer">Call customer</string>
+    <plurals name="staff_history_count">
+        <item quantity="one">%1$d visit · last %2$s</item>
+        <item quantity="other">%1$d visits · last %2$s</item>
+    </plurals>
     <string name="staff_status_updated">Status updated.</string>
-    <string name="staff_no_salon">This account is not linked to a salon yet.</string>
 
     <string name="manage_title">Salon</string>
     <string name="manage_published">Published — visible to customers</string>
@@ -225,7 +228,10 @@
     <string name="stats_empty">No bookings in this period.</string>
     <string name="stats_percent">%1$s%%</string>
     <string name="stats_week_of">Week of %1$s</string>
-    <string name="stats_cd_bar">%1$s: %2$d bookings</string>
+    <plurals name="stats_cd_bar">
+        <item quantity="one">%1$s: %2$d booking</item>
+        <item quantity="other">%1$s: %2$d bookings</item>
+    </plurals>
 
     <string name="reviews_title">Reviews</string>
     <string name="reviews_empty">No reviews yet. Customers are invited to rate their visit after the appointment.</string>
@@ -233,7 +239,6 @@
     <string name="reviews_edit_reply">Edit reply</string>
     <string name="reviews_reply_hint">Your reply (public)</string>
     <string name="reviews_reply_send">Publish reply</string>
-    <string name="reviews_your_reply">Salon reply</string>
 
     <string name="branding_title">Salon appearance</string>
     <string name="branding_cover">Cover photo</string>

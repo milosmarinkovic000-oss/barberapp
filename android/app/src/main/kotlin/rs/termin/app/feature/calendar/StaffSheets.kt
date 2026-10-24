@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
@@ -217,7 +218,7 @@ fun BlockTimeSheet(
             val result = state.result
             if (result != null) {
                 if (result.conflicts > 0) {
-                    Notice(stringResource(R.string.block_conflicts, result.conflicts), tone = NoticeTone.Warning)
+                    Notice(pluralStringResource(R.plurals.block_conflicts, result.conflicts, result.conflicts), tone = NoticeTone.Warning)
                 } else {
                     Notice(stringResource(R.string.block_saved), tone = NoticeTone.Success)
                 }

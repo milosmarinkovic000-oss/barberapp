@@ -64,8 +64,8 @@ import rs.termin.app.core.domain.repository.AuthRepository
 import rs.termin.app.core.domain.repository.SalonRepository
 import rs.termin.app.core.domain.staffSession
 import rs.termin.app.core.ui.Actions
-import rs.termin.app.core.ui.LocalImageUrls
 import rs.termin.app.core.ui.Loadable
+import rs.termin.app.core.ui.LocalImageUrls
 import javax.inject.Inject
 
 data class ManageData(val salon: Salon, val services: List<Service>, val stylists: List<Stylist>) {

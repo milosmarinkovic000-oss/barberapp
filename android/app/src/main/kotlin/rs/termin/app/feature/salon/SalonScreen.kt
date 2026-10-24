@@ -36,6 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
@@ -52,8 +53,8 @@ import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.MapProperties
 import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.Marker
-import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
+import com.google.maps.android.compose.rememberUpdatedMarkerState
 import rs.termin.app.BuildConfig
 import rs.termin.app.R
 import rs.termin.app.core.data.firebase.ImageSize
@@ -84,8 +85,8 @@ import rs.termin.app.core.domain.model.Service
 import rs.termin.app.core.domain.model.Stylist
 import rs.termin.app.core.ui.Actions
 import rs.termin.app.core.ui.Formatter
-import rs.termin.app.core.ui.LocalImageUrls
 import rs.termin.app.core.ui.Loadable
+import rs.termin.app.core.ui.LocalImageUrls
 import rs.termin.app.core.ui.formatter
 import rs.termin.app.core.ui.sharedSalonPhoto
 import java.time.DayOfWeek
@@ -571,7 +572,7 @@ fun PolicyText(salon: Salon, f: Formatter) {
         if (rules.minNoticeMinutes > 0) {
             Text(stringResource(R.string.salon_policy_notice, f.duration(rules.minNoticeMinutes)), style = TerminTheme.type.callout, color = colors.textSecondary)
         }
-        Text(stringResource(R.string.salon_policy_horizon, rules.horizonDays), style = TerminTheme.type.callout, color = colors.textSecondary)
+        Text(pluralStringResource(R.plurals.salon_policy_horizon, rules.horizonDays, rules.horizonDays), style = TerminTheme.type.callout, color = colors.textSecondary)
     }
 }
 
@@ -602,7 +603,7 @@ private fun SalonMap(salon: Salon) {
             properties = MapProperties(),
             uiSettings = MapUiSettings(zoomControlsEnabled = false, scrollGesturesEnabled = false, mapToolbarEnabled = false),
         ) {
-            Marker(state = MarkerState(position), title = salon.name)
+            Marker(state = rememberUpdatedMarkerState(position), title = salon.name)
         }
     }
 }

@@ -52,8 +52,8 @@ import rs.termin.app.core.designsystem.icon.TerminIcon
 import rs.termin.app.core.designsystem.icon.TerminIconImage
 import rs.termin.app.core.domain.model.Salon
 import rs.termin.app.core.domain.model.ServiceCategory
-import rs.termin.app.core.ui.LocalImageUrls
 import rs.termin.app.core.ui.Loadable
+import rs.termin.app.core.ui.LocalImageUrls
 import rs.termin.app.core.ui.SalonCard
 import rs.termin.app.core.ui.formatter
 

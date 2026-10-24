@@ -4,29 +4,21 @@
     <string name="action_cancel">Cancel</string>
     <string name="action_close">Close</string>
     <string name="action_save">Save</string>
-    <string name="action_back">Back</string>
     <string name="action_continue">Continue</string>
     <string name="action_done">Done</string>
     <string name="action_delete">Delete</string>
-    <string name="action_edit">Edit</string>
-    <string name="action_add">Add</string>
     <string name="action_call">Call</string>
     <string name="action_share">Share</string>
     <string name="action_directions">Directions</string>
     <string name="action_open_maps">Open in Google Maps</string>
     <string name="action_see_all">See all</string>
     <string name="action_confirm">Confirm</string>
-    <string name="action_yes">Yes</string>
-    <string name="action_no">No</string>
-    <string name="action_settings">Settings</string>
-    <string name="action_more">More</string>
 
     <string name="state_loading">Loading…</string>
     <string name="state_error_title">Something went wrong</string>
     <string name="state_error_message">We couldn\'t load this. Check your connection and try again.</string>
     <string name="state_offline">You\'re offline. Showing saved data.</string>
     <string name="state_offline_booking">Booking needs an internet connection, because the salon has to confirm your slot.</string>
-    <string name="state_offline_action">This needs an internet connection. Try again once you\'re online.</string>
 
     <string name="error_slot_taken">Someone just booked this slot. Pick one of the free slots below.</string>
     <string name="error_cancel_deadline">The cancellation window has passed. Call the salon to sort it out directly.</string>
@@ -75,7 +67,10 @@
 
     <string name="cd_back">Back</string>
     <string name="cd_close">Close</string>
-    <string name="cd_rating">Rated %1$s out of 5, %2$d reviews</string>
+    <plurals name="cd_rating">
+        <item quantity="one">Rated %1$s out of 5, %2$d review</item>
+        <item quantity="other">Rated %1$s out of 5, %2$d reviews</item>
+    </plurals>
     <string name="cd_rating_no_reviews">No ratings yet</string>
     <string name="cd_photo_of">Photo: %1$s</string>
     <string name="cd_favorite_add">Add to favorites</string>

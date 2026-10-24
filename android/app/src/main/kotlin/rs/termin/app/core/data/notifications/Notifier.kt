@@ -12,6 +12,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import dagger.hilt.android.qualifiers.ApplicationContext
 import rs.termin.app.MainActivity
 import rs.termin.app.R
@@ -25,7 +26,6 @@ enum class Channel(val id: String) { Appointments("appointments"), Reminders("re
 class Notifier @Inject constructor(@param:ApplicationContext private val context: Context) {
 
     fun createChannels() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return
         val manager = context.getSystemService(NotificationManager::class.java) ?: return
         manager.createNotificationChannels(
             listOf(
@@ -88,13 +88,13 @@ class Notifier @Inject constructor(@param:ApplicationContext private val context
 /** Deep linkovi unutar aplikacije. */
 object DeepLinks {
     const val SCHEME = "termin"
-    fun appointment(id: String): Uri = Uri.parse("$SCHEME://appointment/$id")
-    fun salon(id: String): Uri = Uri.parse("$SCHEME://salon/$id")
+    fun appointment(id: String): Uri = "$SCHEME://appointment/$id".toUri()
+    fun salon(id: String): Uri = "$SCHEME://salon/$id".toUri()
     fun book(salonId: String, date: String?, serviceIds: List<String>, stylistId: String?): Uri =
         Uri.Builder().scheme(SCHEME).authority("book").appendPath(salonId).apply {
             if (date != null) appendQueryParameter("date", date)
             if (serviceIds.isNotEmpty()) appendQueryParameter("services", serviceIds.joinToString(","))
             if (stylistId != null) appendQueryParameter("stylist", stylistId)
         }.build()
-    fun inbox(): Uri = Uri.parse("$SCHEME://inbox")
+    fun inbox(): Uri = "$SCHEME://inbox".toUri()
 }

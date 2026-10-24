@@ -25,6 +25,7 @@ import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -34,6 +35,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.liveRegion
@@ -48,8 +50,8 @@ import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.MapProperties
 import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.Marker
-import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
+import com.google.maps.android.compose.rememberUpdatedMarkerState
 import rs.termin.app.BuildConfig
 import rs.termin.app.R
 import rs.termin.app.core.data.firebase.ImageSize
@@ -73,8 +75,8 @@ import rs.termin.app.core.domain.model.SalonListItem
 import rs.termin.app.core.domain.model.SearchFilters
 import rs.termin.app.core.domain.model.ServiceCategory
 import rs.termin.app.core.ui.Actions
-import rs.termin.app.core.ui.LocalImageUrls
 import rs.termin.app.core.ui.Loadable
+import rs.termin.app.core.ui.LocalImageUrls
 import rs.termin.app.core.ui.SalonCard
 import rs.termin.app.core.ui.formatter
 import rs.termin.app.core.ui.isWideLayout
@@ -256,7 +258,7 @@ private fun Results(
                     }
                     item(key = "count", contentType = "count") {
                         Text(
-                            stringResource(R.string.search_results, results.value.size),
+                            pluralStringResource(R.plurals.search_results, results.value.size, results.value.size),
                             style = TerminTheme.type.callout,
                             color = TerminTheme.colors.textSecondary,
                             modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite },
@@ -330,12 +332,14 @@ private fun MapResults(items: List<SalonListItem>, state: SearchUiState, onOpenS
     ) {
         items.forEach { item ->
             val location = item.salon.location ?: return@forEach
-            Marker(
-                state = MarkerState(position = LatLng(location.latitude, location.longitude)),
-                title = item.salon.name,
-                snippet = item.salon.address,
-                onInfoWindowClick = { onOpenSalon(item.salon.id) },
-            )
+            key(item.salon.id) {
+                Marker(
+                    state = rememberUpdatedMarkerState(position = LatLng(location.latitude, location.longitude)),
+                    title = item.salon.name,
+                    snippet = item.salon.address,
+                    onInfoWindowClick = { onOpenSalon(item.salon.id) },
+                )
+            }
         }
     }
 }

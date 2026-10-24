@@ -18,11 +18,13 @@
     <string name="salon_policy_cancel">You can cancel or reschedule up to %1$d h before the appointment. After that, call the salon.</string>
     <string name="salon_policy_cancel_any">You can cancel or reschedule until the appointment starts.</string>
     <string name="salon_policy_notice">Book at least %1$s ahead.</string>
-    <string name="salon_policy_horizon">Booking is open %1$d days ahead.</string>
+    <plurals name="salon_policy_horizon">
+        <item quantity="one">Booking is open %1$d day ahead.</item>
+        <item quantity="other">Booking is open %1$d days ahead.</item>
+    </plurals>
     <string name="salon_share_text">%1$s, %2$s — book an appointment in the Termin app: %3$s</string>
     <string name="salon_share_title">Share salon</string>
     <string name="salon_services_selected">Selected: %1$d · %2$s · %3$s</string>
-    <string name="salon_service_select">Select %1$s</string>
     <string name="salon_no_services">This salon hasn\'t added services yet.</string>
     <string name="salon_no_stylists">This salon hasn\'t added stylists yet.</string>
     <string name="salon_no_reviews_title">No reviews yet</string>

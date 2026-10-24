@@ -8,4 +8,14 @@
     <issue id="GradleDependency" severity="ignore" />
     <issue id="NewerVersionAvailable" severity="ignore" />
     <issue id="AndroidGradlePluginVersion" severity="ignore" />
+    <!--
+      FCM 25.1+ zastarelo je onNewToken/getToken; aplikacija se registruje preko Firebase
+      Installation ID-ja (onRegistered + FirebaseInstallations), pa ova starija provera ne važi.
+    -->
+    <issue id="MissingFirebaseInstanceTokenRefresh" severity="ignore" />
+    <!--
+      targetSdk prati zahtev Google Play-a (36); compileSdk je 37 zbog AndroidX biblioteka.
+      Prelazak na target 37 radi se posebno, uz proveru promena ponašanja (docs/DECISIONS.md).
+    -->
+    <issue id="OldTargetApi" severity="ignore" />
 </lint>

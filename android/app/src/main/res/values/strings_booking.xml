@@ -13,7 +13,6 @@
     <string name="booking_time_title">Kada ti odgovara?</string>
     <string name="booking_review_title">Proveri i potvrdi</string>
     <string name="booking_next">Dalje</string>
-    <string name="booking_back">Nazad</string>
     <string name="booking_total">%1$s · %2$s</string>
     <string name="booking_total_label">Ukupno</string>
     <string name="booking_no_selection">Izaberi bar jednu uslugu</string>
@@ -31,7 +30,6 @@
     <string name="booking_hold_expired">Vreme za potvrdu je isteklo. Izaberi termin ponovo.</string>
     <string name="booking_holding">Čuvamo termin…</string>
     <string name="booking_slot">%1$s, %2$s</string>
-    <string name="booking_slot_stylists">Slobodni: %1$s</string>
     <string name="booking_with_stylist">Frizer: %1$s</string>
     <string name="booking_any_assigned">Dodeljujemo frizera sa najmanje termina tog dana.</string>
     <string name="booking_note">Napomena za frizera</string>
@@ -52,7 +50,6 @@
     <string name="success_share_text">Imam termin: %1$s, %2$s.</string>
     <string name="success_done">Moji termini</string>
     <string name="success_calendar_title">%1$s — %2$s</string>
-    <string name="notifications_rationale_title">Da te podsetimo?</string>
     <string name="notifications_rationale">Poslaćemo ti podsetnik dan ranije i dva sata pre termina, i javiti ako salon nešto promeni.</string>
     <string name="notifications_allow">Uključi obaveštenja</string>
     <string name="notifications_later">Kasnije</string>

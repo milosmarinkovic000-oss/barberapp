@@ -61,10 +61,10 @@ import rs.termin.app.core.designsystem.component.readableWidth
 import rs.termin.app.core.designsystem.icon.TerminIcon
 import rs.termin.app.core.designsystem.icon.TerminIconImage
 import rs.termin.app.core.domain.PhoneNumbers
-import rs.termin.app.core.domain.model.Role as UserRole
 import rs.termin.app.core.domain.repository.AppLanguage
 import rs.termin.app.core.ui.LocalImageUrls
 import rs.termin.app.core.ui.messageRes
+import rs.termin.app.core.domain.model.Role as UserRole
 
 data class ProfileActions(
     val onEditProfile: () -> Unit,

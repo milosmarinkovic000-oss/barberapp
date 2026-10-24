@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
 import android.os.Build
+import androidx.core.graphics.scale
 import androidx.exifinterface.media.ExifInterface
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.storageMetadata
@@ -68,7 +69,7 @@ class ImageUploader @Inject constructor(
     private fun compress(source: Bitmap, maxSize: Int, quality: Int): ByteArray {
         val scale = minOf(1f, maxSize.toFloat() / max(source.width, source.height))
         val bitmap = if (scale < 1f) {
-            Bitmap.createScaledBitmap(source, (source.width * scale).toInt(), (source.height * scale).toInt(), true)
+            source.scale((source.width * scale).toInt(), (source.height * scale).toInt())
         } else {
             source
         }

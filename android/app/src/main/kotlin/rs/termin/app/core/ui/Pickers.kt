@@ -129,6 +129,13 @@ fun DateField(label: String, value: LocalDate, onChange: (LocalDate) -> Unit, mo
         ) {
             DatePicker(
                 state = state,
+                title = {
+                    Text(
+                        stringResource(R.string.date_picker_title),
+                        style = TerminTheme.type.callout,
+                        modifier = Modifier.padding(start = 24.dp, end = 12.dp, top = 16.dp),
+                    )
+                },
                 colors = DatePickerDefaults.colors(
                     containerColor = colors.surface,
                     selectedDayContainerColor = colors.accent,

@@ -1,6 +1,7 @@
 package rs.termin.app.core.data.salon
 
 import com.firebase.geofire.GeoFireUtils
+import com.firebase.geofire.GeoQueryBounds
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldPath
@@ -35,7 +36,6 @@ import java.time.LocalDate
 import java.util.Date
 import javax.inject.Inject
 import javax.inject.Singleton
-import com.firebase.geofire.GeoQueryBounds
 import com.firebase.geofire.GeoLocation as GeoFireLocation
 
 /** Mala slova, bez dijakritika (isto kao na serveru za ključne reči pretrage). */
