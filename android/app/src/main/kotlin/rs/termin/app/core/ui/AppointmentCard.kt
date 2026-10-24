@@ -3,6 +3,8 @@ package rs.termin.app.core.ui
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -52,6 +54,7 @@ fun StatusPill(status: AppointmentStatus, modifier: Modifier = Modifier) {
  * Kartica termina u listi: datum levo (dan i mesec), salon/usluge, vreme i odbrojavanje.
  * [subtitle] zamenjuje naziv salona (npr. ime klijenta u prikazu za osoblje).
  */
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun AppointmentCard(
     appointment: Appointment,
@@ -89,11 +92,11 @@ fun AppointmentCard(
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(title, style = TerminTheme.type.bodyStrong, color = colors.text, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 Text(services, style = TerminTheme.type.callout, color = colors.textSecondary, maxLines = 2, overflow = TextOverflow.Ellipsis)
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                // Uz veliki tekst odbrojavanje prelazi u novi red kao celina.
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(f.timeRange(appointment.start, appointment.end), style = TerminTheme.type.callout, color = colors.text)
                     if (upcoming && showCountdown) {
-                        Text("·", style = TerminTheme.type.callout, color = colors.textSecondary)
-                        Text(f.countdown(appointment.start, now), style = TerminTheme.type.callout, color = colors.accentText)
+                        Text("· ${f.countdown(appointment.start, now)}", style = TerminTheme.type.callout, color = colors.accentText)
                     }
                 }
                 if (!upcoming || appointment.status != AppointmentStatus.Confirmed) {

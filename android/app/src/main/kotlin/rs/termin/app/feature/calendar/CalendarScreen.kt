@@ -94,8 +94,11 @@ private val SheetRequestSaver = Saver<SheetRequest?, String>(
     },
 )
 
-private val HourHeight = 72.dp
-private val TimeColumnWidth = 52.dp
+private val BaseHourHeight = 72.dp
+private val BaseTimeColumnWidth = 52.dp
+private const val MAX_GRID_SCALE = 1.6f
+private const val MAX_TIME_SCALE = 2f
+private const val ONE_LINE_MINUTES = 45
 private val MinColumnWidth = 148.dp
 private const val SNAP_MINUTES = 15
 
@@ -286,20 +289,23 @@ private fun DayGrid(
     val vertical = rememberScrollState()
     val horizontal = rememberScrollState()
     val density = LocalDensity.current
+    // Mreža raste sa sistemskom veličinom slova, da bi sati i imena ostali čitljivi.
+    val hourHeight = BaseHourHeight * density.fontScale.coerceIn(1f, MAX_GRID_SCALE)
+    val timeColumnWidth = BaseTimeColumnWidth * density.fontScale.coerceIn(1f, MAX_TIME_SCALE)
     val isToday = now.atZone(BelgradeZone).toLocalDate() == date
     LaunchedEffect(date, hours.first) {
         val hour = if (isToday) now.atZone(BelgradeZone).toLocalTime().hour - 1 else hours.first
-        val px = with(density) { (HourHeight * (hour - hours.first).coerceAtLeast(0)).toPx() }
+        val px = with(density) { (hourHeight * (hour - hours.first).coerceAtLeast(0)).toPx() }
         vertical.scrollTo(px.toInt())
     }
     BoxWithConstraints(Modifier.fillMaxSize()) {
-        val available = maxWidth - TimeColumnWidth
+        val available = maxWidth - timeColumnWidth
         val columnWidth = maxOf(MinColumnWidth, available / data.stylists.size)
         val scrollable = columnWidth * data.stylists.size > available
         val rowModifier = if (scrollable) Modifier.horizontalScroll(horizontal) else Modifier
         Column(Modifier.fillMaxSize()) {
             Row(Modifier.fillMaxWidth()) {
-                Spacer(Modifier.width(TimeColumnWidth))
+                Spacer(Modifier.width(timeColumnWidth))
                 Row(rowModifier) {
                     data.stylists.forEach { stylist ->
                         Row(
@@ -322,7 +328,7 @@ private fun DayGrid(
                     .verticalScroll(vertical)
                     .padding(bottom = bottomPadding),
             ) {
-                TimeColumn(hours)
+                TimeColumn(hours, hourHeight, timeColumnWidth)
                 Row(rowModifier) {
                     data.stylists.forEach { stylist ->
                         StylistColumn(
@@ -334,6 +340,7 @@ private fun DayGrid(
                             timeOff = data.timeOff.filter { it.stylistId == stylist.id },
                             now = now.takeIf { isToday },
                             width = columnWidth,
+                            hourHeight = hourHeight,
                             onOpen = onOpen,
                             onEmptyTap = { start -> onEmptyTap(stylist.id, start) },
                         )
@@ -345,12 +352,12 @@ private fun DayGrid(
 }
 
 @Composable
-private fun TimeColumn(hours: IntRange) {
+private fun TimeColumn(hours: IntRange, hourHeight: Dp, width: Dp) {
     val colors = TerminTheme.colors
-    Column(Modifier.width(TimeColumnWidth)) {
+    Column(Modifier.width(width)) {
         hours.forEach { hour ->
-            Box(Modifier.height(HourHeight).fillMaxWidth(), contentAlignment = Alignment.TopCenter) {
-                Text("%02d:00".format(hour), style = TerminTheme.type.caption, color = colors.textSecondary, modifier = Modifier.offset(y = (-2).dp))
+            Box(Modifier.height(hourHeight).fillMaxWidth(), contentAlignment = Alignment.TopCenter) {
+                Text("%02d:00".format(hour), style = TerminTheme.type.caption, color = colors.textSecondary, maxLines = 1, modifier = Modifier.offset(y = (-2).dp))
             }
         }
     }
@@ -374,13 +381,14 @@ private fun StylistColumn(
     timeOff: List<TimeOff>,
     now: Instant?,
     width: Dp,
+    hourHeight: Dp,
     onOpen: (String) -> Unit,
     onEmptyTap: (Instant) -> Unit,
 ) {
     val colors = TerminTheme.colors
     val f = formatter
     val density = LocalDensity.current
-    val minutePx = with(density) { HourHeight.toPx() } / 60f
+    val minutePx = with(density) { hourHeight.toPx() } / 60f
     val working = workingRanges(stylist, data, date)
     val breaks = stylist.breaks.on(date.dayOfWeek)
     val dayStart = date.atStartOfDay(BelgradeZone).toInstant()
@@ -390,7 +398,7 @@ private fun StylistColumn(
     Box(
         Modifier
             .width(width)
-            .height(HourHeight * hours.count())
+            .height(hourHeight * hours.count())
             .drawBehind {
                 // Van radnog vremena i pauze: prigušena pozadina.
                 val total = hours.count() * 60f
@@ -462,10 +470,15 @@ private fun StylistColumn(
                     .semantics { contentDescription = description }
                     .padding(horizontal = 8.dp, vertical = 4.dp),
             ) {
-                Column {
-                    Text(f.time(a.start), style = TerminTheme.type.caption, color = fg)
-                    Text(a.customerName, style = TerminTheme.type.bodyStrong, color = fg, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                    if (a.durationMin >= 40) Text(services, style = TerminTheme.type.caption, color = fg, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                if (a.durationMin < ONE_LINE_MINUTES) {
+                    // Kratak termin: vreme i ime u jednom redu.
+                    Text("${f.time(a.start)} ${a.customerName}", style = TerminTheme.type.caption, color = fg, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                } else {
+                    Column {
+                        Text(f.time(a.start), style = TerminTheme.type.caption, color = fg)
+                        Text(a.customerName, style = TerminTheme.type.bodyStrong, color = fg, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                        Text(services, style = TerminTheme.type.caption, color = fg, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                    }
                 }
             }
         }

@@ -169,9 +169,7 @@ class StaffAppointmentDetailViewModel @AssistedInject constructor(
         }
     }
 
-    fun markCompleted() = run(R.string.staff_status_updated) { staff.updateStatus(appointmentId, AppointmentStatus.Completed) }
-
-    fun markNoShow() = run(R.string.staff_status_updated) { staff.updateStatus(appointmentId, AppointmentStatus.NoShow) }
+    fun setStatus(status: AppointmentStatus) = run(R.string.staff_status_updated) { staff.updateStatus(appointmentId, status) }
 
     fun requestCancel() = local.update { it.copy(confirmCancel = true) }
 
@@ -237,6 +235,32 @@ class StaffAppointmentDetailViewModel @AssistedInject constructor(
         const val STOP_TIMEOUT = 5_000L
         const val MAX_REASON = 200
     }
+}
+
+/**
+ * Prelazi statusa koje osoblje sme da uradi (isto kao STAFF_TRANSITIONS na serveru): potvrda
+ * zadržanog termina, ishod posle početka i ispravka pogrešno označenog ishoda.
+ */
+fun staffActions(status: AppointmentStatus, started: Boolean): List<AppointmentStatus> = when (status) {
+    AppointmentStatus.Held -> listOf(AppointmentStatus.Confirmed)
+    AppointmentStatus.Confirmed -> if (started) listOf(AppointmentStatus.Completed, AppointmentStatus.NoShow) else emptyList()
+    AppointmentStatus.Completed -> listOf(AppointmentStatus.NoShow, AppointmentStatus.Confirmed)
+    AppointmentStatus.NoShow -> listOf(AppointmentStatus.Completed, AppointmentStatus.Confirmed)
+    AppointmentStatus.CanceledByCustomer, AppointmentStatus.CanceledBySalon -> emptyList()
+}
+
+private fun actionLabel(from: AppointmentStatus, to: AppointmentStatus): Int = when (to) {
+    AppointmentStatus.Completed -> R.string.staff_mark_completed
+    AppointmentStatus.NoShow -> R.string.staff_mark_no_show
+    AppointmentStatus.Confirmed -> if (from == AppointmentStatus.Held) R.string.staff_confirm else R.string.staff_reopen
+    else -> R.string.staff_cancel
+}
+
+private fun actionIcon(to: AppointmentStatus): TerminIcon = when (to) {
+    AppointmentStatus.Completed -> TerminIcon.TaskAlt
+    AppointmentStatus.NoShow -> TerminIcon.PersonOff
+    AppointmentStatus.Confirmed -> TerminIcon.CheckCircle
+    else -> TerminIcon.EventBusy
 }
 
 @Composable
@@ -331,16 +355,27 @@ fun StaffAppointmentDetailScreen(appointmentId: String, onBack: (() -> Unit)?) {
                                 }
                             }
 
-                            if (a.status.isActive) {
-                                val started = !a.start.isAfter(state.now)
-                                if (started) {
-                                    Row(horizontalArrangement = Arrangement.spacedBy(spacing.xs)) {
-                                        TerminButton(stringResource(R.string.staff_mark_completed), viewModel::markCompleted, icon = TerminIcon.TaskAlt, loading = state.busy, modifier = Modifier.weight(1f))
-                                        TerminButton(stringResource(R.string.staff_mark_no_show), viewModel::markNoShow, variant = ButtonVariant.Secondary, icon = TerminIcon.PersonOff, enabled = !state.busy, modifier = Modifier.weight(1f))
+                            val started = !a.start.isAfter(state.now)
+                            val actions = staffActions(a.status, started)
+                            if (actions.isNotEmpty()) {
+                                Row(horizontalArrangement = Arrangement.spacedBy(spacing.xs)) {
+                                    actions.forEachIndexed { index, target ->
+                                        TerminButton(
+                                            stringResource(actionLabel(a.status, target)),
+                                            { viewModel.setStatus(target) },
+                                            variant = if (index == 0) ButtonVariant.Primary else ButtonVariant.Secondary,
+                                            icon = actionIcon(target),
+                                            loading = state.busy && index == 0,
+                                            enabled = !state.busy,
+                                            modifier = Modifier.weight(1f),
+                                        )
                                     }
-                                } else {
-                                    TerminButton(stringResource(R.string.staff_reschedule), viewModel::startReschedule, variant = ButtonVariant.Secondary, icon = TerminIcon.Schedule, fullWidth = true)
                                 }
+                            }
+                            if (a.status == AppointmentStatus.Confirmed && !started) {
+                                TerminButton(stringResource(R.string.staff_reschedule), viewModel::startReschedule, variant = ButtonVariant.Secondary, icon = TerminIcon.Schedule, fullWidth = true)
+                            }
+                            if (a.status.isActive) {
                                 TerminButton(stringResource(R.string.staff_cancel), viewModel::requestCancel, variant = ButtonVariant.Danger, icon = TerminIcon.EventBusy, enabled = !state.busy, fullWidth = true)
                             }
 

@@ -10,8 +10,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.foundation.text.TextAutoSize
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -58,7 +60,14 @@ fun <T> SegmentedControl(
                         },
                 ) {
                     Box(Modifier.padding(horizontal = 12.dp, vertical = 10.dp), contentAlignment = Alignment.Center) {
-                        Text(label(option), style = TerminTheme.type.callout, textAlign = TextAlign.Center)
+                        // Natpis staje u jedan red i uz veliki sistemski tekst (umanjuje se do 70 %).
+                        val style = TerminTheme.type.callout
+                        BasicText(
+                            label(option),
+                            style = style.copy(textAlign = TextAlign.Center, color = LocalContentColor.current),
+                            maxLines = 1,
+                            autoSize = TextAutoSize.StepBased(minFontSize = style.fontSize * MIN_LABEL_SCALE, maxFontSize = style.fontSize),
+                        )
                     }
                 }
             }
@@ -78,3 +87,5 @@ fun ChipRow(modifier: Modifier = Modifier, content: @Composable () -> Unit) {
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) { content() }
 }
+
+private const val MIN_LABEL_SCALE = 0.7f

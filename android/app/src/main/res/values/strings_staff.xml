@@ -79,6 +79,8 @@
     <string name="staff_source_calcom">Cal.com</string>
     <string name="staff_mark_completed">Završeno</string>
     <string name="staff_mark_no_show">Nedolazak</string>
+    <string name="staff_confirm">Potvrdi termin</string>
+    <string name="staff_reopen">Vrati na potvrđen</string>
     <string name="staff_cancel">Otkaži termin</string>
     <string name="staff_cancel_title">Otkazati termin?</string>
     <string name="staff_cancel_text">Klijent dobija obaveštenje o otkazivanju. Možeš da dodaš razlog.</string>

@@ -18,6 +18,7 @@ import rs.termin.app.feature.owner.isValid
 import rs.termin.app.feature.owner.niceCeiling
 import rs.termin.app.feature.owner.periodStart
 import rs.termin.app.feature.staff.StaffFilter
+import rs.termin.app.feature.staff.staffActions
 import rs.termin.app.feature.staff.staffRange
 import rs.termin.app.testing.TestData
 import java.time.DayOfWeek
@@ -109,5 +110,14 @@ class StaffLogicTest {
         val (upcoming, past) = splitAppointments(listOf(past1, next1, canceled, past2, next2), now)
         assertEquals(listOf("n2", "n1"), upcoming.map { it.id })
         assertEquals(listOf("c", "p2", "p1"), past.map { it.id })
+    }
+
+    @Test
+    fun `akcije osoblja prate dozvoljene prelaze statusa`() {
+        assertEquals(listOf(AppointmentStatus.Confirmed), staffActions(AppointmentStatus.Held, started = false))
+        assertTrue(staffActions(AppointmentStatus.Confirmed, started = false).isEmpty())
+        assertEquals(listOf(AppointmentStatus.Completed, AppointmentStatus.NoShow), staffActions(AppointmentStatus.Confirmed, started = true))
+        assertEquals(listOf(AppointmentStatus.NoShow, AppointmentStatus.Confirmed), staffActions(AppointmentStatus.Completed, started = true))
+        assertTrue(staffActions(AppointmentStatus.CanceledBySalon, started = true).isEmpty())
     }
 }

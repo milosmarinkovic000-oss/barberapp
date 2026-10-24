@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -48,6 +49,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.LiveRegionMode
@@ -442,12 +444,12 @@ private fun DayStrip(days: List<DaySlots>, selected: java.time.LocalDate?, today
                 contentColor = if (isSelected) colors.onAccent else colors.text,
                 border = if (isSelected) null else BorderStroke(1.dp, colors.divider),
                 modifier = Modifier
-                    .width(64.dp)
+                    .widthIn(min = 64.dp)
                     .defaultMinSize(minHeight = 84.dp)
                     .selectable(isSelected, onClick = { onSelect(day.date) }, role = Role.Tab)
                     .clearAndSetSemantics { contentDescription = description },
             ) {
-                Column(Modifier.padding(vertical = 10.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                Column(Modifier.padding(horizontal = 8.dp, vertical = 10.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(2.dp)) {
                     Text(if (day.date == today) label else f.weekdayShort(day.date), style = TerminTheme.type.caption, textAlign = TextAlign.Center, maxLines = 1)
                     Text(day.date.dayOfMonth.toString(), style = TerminTheme.type.title3)
                     Box(
@@ -627,6 +629,42 @@ private fun BottomBar(state: BookingUiState, onNext: () -> Unit, onConfirm: () -
     val colors = TerminTheme.colors
     val haptics = LocalHapticFeedback.current
     val isLast = state.step == BookingStep.Review
+    // Uz veliki tekst zbir i dugme ne staju u jedan red: tada idu jedno ispod drugog.
+    val stacked = LocalDensity.current.fontScale > LARGE_FONT_SCALE
+    val totals: @Composable (Modifier) -> Unit = { modifier ->
+        Column(modifier.semantics(mergeDescendants = true) { liveRegion = LiveRegionMode.Polite }) {
+            Text(stringResource(R.string.booking_total_label), style = TerminTheme.type.caption, color = colors.textSecondary)
+            Text(
+                if (state.totalDuration == 0) stringResource(R.string.booking_no_selection)
+                else stringResource(R.string.booking_total, f.price(state.totalPrice), f.duration(state.totalDuration)),
+                style = TerminTheme.type.price,
+                color = colors.text,
+            )
+        }
+    }
+    val action: @Composable () -> Unit = {
+        if (isLast) {
+            TerminButton(
+                stringResource(if (state.isReschedule) R.string.booking_confirm_reschedule else R.string.booking_confirm),
+                {
+                    haptics.performHapticFeedback(HapticFeedbackType.Confirm)
+                    onConfirm()
+                },
+                loading = state.confirming,
+                enabled = state.online && (state.hold != null || (state.isReschedule && state.selectedSlot != null)),
+                icon = TerminIcon.Check,
+                fullWidth = stacked,
+            )
+        } else {
+            TerminButton(
+                stringResource(if (state.step == BookingStep.Time && !state.canContinue) R.string.booking_select_time_first else R.string.booking_next),
+                onNext,
+                enabled = state.canContinue && state.online,
+                icon = TerminIcon.ArrowForward,
+                fullWidth = stacked,
+            )
+        }
+    }
     Surface(
         color = colors.surface,
         shape = TerminTheme.radii.sheetShape,
@@ -634,41 +672,21 @@ private fun BottomBar(state: BookingUiState, onNext: () -> Unit, onConfirm: () -
             .fillMaxWidth()
             .raised(TerminTheme.surfaces.raisedElevation, TerminTheme.radii.sheetShape),
     ) {
-        Row(
-            Modifier
-                .navigationBarsPadding()
-                .padding(horizontal = TerminTheme.spacing.gutter, vertical = 12.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-        ) {
-            Column(Modifier.weight(1f).semantics(mergeDescendants = true) { liveRegion = LiveRegionMode.Polite }) {
-                Text(stringResource(R.string.booking_total_label), style = TerminTheme.type.caption, color = colors.textSecondary)
-                Text(
-                    if (state.totalDuration == 0) stringResource(R.string.booking_no_selection)
-                    else stringResource(R.string.booking_total, f.price(state.totalPrice), f.duration(state.totalDuration)),
-                    style = TerminTheme.type.price,
-                    color = colors.text,
-                )
+        val padding = Modifier
+            .navigationBarsPadding()
+            .padding(horizontal = TerminTheme.spacing.gutter, vertical = 12.dp)
+        if (stacked) {
+            Column(padding, verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                totals(Modifier.fillMaxWidth())
+                action()
             }
-            if (isLast) {
-                TerminButton(
-                    stringResource(if (state.isReschedule) R.string.booking_confirm_reschedule else R.string.booking_confirm),
-                    {
-                        haptics.performHapticFeedback(HapticFeedbackType.Confirm)
-                        onConfirm()
-                    },
-                    loading = state.confirming,
-                    enabled = state.online && (state.hold != null || (state.isReschedule && state.selectedSlot != null)),
-                    icon = TerminIcon.Check,
-                )
-            } else {
-                TerminButton(
-                    stringResource(if (state.step == BookingStep.Time && !state.canContinue) R.string.booking_select_time_first else R.string.booking_next),
-                    onNext,
-                    enabled = state.canContinue && state.online,
-                    icon = TerminIcon.ArrowForward,
-                )
+        } else {
+            Row(padding, verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                totals(Modifier.weight(1f))
+                action()
             }
         }
     }
 }
+
+private const val LARGE_FONT_SCALE = 1.3f

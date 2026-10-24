@@ -29,6 +29,10 @@ import org.robolectric.annotation.GraphicsMode
 import rs.termin.app.core.designsystem.StyleChoice
 import rs.termin.app.core.designsystem.ThemeConfig
 import rs.termin.app.core.domain.model.AppointmentStatus
+import rs.termin.app.core.domain.model.Role
+import rs.termin.app.core.domain.model.TimeOff
+import rs.termin.app.core.domain.model.TimeOffKind
+import rs.termin.app.core.domain.repository.AuthState
 import rs.termin.app.core.domain.usecase.ConfirmBookingUseCase
 import rs.termin.app.core.domain.usecase.GetAvailabilityUseCase
 import rs.termin.app.core.domain.usecase.HoldSlotUseCase
@@ -42,17 +46,25 @@ import rs.termin.app.feature.auth.LoginContent
 import rs.termin.app.feature.auth.LoginUiState
 import rs.termin.app.feature.booking.BookingScreen
 import rs.termin.app.feature.booking.BookingViewModel
+import rs.termin.app.feature.calendar.CalendarScreen
+import rs.termin.app.feature.calendar.CalendarViewModel
 import rs.termin.app.feature.home.HomeContent
 import rs.termin.app.feature.home.HomeUiState
 import rs.termin.app.feature.home.NearbyState
+import rs.termin.app.feature.salon.SalonScreen
+import rs.termin.app.feature.salon.SalonViewModel
 import rs.termin.app.testing.FakeAppointmentRepository
+import rs.termin.app.testing.FakeAuthRepository
 import rs.termin.app.testing.FakeBookingRepository
 import rs.termin.app.testing.FakeConnectivity
 import rs.termin.app.testing.FakePreferences
 import rs.termin.app.testing.FakeReminders
 import rs.termin.app.testing.FakeSalonRepository
+import rs.termin.app.testing.FakeStaffRepository
+import rs.termin.app.testing.FakeUserRepository
 import rs.termin.app.testing.TestApp
 import rs.termin.app.testing.TestData
+import rs.termin.app.testing.TestProfiles
 import java.time.Clock
 import java.time.LocalDate
 import java.time.ZoneOffset
@@ -167,6 +179,38 @@ class ScreenshotTest(private val variant: Variant) {
             onShowPast = {}, onOpen = {}, onFindSalon = {}, onRetry = {}, onLeaveWaitlist = {}, onBookFromWaitlist = { _, _ -> },
             detailPane = { id -> Text(id) },
         )
+    }
+
+    @Test
+    fun salon() {
+        val salons = FakeSalonRepository()
+        val vm = SalonViewModel("s1", salons, FakeUserRepository(TestProfiles.customer()), clock)
+        snap("salon") { SalonScreen("s1", onBack = {}, onBook = { _, _ -> }, viewModel = vm) }
+    }
+
+    @Test
+    fun ownerCalendar() {
+        val salons = FakeSalonRepository(
+            stylists = listOf(TestData.stylist("a", "Ana Petrović"), TestData.stylist("b", "Bojan Ilić"), TestData.stylist("c", "Vesna Kostić")),
+        )
+        val appointments = FakeAppointmentRepository()
+        appointments.mine.value = listOf(
+            TestData.appointment("c1", TestData.at(today, 9), durationMin = 60),
+            TestData.appointment("c2", TestData.at(today, 11, 30), durationMin = 90).copy(stylistId = "b", customerName = "Jelena Jovanović"),
+            TestData.appointment("c3", TestData.at(today, 14), durationMin = 30, status = AppointmentStatus.Held)
+                .copy(stylistId = "c", customerName = "Nikola Nikolić", holdExpiresAt = now.plusSeconds(240)),
+        )
+        val staff = FakeStaffRepository()
+        staff.timeOff.value = listOf(TimeOff("t1", "a", TestData.at(today, 13), TestData.at(today, 14), TimeOffKind.Block, "Pauza"))
+        val vm = CalendarViewModel(
+            auth = FakeAuthRepository(AuthState.SignedIn("owner", setOf(Role.Owner), "s1", null)),
+            salons = salons,
+            appointments = appointments,
+            staff = staff,
+            connectivity = FakeConnectivity(),
+            clock = clock,
+        )
+        snap("calendar") { CalendarScreen(contentPadding = PaddingValues(), onOpenAppointment = {}, onOpenTeam = {}, viewModel = vm) }
     }
 
     companion object {

@@ -21,10 +21,14 @@ import rs.termin.app.core.domain.model.Review
 import rs.termin.app.core.domain.model.Role
 import rs.termin.app.core.domain.model.Salon
 import rs.termin.app.core.domain.model.SalonListItem
+import rs.termin.app.core.domain.model.SalonStats
 import rs.termin.app.core.domain.model.SearchFilters
 import rs.termin.app.core.domain.model.Service
 import rs.termin.app.core.domain.model.Slot
+import rs.termin.app.core.domain.model.StatsPeriod
 import rs.termin.app.core.domain.model.Stylist
+import rs.termin.app.core.domain.model.TimeOff
+import rs.termin.app.core.domain.model.TimeOffKind
 import rs.termin.app.core.domain.model.UserProfile
 import rs.termin.app.core.domain.model.WaitlistEntry
 import rs.termin.app.core.domain.repository.AppLanguage
@@ -32,14 +36,20 @@ import rs.termin.app.core.domain.repository.AppPreferences
 import rs.termin.app.core.domain.repository.AppointmentRepository
 import rs.termin.app.core.domain.repository.AuthRepository
 import rs.termin.app.core.domain.repository.AuthState
+import rs.termin.app.core.domain.repository.BlockResult
 import rs.termin.app.core.domain.repository.BookingRepository
 import rs.termin.app.core.domain.repository.ConnectivityMonitor
 import rs.termin.app.core.domain.repository.DemoRole
+import rs.termin.app.core.domain.repository.ManualBooking
 import rs.termin.app.core.domain.repository.PhoneCodeEvent
 import rs.termin.app.core.domain.repository.PreferencesRepository
 import rs.termin.app.core.domain.repository.ReminderScheduler
+import rs.termin.app.core.domain.repository.SalonEdit
 import rs.termin.app.core.domain.repository.SalonPage
 import rs.termin.app.core.domain.repository.SalonRepository
+import rs.termin.app.core.domain.repository.ServiceEdit
+import rs.termin.app.core.domain.repository.StaffRepository
+import rs.termin.app.core.domain.repository.StylistEdit
 import rs.termin.app.core.domain.repository.SyncResult
 import rs.termin.app.core.domain.repository.UserRepository
 import java.time.Duration
@@ -276,4 +286,46 @@ object TestProfiles {
         language = "sr",
         notificationsEnabled = true,
     )
+}
+
+/** Osoblje: odsustva iz memorije; ostale izmene snimaju poslednji poziv (koriste ih testovi kalendara). */
+class FakeStaffRepository : StaffRepository {
+    val timeOff = MutableStateFlow<List<TimeOff>>(emptyList())
+    val statusChanges = mutableListOf<Pair<String, AppointmentStatus>>()
+
+    override fun observeTimeOff(salonId: String, stylistId: String): Flow<List<TimeOff>> =
+        timeOff.map { list -> list.filter { it.stylistId == stylistId } }
+    override suspend fun updateStatus(appointmentId: String, status: AppointmentStatus, reason: String) {
+        statusChanges += appointmentId to status
+    }
+    override suspend fun updateSalon(salonId: String, edit: SalonEdit) = unused()
+    override suspend fun uploadSalonPhoto(salonId: String, uri: Uri): String = unused()
+    override suspend fun setSalonPhotos(salonId: String, photos: List<String>) = unused()
+    override suspend fun setSalonBranding(salonId: String, coverPhoto: String?, accentColor: Long) = unused()
+    override suspend fun upsertService(salonId: String, serviceId: String?, edit: ServiceEdit) = unused()
+    override suspend fun deleteService(salonId: String, serviceId: String) = unused()
+    override suspend fun inviteStylist(salonId: String, phoneE164: String, name: String): Boolean = unused()
+    override suspend fun updateStylist(salonId: String, stylistId: String, edit: StylistEdit) = unused()
+    override suspend fun updateStylistProfile(salonId: String, stylistId: String, bio: String, specialties: List<String>) = unused()
+    override suspend fun uploadStylistPhoto(salonId: String, stylistId: String, uri: Uri, portfolio: Boolean): String = unused()
+    override suspend fun setStylistPortfolio(salonId: String, stylistId: String, portfolio: List<String>) = unused()
+    override suspend fun setStylistAccess(salonId: String, stylistId: String, enabled: Boolean) = unused()
+    override suspend fun blockTime(
+        salonId: String,
+        stylistId: String,
+        start: Instant,
+        end: Instant,
+        kind: TimeOffKind,
+        reason: String,
+    ): BlockResult = unused()
+    override suspend fun removeTimeOff(salonId: String, stylistId: String, timeOffId: String) = unused()
+    override suspend fun createManualBooking(booking: ManualBooking): Appointment = unused()
+    override suspend fun replyToReview(salonId: String, reviewId: String, text: String) = unused()
+    override suspend fun stats(
+        salonId: String,
+        period: StatsPeriod,
+        date: LocalDate,
+    ): SalonStats = unused()
+
+    private fun unused(): Nothing = throw UnsupportedOperationException("Ovaj test ne koristi tu radnju")
 }

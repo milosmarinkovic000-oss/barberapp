@@ -102,8 +102,8 @@ fun SalonScreen(
     salonId: String,
     onBack: (() -> Unit)?,
     onBook: (services: String?, stylist: String?) -> Unit,
+    viewModel: SalonViewModel = hiltViewModel<SalonViewModel, SalonViewModel.Factory>(key = salonId) { it.create(salonId) },
 ) {
-    val viewModel = hiltViewModel<SalonViewModel, SalonViewModel.Factory>(key = salonId) { it.create(salonId) }
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val accent = state.content.valueOrNull()?.salon?.accentColor?.let { ComposeColor(it) }
     SalonAccentTheme(accent) {

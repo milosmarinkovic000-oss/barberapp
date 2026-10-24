@@ -85,7 +85,7 @@ Server:
 
 ## Provera kvaliteta
 
-- `./gradlew :app:verifyRoborazziDebug` — unit, UI i 52 snimka ekrana (mali, veliki, preklopni telefon,
+- `./gradlew :app:verifyRoborazziDebug` — unit, UI i 78 snimaka ekrana (početna, salon, zakazivanje, termini, kalendar, prijava; mali, veliki, preklopni telefon,
   tablet; svetla i tamna tema; slova 200 %; četiri stila).
 - StrictMode (debug) beleži čitanja/upise diska i mrežu na glavnoj niti; LeakCanary (debug) curenja
   memorije.

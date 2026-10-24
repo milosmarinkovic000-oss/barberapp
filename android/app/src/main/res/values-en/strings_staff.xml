@@ -77,6 +77,8 @@
     <string name="staff_source_calcom">Cal.com</string>
     <string name="staff_mark_completed">Completed</string>
     <string name="staff_mark_no_show">No-show</string>
+    <string name="staff_confirm">Confirm booking</string>
+    <string name="staff_reopen">Back to confirmed</string>
     <string name="staff_cancel">Cancel booking</string>
     <string name="staff_cancel_title">Cancel booking?</string>
     <string name="staff_cancel_text">The customer gets a cancellation notice. You can add a reason.</string>
