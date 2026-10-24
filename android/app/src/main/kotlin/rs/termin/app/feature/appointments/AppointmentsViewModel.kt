@@ -30,7 +30,6 @@ import rs.termin.app.core.domain.repository.ConnectivityMonitor
 import rs.termin.app.core.ui.Loadable
 import java.time.Clock
 import java.time.Instant
-import java.time.LocalDate
 import javax.inject.Inject
 
 data class AppointmentsLists(

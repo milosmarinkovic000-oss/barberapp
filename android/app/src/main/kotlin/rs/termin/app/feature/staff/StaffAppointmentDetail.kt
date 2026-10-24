@@ -89,7 +89,6 @@ import rs.termin.app.core.ui.messageRes
 import java.time.Clock
 import java.time.Instant
 import java.time.LocalDate
-import javax.inject.Inject
 
 data class RescheduleState(
     val date: LocalDate,

@@ -1,10 +1,7 @@
 package rs.termin.app.core.designsystem.component
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.material3.Surface
@@ -58,26 +55,6 @@ fun TerminCard(
             border = border,
         ) { Column(content = content) }
     }
-}
-
-/**
- * Poluprovidna površina za stil „Staklo“ (zamućenje fotografije ispod radi [TerminPhoto]
- * na Android-u 12+; ovde je samo providna podloga sa finom ivicom).
- */
-@Composable
-fun GlassPanel(
-    modifier: Modifier = Modifier,
-    shape: Shape = TerminTheme.radii.cardShape,
-    content: @Composable BoxScope.() -> Unit,
-) {
-    val colors = TerminTheme.colors
-    Box(
-        modifier
-            .clip(shape)
-            .background(colors.glass)
-            .border(1.dp, colors.surface.copy(alpha = 0.35f), shape),
-        content = content,
-    )
 }
 
 /** Blaga senka po stilu (za plutajuće elemente poput donje trake zakazivanja). */

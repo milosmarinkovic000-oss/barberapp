@@ -111,7 +111,11 @@ class ScreenshotTest(private val variant: Variant) {
         compose.waitForIdle()
         compose.onRoot().captureRoboImage(
             filePath = "src/test/screenshots/${screen}_${variant.name}.png",
-            roborazziOptions = RoborazziOptions(recordOptions = RoborazziOptions.RecordOptions(resizeScale = 0.5)),
+            roborazziOptions = RoborazziOptions(
+                recordOptions = RoborazziOptions.RecordOptions(resizeScale = 0.5),
+                // Do 1 % piksela razlike (anti-aliasing na drugoj mašini) ne smatra se promenom izgleda.
+                compareOptions = RoborazziOptions.CompareOptions(changeThreshold = 0.01f),
+            ),
         )
     }
 

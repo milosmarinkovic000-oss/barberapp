@@ -29,8 +29,8 @@ import rs.termin.app.core.designsystem.component.ChipRow
 import rs.termin.app.core.designsystem.component.RatingSummary
 import rs.termin.app.core.designsystem.component.TerminBottomSheet
 import rs.termin.app.core.designsystem.component.TerminButton
-import rs.termin.app.core.designsystem.component.TerminChip
 import rs.termin.app.core.designsystem.component.TerminPhoto
+import rs.termin.app.core.designsystem.component.TerminTag
 import rs.termin.app.core.designsystem.icon.TerminIcon
 import rs.termin.app.core.domain.model.Stylist
 import rs.termin.app.core.ui.LocalImageUrls
@@ -40,10 +40,11 @@ import rs.termin.app.core.ui.formatter
 @Composable
 fun StylistSheet(
     stylist: Stylist,
-    favorite: Boolean,
-    onToggleFavorite: () -> Unit,
     onBook: () -> Unit,
     onDismiss: () -> Unit,
+    /** Null kada omiljeni nisu dostupni u tom kontekstu (npr. tok zakazivanja). */
+    favorite: Boolean? = null,
+    onToggleFavorite: (() -> Unit)? = null,
 ) {
     val images = LocalImageUrls.current
     val colors = TerminTheme.colors
@@ -71,7 +72,7 @@ fun StylistSheet(
             if (stylist.specialties.isNotEmpty()) {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(stringResource(R.string.stylist_specialties), style = TerminTheme.type.title3, modifier = Modifier.padding(horizontal = spacing.gutter))
-                    ChipRow { stylist.specialties.forEach { TerminChip(it, selected = false, onClick = {}, enabled = false) } }
+                    ChipRow { stylist.specialties.forEach { TerminTag(it) } }
                 }
             }
             if (stylist.portfolio.isNotEmpty()) {
@@ -101,7 +102,7 @@ fun StylistSheet(
             }
             Column(Modifier.padding(horizontal = spacing.gutter), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 TerminButton(stringResource(R.string.salon_book_with, stylist.name), onBook, fullWidth = true, icon = TerminIcon.EventAvailable)
-                if (TerminTheme.features.favorites) {
+                if (TerminTheme.features.favorites && favorite != null && onToggleFavorite != null) {
                     TerminButton(
                         stringResource(if (favorite) R.string.cd_favorite_remove else R.string.cd_favorite_add),
                         onToggleFavorite,

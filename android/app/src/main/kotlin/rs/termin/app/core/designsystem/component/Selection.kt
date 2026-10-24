@@ -1,6 +1,7 @@
 package rs.termin.app.core.designsystem.component
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,6 +15,7 @@ import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -73,6 +75,20 @@ fun <T> SegmentedControl(
             }
         }
     }
+}
+
+/** Neinteraktivna oznaka (npr. specijalnost frizera): isti oblik kao chip, bez dodira. */
+@Composable
+fun TerminTag(text: String, modifier: Modifier = Modifier) {
+    val colors = TerminTheme.colors
+    Text(
+        text,
+        style = TerminTheme.type.callout,
+        color = colors.onAccentSoft,
+        modifier = modifier
+            .background(colors.accentSoft, TerminTheme.radii.buttonShape)
+            .padding(horizontal = 14.dp, vertical = 8.dp),
+    )
 }
 
 /** Horizontalni niz chip-ova sa skrolovanjem. */

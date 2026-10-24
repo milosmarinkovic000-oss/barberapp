@@ -35,7 +35,6 @@ import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import rs.termin.app.R
 import rs.termin.app.core.designsystem.TerminTheme
@@ -194,9 +193,3 @@ fun Notice(text: String, modifier: Modifier = Modifier, tone: NoticeTone = Notic
         Text(text, style = TerminTheme.type.callout, color = fg, modifier = Modifier.weight(1f))
     }
 }
-
-@Composable
-fun VerticalSpace(height: Dp) = Spacer(Modifier.height(height))
-
-@Composable
-fun HorizontalSpace(width: Dp) = Spacer(Modifier.width(width))

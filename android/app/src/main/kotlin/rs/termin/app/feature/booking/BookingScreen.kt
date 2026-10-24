@@ -24,7 +24,6 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -305,8 +304,6 @@ private fun StylistStep(state: BookingUiState, onSelect: (String?) -> Unit, f: F
         state.capableStylists.firstOrNull { it.id == id }?.let { stylist ->
             StylistSheet(
                 stylist = stylist,
-                favorite = false,
-                onToggleFavorite = {},
                 onBook = {
                     onSelect(stylist.id)
                     profile = null

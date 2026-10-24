@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import rs.termin.app.core.domain.PhoneNumbers
 import rs.termin.app.core.domain.StaffSession
-import rs.termin.app.core.domain.capableStylistIds
 import rs.termin.app.core.domain.model.BelgradeZone
 import rs.termin.app.core.domain.model.BookingError
 import rs.termin.app.core.domain.model.Service
@@ -197,12 +196,6 @@ class ManualBookingViewModel @Inject constructor(
 
 /** Ukupno trajanje i cena izabranih usluga (za prikaz u formi). */
 fun ManualBookingUiState.totals() = totalsOf(selectedServices)
-
-/** Frizeri koji mogu da urade sve izabrane usluge. */
-fun ManualBookingUiState.capableStylists(): List<Stylist> {
-    val ids = capableStylistIds(selectedServices, stylists.map { it.id })
-    return stylists.filter { it.id in ids }
-}
 
 // ---------------- Blokiranje vremena ----------------
 
