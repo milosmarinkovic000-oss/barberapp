@@ -121,6 +121,21 @@ android {
     }
 }
 
+// Merni buildovi (Macrobenchmark i generisanje baseline profila) rade nad lokalnim emulatorima
+// sa seed podacima, da bi merenje obuhvatilo prijavu i listu salona bez pravog naloga.
+androidComponents {
+    onVariants(selector().withBuildType("benchmarkRelease")) { variant -> useEmulators(variant) }
+    onVariants(selector().withBuildType("nonMinifiedRelease")) { variant -> useEmulators(variant) }
+}
+
+fun useEmulators(variant: com.android.build.api.variant.ApplicationVariant) {
+    variant.buildConfigFields?.put("USE_EMULATORS", com.android.build.api.variant.BuildConfigField("boolean", "true", "merenje nad emulatorima"))
+    variant.buildConfigFields?.put(
+        "EMULATOR_HOST",
+        com.android.build.api.variant.BuildConfigField("String", "\"${config("termin.emulatorHost", "10.0.2.2")}\"", "adresa emulatora"),
+    )
+}
+
 kotlin {
     compilerOptions {
         jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)

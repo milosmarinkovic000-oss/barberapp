@@ -25,6 +25,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
@@ -47,6 +48,7 @@ import rs.termin.app.core.designsystem.component.readableWidth
 import rs.termin.app.core.designsystem.icon.TerminIcon
 import rs.termin.app.core.domain.PhoneNumbers
 import rs.termin.app.core.domain.repository.DemoRole
+import rs.termin.app.core.ui.TestTags
 import rs.termin.app.core.ui.messageRes
 
 @Composable
@@ -161,7 +163,7 @@ fun LoginContent(
             if (state.demoAvailable && state.step == LoginStep.Phone) {
                 Text(stringResource(R.string.login_demo_title), style = TerminTheme.type.title3, color = colors.text, modifier = Modifier.padding(top = spacing.sm))
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.fillMaxWidth()) {
-                    TerminButton(stringResource(R.string.login_demo_customer), { onDemo(DemoRole.Customer) }, variant = ButtonVariant.Tonal, modifier = Modifier.weight(1f), enabled = !state.loading)
+                    TerminButton(stringResource(R.string.login_demo_customer), { onDemo(DemoRole.Customer) }, variant = ButtonVariant.Tonal, modifier = Modifier.weight(1f).testTag(TestTags.DEMO_CUSTOMER), enabled = !state.loading)
                     TerminButton(stringResource(R.string.login_demo_owner), { onDemo(DemoRole.Owner) }, variant = ButtonVariant.Tonal, modifier = Modifier.weight(1f), enabled = !state.loading)
                     TerminButton(stringResource(R.string.login_demo_stylist), { onDemo(DemoRole.Stylist) }, variant = ButtonVariant.Tonal, modifier = Modifier.weight(1f), enabled = !state.loading)
                 }

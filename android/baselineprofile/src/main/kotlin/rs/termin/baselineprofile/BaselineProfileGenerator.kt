@@ -8,7 +8,7 @@ import org.junit.runner.RunWith
 
 /**
  * Pravi baseline i startup profil (`./gradlew :app:generateBaselineProfile` uz povezan uređaj
- * ili emulator). Rezultat se upisuje u app/src/release/generated/baselineProfiles.
+ * ili emulator i pokrenut demo backend). Rezultat se upisuje u app/src/release/generated/baselineProfiles.
  */
 @RunWith(AndroidJUnit4::class)
 class BaselineProfileGenerator {
@@ -20,6 +20,7 @@ class BaselineProfileGenerator {
     fun generate() = rule.collect(packageName = targetPackage, includeInStartupProfile = true) {
         pressHome()
         startActivityAndWait()
-        firstRunJourney()
+        reachHome()
+        scrollSalons()
     }
 }

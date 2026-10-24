@@ -10,20 +10,33 @@ import androidx.test.uiautomator.Until
 val targetPackage: String
     get() = InstrumentationRegistry.getArguments().getString("targetAppId") ?: "rs.termin.app"
 
-private const val WAIT_MS = 5_000L
+private const val WAIT_MS = 10_000L
+
+// Oznake iz rs.termin.app.core.ui.TestTags (vidljive kao resource-id).
+private const val ONBOARDING_SKIP = "onboarding_skip"
+private const val DEMO_CUSTOMER = "demo_login_customer"
+private const val HOME_LIST = "home_list"
 
 /**
- * Najčešći put pri prvom pokretanju: uvodni ekrani (listanje) i ekran prijave.
- * Prijava traži pravi nalog, pa se profil pravi za deo koji svaki korisnik prolazi.
+ * Do početnog ekrana klijenta: preskače uvod i prijavljuje demo klijenta ako je potrebno.
+ * Merni build radi nad lokalnim emulatorima sa seed podacima (`npm run demo` na računaru).
  */
-fun MacrobenchmarkScope.firstRunJourney() {
+fun MacrobenchmarkScope.reachHome() {
     device.wait(Until.hasObject(By.pkg(targetPackage).depth(0)), WAIT_MS)
-    val pager = device.findObject(By.scrollable(true))
-    if (pager != null) {
-        repeat(2) {
-            pager.swipe(Direction.LEFT, 0.8f)
-            device.waitForIdle()
-        }
+    device.findObject(By.res(ONBOARDING_SKIP))?.click()
+    device.wait(Until.hasObject(By.res(DEMO_CUSTOMER)), WAIT_MS / 5)
+    device.findObject(By.res(DEMO_CUSTOMER))?.click()
+    device.wait(Until.hasObject(By.res(HOME_LIST)), WAIT_MS * 3)
+}
+
+/** Listanje početne liste salona (kartice sa fotografijama) dole pa gore. */
+fun MacrobenchmarkScope.scrollSalons() {
+    val list = device.findObject(By.res(HOME_LIST)) ?: return
+    list.setGestureMargin(device.displayWidth / 5)
+    repeat(2) {
+        list.fling(Direction.DOWN)
+        device.waitForIdle()
     }
+    list.fling(Direction.UP)
     device.waitForIdle()
 }

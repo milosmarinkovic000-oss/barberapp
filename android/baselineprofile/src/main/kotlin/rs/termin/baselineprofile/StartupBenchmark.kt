@@ -12,8 +12,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * Merenje pokretanja (hladno i toplo) sa i bez baseline profila i glatkoće listanja uvoda.
+ * Merenje pokretanja (hladno i toplo) sa i bez baseline profila i glatkoće listanja salona.
  * Cilj: hladno < 1,5 s, toplo < 0,5 s na srednjem telefonu (rezultati u docs/PERFORMANCE.md).
+ * Pre pokretanja: `npm run demo` na računaru (emulatori i seed), pa `./gradlew :baselineprofile:connectedBenchmarkReleaseAndroidTest`.
  */
 @RunWith(AndroidJUnit4::class)
 class StartupBenchmark {
@@ -31,16 +32,19 @@ class StartupBenchmark {
     fun warmStartup() = startup(StartupMode.WARM, CompilationMode.Partial(BaselineProfileMode.Require))
 
     @Test
-    fun onboardingScroll() = rule.measureRepeated(
+    fun salonListScroll() = rule.measureRepeated(
         packageName = targetPackage,
         metrics = listOf(FrameTimingMetric()),
         compilationMode = CompilationMode.Partial(BaselineProfileMode.Require),
-        startupMode = StartupMode.COLD,
+        startupMode = StartupMode.WARM,
         iterations = ITERATIONS,
-        setupBlock = { pressHome() },
+        setupBlock = {
+            pressHome()
+            startActivityAndWait()
+            reachHome()
+        },
     ) {
-        startActivityAndWait()
-        firstRunJourney()
+        scrollSalons()
     }
 
     private fun startup(mode: StartupMode, compilation: CompilationMode) = rule.measureRepeated(

@@ -20,6 +20,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import rs.termin.app.core.designsystem.TerminTheme
 import rs.termin.app.core.designsystem.component.ButtonVariant
@@ -46,7 +48,9 @@ fun AppRoot(viewModel: AppViewModel) {
         transitionSpec = { fadeIn(motion.tweenSpec()) togetherWith fadeOut(motion.tweenSpec()) },
         modifier = Modifier
             .fillMaxSize()
-            .background(colors.background),
+            .background(colors.background)
+            // Test tagovi su vidljivi UiAutomator-u (Macrobenchmark, baseline profil).
+            .semantics { testTagsAsResourceId = true },
         label = "app-phase",
     ) { phase ->
         when (phase) {

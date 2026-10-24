@@ -27,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.heading
@@ -55,6 +56,7 @@ import rs.termin.app.core.domain.model.ServiceCategory
 import rs.termin.app.core.ui.Loadable
 import rs.termin.app.core.ui.LocalImageUrls
 import rs.termin.app.core.ui.SalonCard
+import rs.termin.app.core.ui.TestTags
 import rs.termin.app.core.ui.formatter
 
 fun ServiceCategory.icon(): TerminIcon = when (this) {
@@ -107,6 +109,7 @@ fun HomeContent(
         columns = GridCells.Adaptive(minSize = 340.dp),
         modifier = Modifier
             .fillMaxSize()
+            .testTag(TestTags.HOME_LIST)
             .background(colors.background),
         contentPadding = PaddingValues(
             top = contentPadding.calculateTopPadding() + spacing.md,

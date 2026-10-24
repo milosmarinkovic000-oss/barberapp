@@ -21,6 +21,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -37,6 +38,7 @@ import rs.termin.app.core.designsystem.component.IllustrationImage
 import rs.termin.app.core.designsystem.component.Monogram
 import rs.termin.app.core.designsystem.component.TerminButton
 import rs.termin.app.core.designsystem.component.readableWidth
+import rs.termin.app.core.ui.TestTags
 
 private data class Page(val illustration: Illustration, val title: Int, val text: Int)
 
@@ -69,7 +71,7 @@ fun OnboardingScreen(onFinish: () -> Unit) {
         ) {
             Monogram(size = 40.dp)
             Box(Modifier.weight(1f))
-            if (!last) TerminButton(stringResource(R.string.onboarding_skip), onFinish, variant = ButtonVariant.Text)
+            if (!last) TerminButton(stringResource(R.string.onboarding_skip), onFinish, variant = ButtonVariant.Text, modifier = Modifier.testTag(TestTags.ONBOARDING_SKIP))
         }
         HorizontalPager(state = pager, modifier = Modifier.weight(1f)) { index ->
             val page = pages[index]
