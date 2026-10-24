@@ -113,6 +113,7 @@ CI (GitHub Actions) pokreće isto: `.github/workflows/android.yml` i `.github/wo
      `CALCOM_CLIENT_SECRET`; tajna za webhookove → `CALCOM_WEBHOOK_SECRET`.
 9. **Deploy** pravila, indeksa, funkcija i hostinga:
    ```bash
+   npx firebase login
    npx firebase use <id-projekta>
    npm run build
    npx firebase deploy --only firestore,storage,functions,hosting
@@ -122,8 +123,20 @@ CI (GitHub Actions) pokreće isto: `.github/workflows/android.yml` i `.github/wo
     node scripts/assetlinks.mjs <SHA-256 otisak ključa za potpis iz Play Console-a>
     npx firebase deploy --only hosting
     ```
-11. **Release build.** Ključ za potpis preko promenljivih okruženja ili `local.properties`
-    (`TERMIN_KEYSTORE`, `TERMIN_KEYSTORE_PASSWORD`, `TERMIN_KEY_ALIAS`, `TERMIN_KEY_PASSWORD`), pa:
+11. **Release build.** Ključ za potpis (upload ključ za Play App Signing) pravi se jednom i čuva van
+    repozitorijuma, uz rezervnu kopiju:
+    ```bash
+    keytool -genkeypair -v -keystore ~/termin-upload.jks -alias termin -keyalg RSA -keysize 4096 -validity 10000
+    ```
+    Putanja i lozinke idu u promenljive okruženja ili `android/local.properties`:
+    ```properties
+    TERMIN_KEYSTORE=/home/<korisnik>/termin-upload.jks
+    TERMIN_KEYSTORE_PASSWORD=...
+    TERMIN_KEY_ALIAS=termin
+    TERMIN_KEY_PASSWORD=...
+    ```
+    Bez ovih vrednosti release se potpisuje debug ključem (samo za lokalnu proveru, Play ga odbija).
+    Zatim:
     ```bash
     cd android
     TERMIN_CRASHLYTICS_UPLOAD=true ./gradlew bundleRelease
