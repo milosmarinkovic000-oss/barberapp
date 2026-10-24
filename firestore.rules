@@ -1,0 +1,188 @@
+rules_version = '2';
+
+// Pravila pristupa za Termin.
+// - Uloge (owner, stylist) i salonId/stylistId dolaze iz custom claims koje postavljaju Cloud Functions.
+// - Termini (appointments), lista čekanja, recenzije i sve serverske kolekcije menjaju se isključivo
+//   preko Cloud Functions (Admin SDK zaobilazi ova pravila).
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isSelf(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function roles() {
+      return signedIn() && request.auth.token.roles is list ? request.auth.token.roles : [];
+    }
+
+    function isOwnerOf(salonId) {
+      return 'owner' in roles() && request.auth.token.salonId == salonId;
+    }
+
+    function isStaffOf(salonId) {
+      return ('owner' in roles() || 'stylist' in roles()) && request.auth.token.salonId == salonId;
+    }
+
+    function isStylistSelf(salonId, stylistId) {
+      return 'stylist' in roles()
+        && request.auth.token.salonId == salonId
+        && request.auth.token.stylistId == stylistId;
+    }
+
+    function onlyChanges(keys) {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(keys);
+    }
+
+    function isHexColor(value) {
+      return value is string && value.matches('^#[0-9A-Fa-f]{6}$');
+    }
+
+    // ---------- Korisnici ----------
+    match /users/{uid} {
+      // Dokument pravi syncAccount (server). Klijent menja samo svoja podešavanja.
+      allow read: if isSelf(uid);
+      allow update: if isSelf(uid)
+        && onlyChanges(['name', 'photoPath', 'favoriteSalonIds', 'favoriteStylistKeys',
+                        'fcmTokens', 'language', 'notificationsEnabled', 'updatedAt'])
+        && (!('name' in request.resource.data) || (request.resource.data.name is string
+              && request.resource.data.name.size() <= 60))
+        && (!('favoriteSalonIds' in request.resource.data)
+              || (request.resource.data.favoriteSalonIds is list
+                  && request.resource.data.favoriteSalonIds.size() <= 100))
+        && (!('favoriteStylistKeys' in request.resource.data)
+              || (request.resource.data.favoriteStylistKeys is list
+                  && request.resource.data.favoriteStylistKeys.size() <= 100))
+        && (!('fcmTokens' in request.resource.data)
+              || (request.resource.data.fcmTokens is list
+                  && request.resource.data.fcmTokens.size() <= 10))
+        && (!('language' in request.resource.data)
+              || request.resource.data.language in ['sr', 'en']);
+      allow create, delete: if false;
+
+      match /inbox/{messageId} {
+        allow read: if isSelf(uid);
+        allow update: if isSelf(uid) && onlyChanges(['read']) && request.resource.data.read is bool;
+        allow delete: if isSelf(uid);
+        allow create: if false;
+      }
+    }
+
+    // ---------- Saloni ----------
+    match /salons/{salonId} {
+      allow read: if resource.data.published == true || isStaffOf(salonId);
+      allow create, delete: if false;
+      // Vlasnik menja podatke o salonu; izvedena polja (ocena, kategorije, prvi slobodan termin,
+      // vlasnik) održava server.
+      allow update: if isOwnerOf(salonId)
+        && onlyChanges(['name', 'description', 'address', 'city', 'geo', 'phone', 'photos',
+                        'coverPhoto', 'accentColor', 'priceLevel', 'workingHours', 'rules',
+                        'published', 'updatedAt'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 1 && request.resource.data.name.size() <= 80
+        && request.resource.data.description is string
+        && request.resource.data.description.size() <= 2000
+        && request.resource.data.published is bool
+        && isHexColor(request.resource.data.accentColor)
+        && request.resource.data.photos is list && request.resource.data.photos.size() <= 20
+        && request.resource.data.workingHours is map
+        && request.resource.data.rules.cancelHours is int
+        && request.resource.data.rules.cancelHours >= 0 && request.resource.data.rules.cancelHours <= 168
+        && request.resource.data.rules.minNoticeMinutes is int
+        && request.resource.data.rules.minNoticeMinutes >= 0
+        && request.resource.data.rules.minNoticeMinutes <= 10080
+        && request.resource.data.rules.horizonDays is int
+        && request.resource.data.rules.horizonDays >= 1 && request.resource.data.rules.horizonDays <= 180
+        && request.resource.data.rules.slotStepMin in [5, 10, 15, 20, 30, 60]
+        && request.resource.data.rules.bufferMin is int
+        && request.resource.data.rules.bufferMin >= 0 && request.resource.data.rules.bufferMin <= 120;
+
+      function salonPublished() {
+        return get(/databases/$(database)/documents/salons/$(salonId)).data.published == true;
+      }
+
+      match /services/{serviceId} {
+        allow read: if salonPublished() || isStaffOf(salonId);
+        allow create, update: if isOwnerOf(salonId)
+          && request.resource.data.name is string
+          && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 80
+          && request.resource.data.category in ['haircut', 'blowdry', 'coloring', 'highlights', 'beard', 'treatment']
+          && request.resource.data.durationMin is int
+          && request.resource.data.durationMin >= 5 && request.resource.data.durationMin <= 600
+          && request.resource.data.price is int
+          && request.resource.data.price >= 0 && request.resource.data.price <= 1000000
+          && request.resource.data.stylistIds is list
+          && request.resource.data.active is bool
+          && request.resource.data.order is int;
+        allow delete: if isOwnerOf(salonId);
+      }
+
+      match /stylists/{stylistId} {
+        allow read: if salonPublished() || isStaffOf(salonId);
+        allow create: if false;
+        allow update: if (isOwnerOf(salonId)
+            && onlyChanges(['name', 'photoPath', 'bio', 'specialties', 'portfolio', 'workingHours',
+                            'breaks', 'active', 'order', 'color', 'updatedAt']))
+          || (isStylistSelf(salonId, stylistId)
+            && onlyChanges(['photoPath', 'bio', 'specialties', 'portfolio', 'updatedAt']));
+        allow delete: if false;
+
+        // Odsustva i blokade pravi server (blockTime), jer moraju atomski da zauzmu dane.
+        match /timeOff/{timeOffId} {
+          allow read: if isStaffOf(salonId);
+          allow write: if false;
+        }
+
+        // Zauzeti intervali po danu: isključivo server.
+        match /days/{dateKey} {
+          allow read, write: if false;
+        }
+      }
+
+      match /reviews/{reviewId} {
+        allow read: if salonPublished() || isStaffOf(salonId);
+        allow write: if false;
+      }
+    }
+
+    // ---------- Termini ----------
+    match /appointments/{appointmentId} {
+      allow read: if signedIn()
+        && (resource.data.customerUid == request.auth.uid || isStaffOf(resource.data.salonId));
+      allow write: if false;
+    }
+
+    // ---------- Lista čekanja ----------
+    match /waitlist/{entryId} {
+      allow read: if signedIn() && resource.data.uid == request.auth.uid;
+      allow delete: if signedIn() && resource.data.uid == request.auth.uid;
+      allow create, update: if false;
+    }
+
+    // ---------- Samo server ----------
+    match /integrations/{id} {
+      allow read, write: if false;
+    }
+    match /invites/{id} {
+      allow read, write: if false;
+    }
+    match /oauthStates/{id} {
+      allow read, write: if false;
+    }
+    match /busyCache/{id} {
+      allow read, write: if false;
+    }
+    match /webhookEvents/{id} {
+      allow read, write: if false;
+    }
+    match /rateLimits/{id} {
+      allow read, write: if false;
+    }
+    match /integrationAccounts/{id} {
+      allow read, write: if false;
+    }
+  }
+}

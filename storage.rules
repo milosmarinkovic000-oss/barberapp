@@ -1,0 +1,46 @@
+rules_version = '2';
+
+// Fotografije salona i frizera su javne (prikazuju se svima koji pregledaju salon).
+// Pisanje: vlasnik salona, odnosno frizer za svoj profil i portfolio. Samo slike do 5 MB.
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function roles() {
+      return request.auth != null && request.auth.token.roles is list ? request.auth.token.roles : [];
+    }
+
+    function isOwnerOf(salonId) {
+      return 'owner' in roles() && request.auth.token.salonId == salonId;
+    }
+
+    function isStylistSelf(salonId, stylistId) {
+      return 'stylist' in roles()
+        && request.auth.token.salonId == salonId
+        && request.auth.token.stylistId == stylistId;
+    }
+
+    function isImageUpload() {
+      return request.resource != null
+        && request.resource.size < 5 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+
+    match /salons/{salonId}/photos/{fileName} {
+      allow read: if true;
+      allow create, update: if isOwnerOf(salonId) && isImageUpload();
+      allow delete: if isOwnerOf(salonId);
+    }
+
+    match /salons/{salonId}/stylists/{stylistId}/{fileName} {
+      allow read: if true;
+      allow create, update: if (isOwnerOf(salonId) || isStylistSelf(salonId, stylistId)) && isImageUpload();
+      allow delete: if isOwnerOf(salonId) || isStylistSelf(salonId, stylistId);
+    }
+
+    match /users/{uid}/{fileName} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow create, update: if request.auth != null && request.auth.uid == uid && isImageUpload();
+      allow delete: if request.auth != null && request.auth.uid == uid;
+    }
+  }
+}

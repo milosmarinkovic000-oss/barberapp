@@ -1,0 +1,23 @@
+{
+  "name": "termin-seed",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "seed": "tsx src/seed.ts",
+    "images": "tsx src/generate-images.ts",
+    "lint": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "firebase-admin": "14.5.0",
+    "luxon": "3.7.2",
+    "ngeohash": "0.6.4"
+  },
+  "devDependencies": {
+    "@types/luxon": "3.7.6",
+    "@types/ngeohash": "0.6.8",
+    "@types/node": "22.20.5",
+    "sharp": "0.35.5",
+    "tsx": "4.23.15",
+    "typescript": "6.0.3"
+  }
+}
