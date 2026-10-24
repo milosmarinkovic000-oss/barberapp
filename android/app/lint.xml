@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Sva upozorenja su greške (warningsAsErrors). Isključene su samo provere koje zavise od
+  spoljnog sveta, a ne od koda: obaveštenja o novijim verzijama biblioteka bi rušila CI svaki
+  put kad izađe nova verzija. Verzije se ažuriraju namerno, u gradle/libs.versions.toml.
+-->
+<lint>
+    <issue id="GradleDependency" severity="ignore" />
+    <issue id="NewerVersionAvailable" severity="ignore" />
+    <issue id="AndroidGradlePluginVersion" severity="ignore" />
+</lint>

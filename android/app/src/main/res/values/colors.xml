@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Boje za splash, ikonicu i obaveštenja (paleta 1 „Šampanj“; ostatak UI-ja je u ThemeConfig.kt). -->
+    <color name="brand_accent">#B08D57</color>
+    <color name="brand_on_accent">#1C1B1A</color>
+    <color name="splash_background">#FAF8F5</color>
+    <color name="window_background">#FAF8F5</color>
+    <color name="launcher_background">#1C1B1A</color>
+</resources>

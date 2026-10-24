@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Formatiranje po srpskim pravilima: „1.200 RSD“, „utorak, 14. maj“ -->
+    <string name="format_thousands_separator">.</string>
+    <string name="format_decimal_separator">,</string>
+    <string name="format_price">%1$s RSD</string>
+    <string name="format_day_long">%1$s, %2$d. %3$s</string>
+    <string name="format_day_short">%1$s %2$d.</string>
+    <string name="format_day_month">%1$d. %2$s</string>
+    <string name="format_date_time">%1$s u %2$s</string>
+    <string name="format_today_at">danas u %1$s</string>
+    <string name="format_tomorrow_at">sutra u %1$s</string>
+    <string name="format_today">Danas</string>
+    <string name="format_tomorrow">Sutra</string>
+    <string name="format_duration_minutes">%1$d min</string>
+    <string name="format_duration_hours">%1$d h</string>
+    <string name="format_duration_hours_minutes">%1$d h %2$d min</string>
+    <string name="format_distance_m">%1$d m</string>
+    <string name="format_distance_km">%1$s km</string>
+    <string name="format_time_range">%1$s–%2$s</string>
+    <string name="format_first_free">Prvi slobodan: %1$s</string>
+    <string name="format_in_minutes_now">uskoro</string>
+    <plurals name="countdown_minutes">
+        <item quantity="one">za %d minut</item>
+        <item quantity="few">za %d minuta</item>
+        <item quantity="other">za %d minuta</item>
+    </plurals>
+    <plurals name="countdown_hours">
+        <item quantity="one">za %d sat</item>
+        <item quantity="few">za %d sata</item>
+        <item quantity="other">za %d sati</item>
+    </plurals>
+    <plurals name="countdown_days">
+        <item quantity="one">za %d dan</item>
+        <item quantity="few">za %d dana</item>
+        <item quantity="other">za %d dana</item>
+    </plurals>
+    <plurals name="reviews_count">
+        <item quantity="one">%d recenzija</item>
+        <item quantity="few">%d recenzije</item>
+        <item quantity="other">%d recenzija</item>
+    </plurals>
+    <string-array name="weekday_names">
+        <item>ponedeljak</item>
+        <item>utorak</item>
+        <item>sreda</item>
+        <item>četvrtak</item>
+        <item>petak</item>
+        <item>subota</item>
+        <item>nedelja</item>
+    </string-array>
+    <string-array name="weekday_short">
+        <item>pon</item>
+        <item>uto</item>
+        <item>sre</item>
+        <item>čet</item>
+        <item>pet</item>
+        <item>sub</item>
+        <item>ned</item>
+    </string-array>
+    <string-array name="month_names">
+        <item>januar</item>
+        <item>februar</item>
+        <item>mart</item>
+        <item>april</item>
+        <item>maj</item>
+        <item>jun</item>
+        <item>jul</item>
+        <item>avgust</item>
+        <item>septembar</item>
+        <item>oktobar</item>
+        <item>novembar</item>
+        <item>decembar</item>
+    </string-array>
+</resources>

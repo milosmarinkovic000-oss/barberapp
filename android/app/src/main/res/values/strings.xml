@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Termin</string>
+
+    <!-- Zajedničke akcije -->
+    <string name="action_retry">Pokušaj ponovo</string>
+    <string name="action_cancel">Otkaži</string>
+    <string name="action_close">Zatvori</string>
+    <string name="action_save">Sačuvaj</string>
+    <string name="action_back">Nazad</string>
+    <string name="action_continue">Nastavi</string>
+    <string name="action_done">Gotovo</string>
+    <string name="action_delete">Obriši</string>
+    <string name="action_edit">Izmeni</string>
+    <string name="action_add">Dodaj</string>
+    <string name="action_call">Pozovi</string>
+    <string name="action_share">Podeli</string>
+    <string name="action_directions">Put do salona</string>
+    <string name="action_open_maps">Otvori u Google Mapama</string>
+    <string name="action_see_all">Vidi sve</string>
+    <string name="action_confirm">Potvrdi</string>
+    <string name="action_yes">Da</string>
+    <string name="action_no">Ne</string>
+    <string name="action_settings">Podešavanja</string>
+    <string name="action_more">Još</string>
+
+    <!-- Stanja ekrana -->
+    <string name="state_loading">Učitavanje…</string>
+    <string name="state_error_title">Nešto nije u redu</string>
+    <string name="state_error_message">Nismo uspeli da učitamo podatke. Proveri vezu i pokušaj ponovo.</string>
+    <string name="state_offline">Nema interneta. Prikazujemo sačuvane podatke.</string>
+    <string name="state_offline_booking">Zakazivanje nije moguće bez interneta. Termin mora da potvrdi salon, a to traži vezu.</string>
+    <string name="state_offline_action">Ova radnja traži internet. Pokušaj ponovo kad se povežeš.</string>
+
+    <!-- Greške sa servera -->
+    <string name="error_slot_taken">Neko je upravo zauzeo ovaj termin. Izaberi neki od slobodnih ispod.</string>
+    <string name="error_cancel_deadline">Rok za otkazivanje ili promenu je prošao. Pozovi salon i dogovorite se direktno.</string>
+    <string name="error_outside_window">Ovaj termin više ne može da se zakaže (prekasno je ili predaleko unapred).</string>
+    <string name="error_max_holds">Već čuvaš dva termina. Potvrdi ili otpusti jedan pa probaj ponovo.</string>
+    <string name="error_max_waitlist">Već si na listi čekanja za više dana. Ukloni neki unos pa probaj ponovo.</string>
+    <string name="error_not_active">Ovaj termin više nije aktivan.</string>
+    <string name="error_not_completed">Ocena je moguća tek posle završenog termina.</string>
+    <string name="error_already_reviewed">Ova poseta je već ocenjena. Hvala!</string>
+    <string name="error_not_started">Termin još nije počeo.</string>
+    <string name="error_hold_expired">Vreme za potvrdu je isteklo, a termin je u međuvremenu zauzet. Izaberi novi.</string>
+    <string name="error_already_invited">Ovaj broj već ima poziv koji čeka prijavu.</string>
+    <string name="error_not_connected">Integracija nije povezana.</string>
+    <string name="error_not_allowed">Nemaš dozvolu za ovu radnju.</string>
+    <string name="error_validation">Proveri unete podatke.</string>
+    <string name="error_not_found">Ne postoji ili je uklonjeno.</string>
+    <string name="error_rate_limited">Previše zahteva za kratko vreme. Sačekaj minut pa probaj ponovo.</string>
+    <string name="error_integration_not_configured">Ova integracija još nije podešena na serveru. Uputstvo je u README-u (odeljak „Prelazak na produkciju“).</string>
+    <string name="error_offline">Nema veze sa serverom. Proveri internet i pokušaj ponovo.</string>
+    <string name="error_unknown">Došlo je do greške. Pokušaj ponovo.</string>
+
+    <!-- Kanali obaveštenja i lokalni podsetnici -->
+    <string name="channel_appointments">Termini</string>
+    <string name="channel_appointments_description">Potvrde, promene i otkazivanja termina</string>
+    <string name="channel_reminders">Podsetnici</string>
+    <string name="channel_reminders_description">Podsetnici pre termina i molbe za ocenu</string>
+    <string name="channel_waitlist">Lista čekanja</string>
+    <string name="channel_waitlist_description">Javljamo ti kad se oslobodi termin</string>
+    <string name="reminder_day_title">Sutra imaš termin</string>
+    <string name="reminder_day_body">%1$s u %2$s. Vidimo se!</string>
+    <string name="reminder_two_hours_title">Termin za 2 sata</string>
+    <string name="reminder_two_hours_body">%1$s u %2$s. Na vreme si!</string>
+
+    <!-- Kategorije usluga -->
+    <string name="category_haircut">Šišanje</string>
+    <string name="category_blowdry">Feniranje</string>
+    <string name="category_coloring">Bojenje</string>
+    <string name="category_highlights">Pramenovi</string>
+    <string name="category_beard">Brada</string>
+    <string name="category_treatment">Tretmani</string>
+
+    <!-- Statusi termina -->
+    <string name="status_held">Čeka potvrdu</string>
+    <string name="status_confirmed">Potvrđen</string>
+    <string name="status_canceled_by_customer">Otkazao klijent</string>
+    <string name="status_canceled_by_salon">Otkazao salon</string>
+    <string name="status_completed">Završen</string>
+    <string name="status_no_show">Nije došao</string>
+
+    <!-- Pristupačnost -->
+    <string name="cd_back">Nazad</string>
+    <string name="cd_close">Zatvori</string>
+    <string name="cd_rating">Ocena %1$s od 5, %2$d recenzija</string>
+    <string name="cd_rating_no_reviews">Još nema ocena</string>
+    <string name="cd_photo_of">Fotografija: %1$s</string>
+    <string name="cd_favorite_add">Dodaj u omiljene</string>
+    <string name="cd_favorite_remove">Ukloni iz omiljenih</string>
+    <string name="cd_star_input">%1$d od 5 zvezdica</string>
+    <string name="cd_selected">izabrano</string>
+    <string name="cd_not_selected">nije izabrano</string>
+    <string name="cd_logo">Logo aplikacije Termin</string>
+</resources>

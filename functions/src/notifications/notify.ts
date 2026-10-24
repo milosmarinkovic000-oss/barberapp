@@ -56,11 +56,12 @@ export async function notifyUser(
       createdAt: FieldValue.serverTimestamp(),
     });
 
-    const tokens = Array.isArray(user.fcmTokens) ? (user.fcmTokens as string[]).filter((t) => typeof t === "string") : [];
-    if (isEmulator || tokens.length === 0 || user.notificationsEnabled === false) return;
+    // fcmTokens čuva Firebase Installation ID-jeve (FCM registracija preko FID-a).
+    const fids = Array.isArray(user.fcmTokens) ? (user.fcmTokens as string[]).filter((t) => typeof t === "string") : [];
+    if (isEmulator || fids.length === 0 || user.notificationsEnabled === false) return;
 
     const response = await messaging.sendEachForMulticast({
-      tokens,
+      fids,
       notification: { title, body },
       data: toFcmData(type, inboxRef.id, data),
       android: {
@@ -72,7 +73,7 @@ export async function notifyUser(
       },
     });
     const invalid = response.responses
-      .map((r, i) => (r.error && INVALID_TOKEN_CODES.has(r.error.code) ? tokens[i] : null))
+      .map((r, i) => (r.error && INVALID_TOKEN_CODES.has(r.error.code) ? fids[i] : null))
       .filter((t): t is string => t !== null);
     if (invalid.length > 0) {
       await col.users().doc(uid).update({ fcmTokens: FieldValue.arrayRemove(...invalid) });

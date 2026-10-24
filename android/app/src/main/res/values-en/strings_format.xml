@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="format_thousands_separator">,</string>
+    <string name="format_decimal_separator">.</string>
+    <string name="format_price">%1$s RSD</string>
+    <string name="format_day_long">%1$s, %2$d %3$s</string>
+    <string name="format_day_short">%1$s %2$d</string>
+    <string name="format_day_month">%1$d %2$s</string>
+    <string name="format_date_time">%1$s at %2$s</string>
+    <string name="format_today_at">today at %1$s</string>
+    <string name="format_tomorrow_at">tomorrow at %1$s</string>
+    <string name="format_today">Today</string>
+    <string name="format_tomorrow">Tomorrow</string>
+    <string name="format_duration_minutes">%1$d min</string>
+    <string name="format_duration_hours">%1$d h</string>
+    <string name="format_duration_hours_minutes">%1$d h %2$d min</string>
+    <string name="format_distance_m">%1$d m</string>
+    <string name="format_distance_km">%1$s km</string>
+    <string name="format_time_range">%1$s–%2$s</string>
+    <string name="format_first_free">First free: %1$s</string>
+    <string name="format_in_minutes_now">shortly</string>
+    <plurals name="countdown_minutes">
+        <item quantity="one">in %d minute</item>
+        <item quantity="other">in %d minutes</item>
+    </plurals>
+    <plurals name="countdown_hours">
+        <item quantity="one">in %d hour</item>
+        <item quantity="other">in %d hours</item>
+    </plurals>
+    <plurals name="countdown_days">
+        <item quantity="one">in %d day</item>
+        <item quantity="other">in %d days</item>
+    </plurals>
+    <plurals name="reviews_count">
+        <item quantity="one">%d review</item>
+        <item quantity="other">%d reviews</item>
+    </plurals>
+    <string-array name="weekday_names">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+    <string-array name="weekday_short">
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+        <item>Sat</item>
+        <item>Sun</item>
+    </string-array>
+    <string-array name="month_names">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+</resources>
