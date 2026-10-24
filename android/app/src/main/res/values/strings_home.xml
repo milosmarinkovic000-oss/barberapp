@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nav_home">Početna</string>
+    <string name="nav_search">Pretraga</string>
+    <string name="nav_appointments">Termini</string>
+    <string name="nav_profile">Profil</string>
+    <string name="nav_calendar">Kalendar</string>
+    <string name="nav_salon">Salon</string>
+    <string name="nav_book">Zakaži</string>
+
+    <string name="home_greeting">Zdravo, %1$s</string>
+    <string name="home_greeting_anonymous">Zdravo!</string>
+    <string name="home_subtitle">Gde idemo danas?</string>
+    <string name="home_search_hint">Pretraži salone i usluge</string>
+    <string name="home_categories">Kategorije</string>
+    <string name="home_free_today">Slobodno danas</string>
+    <string name="home_free_today_subtitle">Saloni koji još danas imaju termin</string>
+    <string name="home_free_today_empty">Za danas su svi popunjeni. Pogledaj sutrašnje termine u pretrazi.</string>
+    <string name="home_nearby">U blizini</string>
+    <string name="home_nearby_permission">Dozvoli približnu lokaciju da vidiš salone oko sebe. Lokaciju koristimo samo dok gledaš ovaj ekran.</string>
+    <string name="home_nearby_allow">Prikaži salone u blizini</string>
+    <string name="home_nearby_unavailable">Lokacija nije dostupna. Uključi lokaciju ili potraži salon po nazivu.</string>
+    <string name="home_nearby_empty">Nema salona u krugu od 10 km.</string>
+    <string name="home_all_salons">Svi saloni</string>
+    <string name="home_empty_title">Još nema salona</string>
+    <string name="home_empty_message">Čim se saloni u tvom gradu prijave, videćeš ih ovde.</string>
+    <string name="home_load_more">Učitaj još</string>
+    <string name="salon_from_price">od %1$s</string>
+    <string name="salon_no_free_slots">Nema slobodnih termina</string>
+</resources>

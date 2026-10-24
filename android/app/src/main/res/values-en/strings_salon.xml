@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="salon_tab_services">Services</string>
+    <string name="salon_tab_stylists">Stylists</string>
+    <string name="salon_tab_reviews">Reviews</string>
+    <string name="salon_tab_info">Info</string>
+    <string name="salon_book">Book an appointment</string>
+    <string name="salon_book_selected">Book (%1$d)</string>
+    <string name="salon_book_with">Book with %1$s</string>
+    <string name="salon_open_today">Open today %1$s</string>
+    <string name="salon_closed_today">Closed today</string>
+    <string name="salon_closed">Closed</string>
+    <string name="salon_hours">Opening hours</string>
+    <string name="salon_address">Address</string>
+    <string name="salon_phone">Phone</string>
+    <string name="salon_about">About</string>
+    <string name="salon_policy">Booking policy</string>
+    <string name="salon_policy_cancel">You can cancel or reschedule up to %1$d h before the appointment. After that, call the salon.</string>
+    <string name="salon_policy_cancel_any">You can cancel or reschedule until the appointment starts.</string>
+    <string name="salon_policy_notice">Book at least %1$s ahead.</string>
+    <string name="salon_policy_horizon">Booking is open %1$d days ahead.</string>
+    <string name="salon_share_text">%1$s, %2$s — book an appointment in the Termin app: %3$s</string>
+    <string name="salon_share_title">Share salon</string>
+    <string name="salon_services_selected">Selected: %1$d · %2$s · %3$s</string>
+    <string name="salon_service_select">Select %1$s</string>
+    <string name="salon_no_services">This salon hasn\'t added services yet.</string>
+    <string name="salon_no_stylists">This salon hasn\'t added stylists yet.</string>
+    <string name="salon_no_reviews_title">No reviews yet</string>
+    <string name="salon_no_reviews">Anyone who completed an appointment here can leave a review.</string>
+    <string name="salon_reply">Salon\'s reply</string>
+    <string name="salon_not_found">This salon wasn\'t found or is no longer published.</string>
+    <string name="salon_map_unavailable">The map isn\'t available without a Google Maps key.</string>
+    <string name="salon_gallery">Gallery, photo %1$d of %2$d</string>
+    <string name="price_level_1">Affordable</string>
+    <string name="price_level_2">Mid-range</string>
+    <string name="price_level_3">Premium</string>
+
+    <string name="stylist_specialties">Specialties</string>
+    <string name="stylist_portfolio">Work</string>
+    <string name="stylist_first_free">First free slot</string>
+    <string name="stylist_no_free">No free slots in the next 14 days.</string>
+    <string name="stylist_portfolio_item">Work by %1$s, %2$d of %3$d</string>
+    <string name="stylist_any">Any available</string>
+    <string name="stylist_any_description">First free stylist who does all selected services</string>
+</resources>

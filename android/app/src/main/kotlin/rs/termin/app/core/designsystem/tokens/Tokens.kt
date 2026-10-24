@@ -1,6 +1,5 @@
 package rs.termin.app.core.designsystem.tokens
 
-import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.FiniteAnimationSpec
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.snap
@@ -127,7 +126,7 @@ data class Motion(
 
     fun <T> tweenSpec(): FiniteAnimationSpec<T> = if (!enabled) snap() else tween(durationMs)
 
-    fun offsetSpec(): AnimationSpec<IntOffset> =
+    fun offsetSpec(): FiniteAnimationSpec<IntOffset> =
         if (!enabled) snap() else spring(dampingRatio = dampingRatio, stiffness = stiffness)
 }
 

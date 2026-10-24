@@ -101,7 +101,7 @@ export function render(type: NotificationType, language: Language, p: TemplatePa
         : { title: "The salon replied", body: `${p.salonName} replied to your review.` };
     case "stylist_invited":
       return sr
-        ? { title: "Dobrodošao/la u tim", body: `${p.salonName} te je dodao kao frizera. Tvoj raspored je spreman.` }
+        ? { title: "Dobrodošlica u tim", body: `${p.salonName} te je dodao u tim frizera. Tvoj raspored je spreman.` }
         : { title: "Welcome to the team", body: `${p.salonName} added you as a stylist. Your schedule is ready.` };
   }
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_title">Search</string>
+    <string name="search_field">Salon name or service</string>
+    <string name="search_clear">Clear search</string>
+    <string name="search_filters">Filters</string>
+    <string name="search_filters_active">Filters (%1$d)</string>
+    <string name="search_view_list">List</string>
+    <string name="search_view_map">Map</string>
+    <string name="search_recent">Recent searches</string>
+    <string name="search_results">%1$d results</string>
+    <string name="search_empty_title">Nothing found</string>
+    <string name="search_empty_message">Try another name or remove a filter.</string>
+    <string name="search_reset_filters">Reset filters</string>
+    <string name="search_filter_service">Service</string>
+    <string name="search_filter_price">Price up to</string>
+    <string name="search_filter_rating">Rating</string>
+    <string name="search_filter_distance">Distance</string>
+    <string name="search_filter_availability">Free slot</string>
+    <string name="search_any">Any</string>
+    <string name="search_any_time">Any time</string>
+    <string name="search_today">Today</string>
+    <string name="search_tomorrow">By tomorrow</string>
+    <string name="search_rating_at_least">%1$s+</string>
+    <string name="search_distance_up_to">up to %1$s</string>
+    <string name="search_distance_needs_location">The distance filter needs your approximate location.</string>
+    <string name="search_apply">Show results</string>
+    <string name="search_map_no_key_title">Map unavailable</string>
+    <string name="search_map_no_key">The map needs a Google Maps key and this build doesn\'t have one. Salons are listed below and each can be opened in Google Maps.</string>
+    <string name="search_select_salon">Pick a salon from the list to see details.</string>
+</resources>

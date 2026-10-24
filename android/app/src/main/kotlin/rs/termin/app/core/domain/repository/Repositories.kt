@@ -230,6 +230,8 @@ data class AppPreferences(
     val notificationPermissionAsked: Boolean = false,
     val firstBookingDone: Boolean = false,
     val recentSearches: List<String> = emptyList(),
+    /** Vlasnik ili frizer trenutno koristi aplikaciju kao klijent. */
+    val clientView: Boolean = false,
     /** Samo debug: izbor sa ekrana „Pregled stila“. */
     val debugThemeConfig: ThemeConfig? = null,
 )
@@ -242,6 +244,7 @@ interface PreferencesRepository {
     suspend fun setNotificationPermissionAsked()
     suspend fun setFirstBookingDone()
     suspend fun addRecentSearch(query: String)
+    suspend fun setClientView(clientView: Boolean)
     suspend fun setDebugThemeConfig(config: ThemeConfig?)
 }
 

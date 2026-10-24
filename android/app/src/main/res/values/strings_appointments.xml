@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="appointments_title">Moji termini</string>
+    <string name="appointments_upcoming">Predstojeći</string>
+    <string name="appointments_past">Prošli</string>
+    <string name="appointments_waitlist">Lista čekanja</string>
+    <string name="appointments_waitlist_entry">%1$s · %2$s</string>
+    <string name="appointments_waitlist_notified">Oslobodio se termin — zakaži dok je slobodan</string>
+    <string name="appointments_waitlist_waiting">Čekamo da se oslobodi termin</string>
+    <string name="appointments_waitlist_leave">Ukloni sa liste čekanja</string>
+    <string name="appointments_waitlist_book">Zakaži</string>
+    <string name="appointments_empty_upcoming_title">Nemaš zakazanih termina</string>
+    <string name="appointments_empty_upcoming">Pronađi salon i zakaži termin za par dodira.</string>
+    <string name="appointments_find_salon">Pronađi salon</string>
+    <string name="appointments_empty_past">Ovde će biti tvoje prethodne posete.</string>
+    <string name="appointments_book_again">Zakaži ponovo</string>
+    <string name="appointments_rate">Oceni posetu</string>
+    <string name="appointments_select">Izaberi termin sa liste da vidiš detalje.</string>
+
+    <string name="appointment_title">Termin</string>
+    <string name="appointment_when">Kada</string>
+    <string name="appointment_where">Gde</string>
+    <string name="appointment_stylist">Frizer</string>
+    <string name="appointment_services">Usluge</string>
+    <string name="appointment_note">Napomena</string>
+    <string name="appointment_total">Ukupno</string>
+    <string name="appointment_reschedule">Promeni termin</string>
+    <string name="appointment_cancel">Otkaži termin</string>
+    <string name="appointment_cancel_title">Otkaži termin?</string>
+    <string name="appointment_cancel_text">Termin %1$s biće otkazan, a vreme oslobođeno za druge.</string>
+    <string name="appointment_cancel_confirm">Da, otkaži</string>
+    <string name="appointment_keep">Zadrži termin</string>
+    <string name="appointment_canceled">Termin je otkazan.</string>
+    <string name="appointment_deadline_title">Pozovi salon</string>
+    <string name="appointment_deadline_text">Rok za otkazivanje i promenu (%1$d h pre termina) je prošao. Pozovi salon i dogovorite se direktno.</string>
+    <string name="appointment_deadline_until">Promena i otkazivanje mogući su do %1$s.</string>
+    <string name="appointment_call_salon">Pozovi salon</string>
+    <string name="appointment_not_found">Termin nije pronađen.</string>
+    <string name="appointment_review_title">Kako je bilo?</string>
+    <string name="appointment_review_text">Tvoja ocena pomaže drugima da izaberu, a salonu da bude još bolji.</string>
+    <string name="appointment_review_hint">Napiši par reči (nije obavezno)</string>
+    <string name="appointment_review_submit">Pošalji ocenu</string>
+    <string name="appointment_review_thanks">Hvala na oceni!</string>
+    <string name="appointment_reviewed">Ocenjeno. Hvala!</string>
+    <string name="appointment_review_pick">Izaberi ocenu od 1 do 5</string>
+</resources>

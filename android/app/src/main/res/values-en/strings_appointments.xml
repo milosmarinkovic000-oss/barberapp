@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="appointments_title">My bookings</string>
+    <string name="appointments_upcoming">Upcoming</string>
+    <string name="appointments_past">Past</string>
+    <string name="appointments_waitlist">Waitlist</string>
+    <string name="appointments_waitlist_entry">%1$s · %2$s</string>
+    <string name="appointments_waitlist_notified">A slot opened up — book it while it\'s free</string>
+    <string name="appointments_waitlist_waiting">Waiting for a slot to open</string>
+    <string name="appointments_waitlist_leave">Leave waitlist</string>
+    <string name="appointments_waitlist_book">Book</string>
+    <string name="appointments_empty_upcoming_title">No upcoming bookings</string>
+    <string name="appointments_empty_upcoming">Find a salon and book in a few taps.</string>
+    <string name="appointments_find_salon">Find a salon</string>
+    <string name="appointments_empty_past">Your past visits will show up here.</string>
+    <string name="appointments_book_again">Book again</string>
+    <string name="appointments_rate">Rate visit</string>
+    <string name="appointments_select">Pick a booking from the list to see details.</string>
+
+    <string name="appointment_title">Booking</string>
+    <string name="appointment_when">When</string>
+    <string name="appointment_where">Where</string>
+    <string name="appointment_stylist">Stylist</string>
+    <string name="appointment_services">Services</string>
+    <string name="appointment_note">Note</string>
+    <string name="appointment_total">Total</string>
+    <string name="appointment_reschedule">Reschedule</string>
+    <string name="appointment_cancel">Cancel booking</string>
+    <string name="appointment_cancel_title">Cancel booking?</string>
+    <string name="appointment_cancel_text">Your booking on %1$s will be canceled and the time freed up for others.</string>
+    <string name="appointment_cancel_confirm">Yes, cancel</string>
+    <string name="appointment_keep">Keep booking</string>
+    <string name="appointment_canceled">Booking canceled.</string>
+    <string name="appointment_deadline_title">Call the salon</string>
+    <string name="appointment_deadline_text">The window to cancel or reschedule (%1$d h before) has passed. Call the salon to sort it out directly.</string>
+    <string name="appointment_deadline_until">You can reschedule or cancel until %1$s.</string>
+    <string name="appointment_call_salon">Call the salon</string>
+    <string name="appointment_not_found">Booking not found.</string>
+    <string name="appointment_review_title">How was it?</string>
+    <string name="appointment_review_text">Your rating helps others choose and helps the salon get even better.</string>
+    <string name="appointment_review_hint">Write a few words (optional)</string>
+    <string name="appointment_review_submit">Send rating</string>
+    <string name="appointment_review_thanks">Thanks for rating!</string>
+    <string name="appointment_reviewed">Rated. Thank you!</string>
+    <string name="appointment_review_pick">Pick a rating from 1 to 5</string>
+</resources>

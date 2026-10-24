@@ -27,7 +27,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -63,7 +62,6 @@ fun TerminTopBar(
     title: String,
     modifier: Modifier = Modifier,
     onBack: (() -> Unit)? = null,
-    scrollBehavior: TopAppBarScrollBehavior? = null,
     transparent: Boolean = false,
     actions: @Composable RowScope.() -> Unit = {},
 ) {
@@ -85,7 +83,6 @@ fun TerminTopBar(
             }
         },
         actions = actions,
-        scrollBehavior = scrollBehavior,
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = if (transparent) Color.Transparent else colors.background,
             scrolledContainerColor = colors.surface,

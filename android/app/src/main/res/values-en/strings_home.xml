@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nav_home">Home</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_appointments">Bookings</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_calendar">Calendar</string>
+    <string name="nav_salon">Salon</string>
+    <string name="nav_book">Book</string>
+
+    <string name="home_greeting">Hi, %1$s</string>
+    <string name="home_greeting_anonymous">Hi there!</string>
+    <string name="home_subtitle">Where to today?</string>
+    <string name="home_search_hint">Search salons and services</string>
+    <string name="home_categories">Categories</string>
+    <string name="home_free_today">Free today</string>
+    <string name="home_free_today_subtitle">Salons with a slot still today</string>
+    <string name="home_free_today_empty">Everyone is booked for today. Check tomorrow\'s slots in search.</string>
+    <string name="home_nearby">Nearby</string>
+    <string name="home_nearby_permission">Allow approximate location to see salons around you. We only use it while you\'re on this screen.</string>
+    <string name="home_nearby_allow">Show nearby salons</string>
+    <string name="home_nearby_unavailable">Location isn\'t available. Turn on location or search for a salon by name.</string>
+    <string name="home_nearby_empty">No salons within 10 km.</string>
+    <string name="home_all_salons">All salons</string>
+    <string name="home_empty_title">No salons yet</string>
+    <string name="home_empty_message">As soon as salons in your city join, you\'ll see them here.</string>
+    <string name="home_load_more">Load more</string>
+    <string name="salon_from_price">from %1$s</string>
+    <string name="salon_no_free_slots">No free slots</string>
+</resources>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Uvod -->
+    <string name="onboarding_skip">Preskoči</string>
+    <string name="onboarding_next">Dalje</string>
+    <string name="onboarding_start">Počnimo</string>
+    <string name="onboarding_1_title">Tvoj salon, na dodir</string>
+    <string name="onboarding_1_text">Pronađi frizera u blizini, pogledaj radove i cene, i izaberi ono što ti prija.</string>
+    <string name="onboarding_2_title">Slobodni termini, odmah</string>
+    <string name="onboarding_2_text">Vidiš tačno kada je slobodno. Izabrani termin čuvamo za tebe dok ga ne potvrdiš.</string>
+    <string name="onboarding_3_title">Bez zaboravljanja</string>
+    <string name="onboarding_3_text">Podsetimo te dan ranije i dva sata pre termina. Promena i otkazivanje su jednim dodirom.</string>
+    <string name="onboarding_page">Strana %1$d od %2$d</string>
+
+    <!-- Prijava -->
+    <string name="login_title">Zdravo! Ovo je Termin</string>
+    <string name="login_subtitle">Prijavi se brojem telefona ili Google nalogom.</string>
+    <string name="login_phone_label">Broj telefona</string>
+    <string name="login_phone_placeholder">60 123 4567</string>
+    <string name="login_phone_supporting">Poslaćemo ti SMS sa kodom.</string>
+    <string name="login_send_code">Pošalji kod</string>
+    <string name="login_code_title">Unesi kod iz SMS-a</string>
+    <string name="login_code_sent_to">Poslali smo kod na %1$s.</string>
+    <string name="login_code_label">Kod (6 cifara)</string>
+    <string name="login_verify">Potvrdi</string>
+    <string name="login_change_number">Promeni broj</string>
+    <string name="login_resend">Pošalji ponovo</string>
+    <string name="login_or">ili</string>
+    <string name="login_google">Nastavi sa Google nalogom</string>
+    <string name="login_emulator_hint">Demo režim: SMS kod vidiš u Emulator UI (http://127.0.0.1:4000 → Authentication).</string>
+    <string name="login_terms">Prijavom prihvataš uslove korišćenja i politiku privatnosti.</string>
+    <string name="login_privacy_link">Politika privatnosti</string>
+    <string name="login_demo_title">Brza demo prijava</string>
+    <string name="login_demo_customer">Klijent</string>
+    <string name="login_demo_owner">Vlasnik</string>
+    <string name="login_demo_stylist">Frizer</string>
+    <string name="login_google_demo_title">Google nalog (demo)</string>
+    <string name="login_google_demo_text">U demo režimu Google prijava ide preko Auth emulatora. Upiši e-poštu za probni nalog.</string>
+    <string name="login_google_demo_email">E-pošta</string>
+
+    <string name="auth_error_invalid_phone">Broj telefona nije ispravan. Upiši ga bez nule, npr. 60 123 4567.</string>
+    <string name="auth_error_invalid_code">Kod nije ispravan. Proveri SMS i pokušaj ponovo.</string>
+    <string name="auth_error_code_expired">Kod je istekao. Zatraži novi.</string>
+    <string name="auth_error_too_many">Previše pokušaja. Sačekaj malo pa probaj ponovo.</string>
+    <string name="auth_error_google">Google prijava trenutno nije dostupna na ovom telefonu.</string>
+    <string name="auth_error_cancelled">Prijava je prekinuta.</string>
+    <string name="error_no_app">Nema aplikacije koja može ovo da otvori.</string>
+
+    <!-- Podešavanje profila -->
+    <string name="setup_title">Kako da te zovemo?</string>
+    <string name="setup_subtitle">Ime vidi samo salon kod kog zakažeš.</string>
+    <string name="setup_name_label">Ime i prezime</string>
+    <string name="setup_name_error">Upiši ime (najmanje 2 slova).</string>
+    <string name="setup_photo">Dodaj fotografiju (nije obavezno)</string>
+    <string name="setup_photo_change">Promeni fotografiju</string>
+    <string name="setup_finish">Završi</string>
+</resources>

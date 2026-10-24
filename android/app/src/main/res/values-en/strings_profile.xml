@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_title">Profile</string>
+    <string name="profile_edit">Edit profile</string>
+    <string name="profile_section_mine">Mine</string>
+    <string name="profile_section_settings">Settings</string>
+    <string name="profile_section_business">For salons</string>
+    <string name="profile_section_about">About</string>
+    <string name="profile_favorites">Favorites</string>
+    <string name="profile_inbox">Notifications</string>
+    <string name="profile_appearance">Appearance</string>
+    <string name="profile_language">Language</string>
+    <string name="profile_notifications">Phone notifications</string>
+    <string name="profile_notifications_text">Confirmations, reminders and changes</string>
+    <string name="profile_notifications_blocked">Notifications are turned off in your phone settings.</string>
+    <string name="profile_open_system_settings">Open phone settings</string>
+    <string name="profile_privacy">Privacy policy</string>
+    <string name="profile_licenses">Open source licenses</string>
+    <string name="profile_create_salon">Open your salon on Termin</string>
+    <string name="profile_create_salon_text">Take bookings, manage your calendar and team.</string>
+    <string name="profile_staff_view">Salon view</string>
+    <string name="profile_staff_view_text">Turn off to book as a customer</string>
+    <string name="profile_style_preview">Style preview</string>
+    <string name="profile_sign_out">Sign out</string>
+    <string name="profile_sign_out_title">Sign out?</string>
+    <string name="profile_sign_out_text">Local appointment reminders will be removed from this phone.</string>
+    <string name="profile_delete_account">Delete account</string>
+    <string name="profile_version">Termin %1$s</string>
+    <string name="profile_demo_mode">Demo mode (local Firebase emulators)</string>
+    <string name="profile_role_owner">Salon owner</string>
+    <string name="profile_role_stylist">Stylist</string>
+    <string name="profile_role_customer">Customer</string>
+
+    <string name="language_system">Phone language</string>
+    <string name="language_serbian">Srpski (latinica)</string>
+    <string name="language_english">English</string>
+
+    <string name="appearance_title">Appearance</string>
+    <string name="appearance_theme">Theme</string>
+    <string name="appearance_theme_system">Like phone</string>
+    <string name="appearance_theme_light">Light</string>
+    <string name="appearance_theme_dark">Dark</string>
+    <string name="appearance_accent">Accent shade</string>
+    <string name="appearance_accent_default">Default</string>
+    <string name="appearance_accent_option">Shade %1$d</string>
+    <string name="appearance_preview">Preview</string>
+    <string name="appearance_preview_salon">Studio Lumière</string>
+    <string name="appearance_preview_text">Haircut and blow-dry · 60 min</string>
+    <string name="appearance_preview_button">Book</string>
+    <string name="appearance_noir_note">The selected style is always dark.</string>
+
+    <string name="edit_profile_title">Edit profile</string>
+    <string name="edit_profile_name">Full name</string>
+    <string name="edit_profile_photo">Change photo</string>
+    <string name="edit_profile_phone">Phone</string>
+    <string name="edit_profile_email">Email</string>
+    <string name="edit_profile_saved">Saved</string>
+
+    <string name="delete_title">Delete account</string>
+    <string name="delete_text">Deleting your account permanently removes your name, phone number, photo, favorites, notifications and waitlist. Upcoming appointments are canceled. Past appointments remain with the salon only as anonymous statistics.</string>
+    <string name="delete_owner_text">You own a salon. It will be hidden from search and stylists will lose access.</string>
+    <string name="delete_confirm_label">Type DELETE to confirm</string>
+    <string name="delete_confirm_word">DELETE</string>
+    <string name="delete_button">Permanently delete account</string>
+    <string name="delete_done">Your account has been deleted.</string>
+
+    <string name="create_salon_title">New salon</string>
+    <string name="create_salon_intro">Enter the basics. You can set up services, stylists, hours and photos later; customers see the salon only after you publish it.</string>
+    <string name="create_salon_name">Salon name</string>
+    <string name="create_salon_city">City</string>
+    <string name="create_salon_address">Address</string>
+    <string name="create_salon_phone">Salon phone</string>
+    <string name="create_salon_location">Location on the map</string>
+    <string name="create_salon_location_text">Tap the map to place the pin at the salon entrance.</string>
+    <string name="create_salon_location_fallback">The pin is placed at the city center. You can set the exact location later in salon details.</string>
+    <string name="create_salon_use_location">Use my location</string>
+    <string name="create_salon_submit">Create salon</string>
+    <string name="create_salon_error_name">Enter the salon name (at least 2 characters)</string>
+    <string name="create_salon_error_address">Enter the address</string>
+
+    <string name="favorites_title">Favorites</string>
+    <string name="favorites_salons">Salons</string>
+    <string name="favorites_stylists">Stylists</string>
+    <string name="favorites_empty_title">No favorites yet</string>
+    <string name="favorites_empty">Tap the heart on a salon or stylist to find them here quickly.</string>
+    <string name="favorites_stylist_at">%1$s · %2$s</string>
+
+    <string name="inbox_title">Notifications</string>
+    <string name="inbox_mark_all">Mark all as read</string>
+    <string name="inbox_empty_title">No notifications</string>
+    <string name="inbox_empty">Confirmations, reminders and salon messages arrive here.</string>
+    <string name="inbox_unread">Unread</string>
+    <string name="inbox_deleted">Notification deleted</string>
+
+    <string name="licenses_title">Open source licenses</string>
+    <string name="licenses_intro">Termin uses the following open source libraries and fonts. Thanks to their authors.</string>
+    <string name="licenses_fonts">Fonts and icons</string>
+    <string name="licenses_libraries">Libraries</string>
+
+    <string name="privacy_title">Privacy policy</string>
+    <string name="privacy_updated">Effective October 1, 2026.</string>
+    <string name="privacy_body">Termin is an app for booking appointments at hair salons. This policy explains which data we process, why, and what your rights are, in line with the Serbian Law on Personal Data Protection and the General Data Protection Regulation (GDPR).\n\n<b>Data we process</b>\n• Phone number or Google account (name and email) — to sign in.\n• Your name and, optionally, a profile photo.\n• Appointments: salon, stylist, services, time, price and any note you write.\n• Ratings and comments you leave after a visit.\n• Favorite salons and stylists, waitlist and in-app notifications.\n• An installation identifier for push notifications.\n• Approximate location — only when you ask for “Nearby” or search; it is not stored on the server.\n• Technical crash reports (without the content of your appointments).\n\n<b>Why we process it</b>\nTo create and confirm bookings, send reminders and changes, prevent abuse (rate limiting and app integrity checks) and fix bugs. We do not sell data or use it for advertising.\n\n<b>Who sees your data</b>\nThe salon you book with sees your name, phone number, appointment and note, and your visit history at that salon. A stylist sees their own appointments. Ratings are shown publicly with your first name. Data is stored on Google Firebase infrastructure in the European Union.\n\n<b>Staff calendars</b>\nWhen a stylist connects Google Calendar, Calendly or Cal.com, the server stores encrypted access tokens and uses them only to sync busy times and add appointments. The connection can be removed at any time.\n\n<b>How long</b>\nAs long as your account is active. When you delete your account (Profile → Delete account), we permanently delete personal data; past appointments remain with the salon only as anonymous statistics.\n\n<b>Your rights</b>\nYou have the right to access, rectification, erasure, restriction, portability and objection, and to lodge a complaint with the Serbian Commissioner for Information of Public Importance and Personal Data Protection. For requests, write to the email address listed on the app’s Google Play page.</string>
+</resources>

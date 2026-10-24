@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_start">Let\'s go</string>
+    <string name="onboarding_1_title">Your salon, one tap away</string>
+    <string name="onboarding_1_text">Find stylists nearby, see their work and prices, and pick what feels right.</string>
+    <string name="onboarding_2_title">Free slots, instantly</string>
+    <string name="onboarding_2_text">See exactly what\'s available. We hold your slot while you confirm.</string>
+    <string name="onboarding_3_title">Never forget</string>
+    <string name="onboarding_3_text">We remind you the day before and two hours ahead. Reschedule or cancel in one tap.</string>
+    <string name="onboarding_page">Page %1$d of %2$d</string>
+
+    <string name="login_title">Welcome to Termin</string>
+    <string name="login_subtitle">Sign in with your phone number or Google account.</string>
+    <string name="login_phone_label">Phone number</string>
+    <string name="login_phone_placeholder">60 123 4567</string>
+    <string name="login_phone_supporting">We\'ll text you a code.</string>
+    <string name="login_send_code">Send code</string>
+    <string name="login_code_title">Enter the code from the SMS</string>
+    <string name="login_code_sent_to">We sent a code to %1$s.</string>
+    <string name="login_code_label">Code (6 digits)</string>
+    <string name="login_verify">Verify</string>
+    <string name="login_change_number">Change number</string>
+    <string name="login_resend">Resend</string>
+    <string name="login_or">or</string>
+    <string name="login_google">Continue with Google</string>
+    <string name="login_emulator_hint">Demo mode: find the SMS code in the Emulator UI (http://127.0.0.1:4000 → Authentication).</string>
+    <string name="login_terms">By signing in you accept the terms of use and the privacy policy.</string>
+    <string name="login_privacy_link">Privacy policy</string>
+    <string name="login_demo_title">Quick demo sign-in</string>
+    <string name="login_demo_customer">Client</string>
+    <string name="login_demo_owner">Owner</string>
+    <string name="login_demo_stylist">Stylist</string>
+    <string name="login_google_demo_title">Google account (demo)</string>
+    <string name="login_google_demo_text">In demo mode Google sign-in goes through the Auth emulator. Enter an email for a test account.</string>
+    <string name="login_google_demo_email">Email</string>
+
+    <string name="auth_error_invalid_phone">That phone number isn\'t valid. Enter it without the leading zero, e.g. 60 123 4567.</string>
+    <string name="auth_error_invalid_code">That code isn\'t right. Check the SMS and try again.</string>
+    <string name="auth_error_code_expired">The code expired. Request a new one.</string>
+    <string name="auth_error_too_many">Too many attempts. Wait a bit and try again.</string>
+    <string name="auth_error_google">Google sign-in isn\'t available on this phone right now.</string>
+    <string name="auth_error_cancelled">Sign-in was cancelled.</string>
+    <string name="error_no_app">No app can open this.</string>
+
+    <string name="setup_title">What should we call you?</string>
+    <string name="setup_subtitle">Only the salon you book with sees your name.</string>
+    <string name="setup_name_label">Full name</string>
+    <string name="setup_name_error">Enter your name (at least 2 letters).</string>
+    <string name="setup_photo">Add a photo (optional)</string>
+    <string name="setup_photo_change">Change photo</string>
+    <string name="setup_finish">Finish</string>
+</resources>

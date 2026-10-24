@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_title">Pretraga</string>
+    <string name="search_field">Naziv salona ili usluga</string>
+    <string name="search_clear">Obriši pretragu</string>
+    <string name="search_filters">Filteri</string>
+    <string name="search_filters_active">Filteri (%1$d)</string>
+    <string name="search_view_list">Lista</string>
+    <string name="search_view_map">Mapa</string>
+    <string name="search_recent">Skorašnje pretrage</string>
+    <string name="search_results">%1$d rezultata</string>
+    <string name="search_empty_title">Ništa nismo našli</string>
+    <string name="search_empty_message">Probaj drugi naziv ili ukloni neki filter.</string>
+    <string name="search_reset_filters">Poništi filtere</string>
+    <string name="search_filter_service">Usluga</string>
+    <string name="search_filter_price">Cena do</string>
+    <string name="search_filter_rating">Ocena</string>
+    <string name="search_filter_distance">Rastojanje</string>
+    <string name="search_filter_availability">Slobodan termin</string>
+    <string name="search_any">Bilo koja</string>
+    <string name="search_any_time">Bilo kada</string>
+    <string name="search_today">Danas</string>
+    <string name="search_tomorrow">Do sutra</string>
+    <string name="search_rating_at_least">%1$s+</string>
+    <string name="search_distance_up_to">do %1$s</string>
+    <string name="search_distance_needs_location">Za filter po rastojanju potrebna je približna lokacija.</string>
+    <string name="search_apply">Prikaži rezultate</string>
+    <string name="search_map_no_key_title">Mapa nije dostupna</string>
+    <string name="search_map_no_key">Mapa traži Google Maps ključ, a u ovom buildu ga nema. Saloni su ispod, a svaki možeš da otvoriš u Google Mapama.</string>
+    <string name="search_select_salon">Izaberi salon sa liste da vidiš detalje.</string>
+</resources>

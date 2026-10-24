@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="salon_tab_services">Usluge</string>
+    <string name="salon_tab_stylists">Frizeri</string>
+    <string name="salon_tab_reviews">Recenzije</string>
+    <string name="salon_tab_info">Info</string>
+    <string name="salon_book">Zakaži termin</string>
+    <string name="salon_book_selected">Zakaži (%1$d)</string>
+    <string name="salon_book_with">Zakaži kod: %1$s</string>
+    <string name="salon_open_today">Danas radi %1$s</string>
+    <string name="salon_closed_today">Danas ne radi</string>
+    <string name="salon_closed">Ne radi</string>
+    <string name="salon_hours">Radno vreme</string>
+    <string name="salon_address">Adresa</string>
+    <string name="salon_phone">Telefon</string>
+    <string name="salon_about">O salonu</string>
+    <string name="salon_policy">Pravila zakazivanja</string>
+    <string name="salon_policy_cancel">Otkazivanje i promena termina su mogući najkasnije %1$d h pre termina. Posle toga pozovi salon.</string>
+    <string name="salon_policy_cancel_any">Otkazivanje i promena termina su mogući do početka termina.</string>
+    <string name="salon_policy_notice">Termin može da se zakaže najranije %1$s unapred.</string>
+    <string name="salon_policy_horizon">Zakazivanje je otvoreno %1$d dana unapred.</string>
+    <string name="salon_share_text">%1$s, %2$s — zakaži termin u aplikaciji Termin: %3$s</string>
+    <string name="salon_share_title">Podeli salon</string>
+    <string name="salon_services_selected">Izabrano: %1$d · %2$s · %3$s</string>
+    <string name="salon_service_select">Izaberi uslugu %1$s</string>
+    <string name="salon_no_services">Salon još nije dodao usluge.</string>
+    <string name="salon_no_stylists">Salon još nije dodao frizere.</string>
+    <string name="salon_no_reviews_title">Još nema recenzija</string>
+    <string name="salon_no_reviews">Recenziju može da ostavi svako ko je završio termin u ovom salonu.</string>
+    <string name="salon_reply">Odgovor salona</string>
+    <string name="salon_not_found">Salon nije pronađen ili više nije objavljen.</string>
+    <string name="salon_map_unavailable">Mapa nije dostupna bez Google Maps ključa.</string>
+    <string name="salon_gallery">Galerija, fotografija %1$d od %2$d</string>
+    <string name="price_level_1">Povoljno</string>
+    <string name="price_level_2">Srednje cene</string>
+    <string name="price_level_3">Premium</string>
+
+    <string name="stylist_specialties">Specijalnosti</string>
+    <string name="stylist_portfolio">Radovi</string>
+    <string name="stylist_first_free">Prvi slobodan termin</string>
+    <string name="stylist_no_free">Nema slobodnih termina u narednih 14 dana.</string>
+    <string name="stylist_portfolio_item">Rad frizera %1$s, %2$d od %3$d</string>
+    <string name="stylist_any">Bilo koji slobodan</string>
+    <string name="stylist_any_description">Prvi slobodan frizer koji radi sve izabrane usluge</string>
+</resources>

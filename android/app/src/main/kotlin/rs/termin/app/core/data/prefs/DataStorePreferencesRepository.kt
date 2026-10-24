@@ -39,6 +39,7 @@ class DataStorePreferencesRepository @Inject constructor(
         val notificationAsked = booleanPreferencesKey("notification_permission_asked")
         val firstBooking = booleanPreferencesKey("first_booking_done")
         val recentSearches = stringPreferencesKey("recent_searches")
+        val clientView = booleanPreferencesKey("client_view")
         val debugTheme = stringPreferencesKey("debug_theme_config")
     }
 
@@ -56,6 +57,7 @@ class DataStorePreferencesRepository @Inject constructor(
                 notificationPermissionAsked = p[Keys.notificationAsked] == true,
                 firstBookingDone = p[Keys.firstBooking] == true,
                 recentSearches = p[Keys.recentSearches]?.split('\n')?.filter { it.isNotBlank() }.orEmpty(),
+                clientView = p[Keys.clientView] == true,
                 // U release buildu važi isključivo izbor iz ThemeConfig.Default.
                 debugThemeConfig = if (BuildConfig.DEBUG) p[Keys.debugTheme]?.let(ThemeConfigCodec::decode) else null,
             )
@@ -93,6 +95,10 @@ class DataStorePreferencesRepository @Inject constructor(
                 .take(MAX_RECENT)
                 .joinToString("\n")
         }
+    }
+
+    override suspend fun setClientView(clientView: Boolean) {
+        context.dataStore.edit { it[Keys.clientView] = clientView }
     }
 
     override suspend fun setDebugThemeConfig(config: ThemeConfig?) {
