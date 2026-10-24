@@ -71,7 +71,7 @@
     <string name="status_canceled_by_customer">Otkazao klijent</string>
     <string name="status_canceled_by_salon">Otkazao salon</string>
     <string name="status_completed">Završen</string>
-    <string name="status_no_show">Nije došao</string>
+    <string name="status_no_show">Nedolazak</string>
 
     <!-- Pristupačnost -->
     <string name="cd_back">Nazad</string>

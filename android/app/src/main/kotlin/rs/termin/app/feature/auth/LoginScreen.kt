@@ -117,7 +117,7 @@ fun LoginContent(
                             placeholder = stringResource(R.string.login_phone_placeholder),
                             leadingIcon = TerminIcon.Smartphone,
                             supporting = stringResource(R.string.login_phone_supporting),
-                            trailing = { Text("+381", style = TerminTheme.type.callout, color = colors.textSecondary, modifier = Modifier.padding(end = 12.dp)) },
+                            prefix = "+381 ",
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone, imeAction = ImeAction.Send),
                             keyboardActions = KeyboardActions(onSend = { onSendCode() }),
                         )
