@@ -14,6 +14,7 @@ import coil3.network.okhttp.OkHttpNetworkFetcherFactory
 import coil3.request.crossfade
 import com.google.firebase.Firebase
 import com.google.firebase.appcheck.appCheck
+import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory
 import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
 import com.google.firebase.crashlytics.crashlytics
 import dagger.hilt.android.HiltAndroidApp
@@ -36,7 +37,9 @@ class TerminApp : Application(), Configuration.Provider, SingletonImageLoader.Fa
         // Crashlytics i App Check rade samo sa pravim Firebase projektom (ne u demo režimu).
         Firebase.crashlytics.isCrashlyticsCollectionEnabled = !BuildConfig.USE_EMULATORS
         if (!BuildConfig.USE_EMULATORS) {
-            Firebase.appCheck.installAppCheckProviderFactory(PlayIntegrityAppCheckProviderFactory.getInstance())
+            // Debug build nad pravim projektom: debug token iz logcat-a se dodaje u Firebase konzoli.
+            val factory = if (BuildConfig.DEBUG) DebugAppCheckProviderFactory.getInstance() else PlayIntegrityAppCheckProviderFactory.getInstance()
+            Firebase.appCheck.installAppCheckProviderFactory(factory)
         }
         notifier.createChannels()
     }

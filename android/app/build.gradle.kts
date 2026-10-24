@@ -59,7 +59,8 @@ android {
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"
-            buildConfigField("boolean", "USE_EMULATORS", "true")
+            // Podrazumevano demo (emulatori); -Ptermin.useEmulators=false povezuje debug sa pravim projektom.
+            buildConfigField("boolean", "USE_EMULATORS", config("termin.useEmulators", "true"))
             buildConfigField("String", "EMULATOR_HOST", "\"${config("termin.emulatorHost", "10.0.2.2")}\"")
         }
         release {
@@ -196,7 +197,8 @@ dependencies {
     implementation(libs.firebase.installations)
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.appcheck.playintegrity)
-    debugImplementation(libs.firebase.appcheck.debug)
+    // Debug provider se koristi samo u debug buildu (BuildConfig.DEBUG); R8 ga uklanja iz release-a.
+    implementation(libs.firebase.appcheck.debug)
     implementation(libs.geofire.common)
 
     implementation(libs.coil.compose)
