@@ -39,10 +39,17 @@ export const integrationSecrets = [
   tokenEncryptionKey,
 ];
 
-/** Bezbedno čitanje tajne: u emulatoru bez .secret.local vrednost je prazna. */
+/**
+ * Vrednost kojom demo režim (functions/.secret.local) označava nepodešenu tajnu. Emulator
+ * prazne vrednosti tretira kao nepostojeće i tada pokušava Secret Manager, zato koristimo ovu.
+ */
+export const UNSET_SECRET = "not-configured";
+
+/** Bezbedno čitanje tajne: nepodešena tajna je prazan string. */
 export function secretValue(secret: { value(): string }): string {
   try {
-    return secret.value() ?? "";
+    const value = secret.value() ?? "";
+    return value === UNSET_SECRET ? "" : value;
   } catch {
     return "";
   }
