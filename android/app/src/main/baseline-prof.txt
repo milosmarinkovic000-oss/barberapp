@@ -1,0 +1,17 @@
+# Ručni početni profil za put pokretanja (hladni start → uvod/prijava → početni ekran).
+# Precizniji profil pravi :baselineprofile modul na uređaju (./gradlew :app:generateBaselineProfile)
+# i upisuje ga u src/release/generated/baselineProfiles; ovaj fajl važi dok se to ne uradi.
+HSPLrs/termin/app/TerminApp;->**(**)**
+HSPLrs/termin/app/MainActivity;->**(**)**
+HSPLrs/termin/app/AppViewModel**;->**(**)**
+HSPLrs/termin/app/AppRootKt**;->**(**)**
+HSPLrs/termin/app/navigation/**;->**(**)**
+HSPLrs/termin/app/core/designsystem/**;->**(**)**
+HSPLrs/termin/app/core/ui/**;->**(**)**
+HSPLrs/termin/app/core/data/**;->**(**)**
+HSPLrs/termin/app/core/domain/**;->**(**)**
+HSPLrs/termin/app/feature/onboarding/**;->**(**)**
+HSPLrs/termin/app/feature/auth/**;->**(**)**
+HSPLrs/termin/app/feature/home/**;->**(**)**
+HSPLrs/termin/app/feature/calendar/**;->**(**)**
+Lrs/termin/app/**;
