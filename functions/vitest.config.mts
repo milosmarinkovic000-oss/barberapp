@@ -7,5 +7,7 @@ export default defineConfig({
     testTimeout: 30000,
     hookTimeout: 30000,
     fileParallelism: false,
+    // Testovi rade samo nad emulatorima: bez traženja GCP metadata servera (i upozorenja o tome).
+    env: { METADATA_SERVER_DETECTION: "none" },
   },
 });

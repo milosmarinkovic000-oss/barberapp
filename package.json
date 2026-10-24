@@ -1,7 +1,7 @@
 {
   "name": "termin",
   "private": true,
-  "description": "Termin \u2014 zakazivanje termina u frizerskim salonima (monorepo: Cloud Functions, seed, Android).",
+  "description": "Termin — zakazivanje termina u frizerskim salonima (monorepo: Cloud Functions, seed, Android).",
   "workspaces": [
     "functions",
     "seed"
@@ -15,7 +15,8 @@
     "emulators": "npm run build && node scripts/prepare-demo.mjs && firebase emulators:start --project demo-termin",
     "seed": "npm run seed --workspace seed",
     "lint": "npm run lint --workspaces",
-    "test": "npm run build && node scripts/prepare-demo.mjs && firebase emulators:exec --project demo-termin --only auth,firestore,storage \"npm run test:all --workspace functions\""
+    "test": "npm run build && node scripts/prepare-demo.mjs && firebase emulators:exec --project demo-termin --only auth,firestore,storage \"npm run test:all --workspace functions\"",
+    "smoke": "node scripts/smoke.mjs"
   },
   "devDependencies": {
     "firebase-tools": "15.34.1"

@@ -6,6 +6,27 @@
   "storage": {
     "rules": "storage.rules"
   },
+  "hosting": {
+    "public": "hosting/public",
+    "cleanUrls": true,
+    "rewrites": [
+      {
+        "source": "/s/**",
+        "destination": "/s.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "/.well-known/assetlinks.json",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ]
+      }
+    ]
+  },
   "functions": [
     {
       "source": "functions",
@@ -65,6 +86,10 @@
     "tasks": {
       "host": "127.0.0.1",
       "port": 9499
+    },
+    "hosting": {
+      "host": "127.0.0.1",
+      "port": 5005
     }
   }
 }

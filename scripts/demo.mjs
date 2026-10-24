@@ -40,6 +40,8 @@ async function main() {
     cwd: root,
     stdio: "inherit",
     shell: isWindows,
+    // Lokalno nema GCP metadata servera; bez ovoga Firebase CLI ispisuje suvišno upozorenje.
+    env: { ...process.env, METADATA_SERVER_DETECTION: "none" },
   });
   const stop = () => emulators.kill("SIGINT");
   process.on("SIGINT", stop);
@@ -55,6 +57,7 @@ async function main() {
       " Demo je spreman.",
       "   Emulator UI:   http://127.0.0.1:4000",
       "   Android:       cd android && ./gradlew installDebug",
+      "   Provera:       npm run smoke (u drugom terminalu)",
       "   (Android emulator pristupa računaru preko 10.0.2.2)",
       " Ctrl+C zaustavlja emulatore.",
       "────────────────────────────────────────────────────────────",

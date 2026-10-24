@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="sr-Latn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Termin — zakaži termin u salonu</title>
+  <meta name="description" content="Otvori salon u aplikaciji Termin i zakaži termin za par dodira.">
+  <style>
+    :root { --bg: #FAF8F5; --surface: #FFFFFF; --text: #1C1B1A; --muted: #6E6A64; --accent: #8C6A3F; --on-accent: #FFFFFF; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #121110; --surface: #1C1A18; --text: #F2EEE8; --muted: #B5AFA6; --accent: #D4B47A; --on-accent: #1C1B1A; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: var(--bg); color: var(--text);
+      font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; padding: 24px 16px; }
+    main { width: 100%; max-width: 420px; background: var(--surface); border-radius: 20px; padding: 32px 24px; text-align: center;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .06); }
+    .logo { width: 72px; height: 72px; border-radius: 50%; margin: 0 auto 16px; display: grid; place-items: center;
+      background: var(--accent); color: var(--on-accent); font: 600 36px/1 Georgia, serif; }
+    h1 { font: 600 26px/1.25 Georgia, "Times New Roman", serif; margin: 0 0 8px; }
+    p { color: var(--muted); margin: 0 0 24px; }
+    a.button { display: block; padding: 14px 20px; border-radius: 12px; text-decoration: none; font-weight: 600; margin-top: 12px; min-height: 48px; }
+    a.primary { background: var(--accent); color: var(--on-accent); }
+    a.secondary { border: 1px solid var(--muted); color: var(--text); }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="logo" aria-hidden="true">T</div>
+    <h1>Zakaži termin u aplikaciji Termin</h1>
+    <p>Pogledaj usluge, frizere i slobodne termine ovog salona i zakaži za par dodira.</p>
+    <a id="open" class="button primary" href="#">Otvori u aplikaciji</a>
+    <a id="store" class="button secondary" href="https://play.google.com/store/apps/details?id=rs.termin.app">Preuzmi sa Google Play</a>
+  </main>
+  <script>
+    // /s/{id} → termin://salon/{id}; na Android-u intent link vodi u Play prodavnicu ako aplikacija nije instalirana.
+    (function () {
+      var id = decodeURIComponent(location.pathname.replace(/^\/s\//, "").split("/")[0] || "");
+      var store = document.getElementById("store").href;
+      var open = document.getElementById("open");
+      if (!id) { open.hidden = true; return; }
+      var safe = encodeURIComponent(id);
+      open.href = /Android/i.test(navigator.userAgent)
+        ? "intent://salon/" + safe + "#Intent;scheme=termin;package=rs.termin.app;S.browser_fallback_url=" + encodeURIComponent(store) + ";end"
+        : "termin://salon/" + safe;
+    })();
+  </script>
+</body>
+</html>
