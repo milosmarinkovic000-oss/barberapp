@@ -149,6 +149,12 @@ postoji u interfejsu: svaki ulaz (meni, dugme, ekran, tab) proverava zastavicu.
   Sve ostalo je kao u produkciji: faze, navigacija, deep linkovi, ViewModel-i i ekrani. Korisnik prolazi
   kroz uvod, prijavu, zakazivanje, otkazivanje, rad bez interneta, a vlasnik i frizer kroz kalendar,
   ručni unos i blokadu vremena.
+- **Snimci za sajt** (`WebsiteScreenshotsTest`): prava aplikacija sa demo salonima iz seed-a
+  (`testing/DemoData.kt`, fotografije iz `seed/images`) snima 11 ekrana u `hosting/public/screens`. Proveravaju
+  se kao ostali snimci, pa sajt ne može da zastari u odnosu na aplikaciju.
+- **„Danas“ dolazi iz sata aplikacije** (`Clock` iz Hilt-a) i na ekranima salona, kalendara, odsustava i
+  pomeranja termina, ne iz `LocalDate.now()`: inače bi snimci i testovi zavisili od stvarnog dana (nedeljom
+  demo salon ne radi).
 - **Provera za čitač ekrana**: na svakom ekranu klijenta i vlasnika test proverava da svako dugme i polje
   ima naziv koji TalkBack izgovara (tekst ili opis). Material3 1.4 skriva natpis proširenog plutajućeg
   dugmeta i čita opis ikonice, pa `TerminExtendedFab` isti natpis daje i ikonici.
@@ -159,3 +165,13 @@ postoji u interfejsu: svaki ulaz (meni, dugme, ekran, tab) proverava zastavicu.
   imenima.
 - **Smoke test** (`npm run smoke`) proverava scenarije iz „GOTOVO JE KAD“ nad pokrenutim demo okruženjem,
   kroz iste API-je koje koristi aplikacija.
+
+## Javni sajt
+
+- **GitHub Pages** objavljuje samo statički sajt (`hosting/public`: početna sa snimcima, politika privatnosti,
+  brisanje naloga), workflow `.github/workflows/pages.yml` sa grane `main`. Backend ne može na GitHub Pages
+  (nema servera, baze ni funkcija), pa ostaje na Firebase-u.
+- **Deljeni linkovi salona** ostaju na Firebase Hosting-u (`<projekat>.web.app/s/{id}`): traže preusmeravanje
+  `/s/** → s.html` i `/.well-known/assetlinks.json` na korenu domena, a GitHub Pages projekta nema ni jedno.
+- **Fontovi sajta** su isti fajlovi kao u aplikaciji (Fraunces, Inter) i služe se sa istog servera, bez
+  Google Fonts-a, da posetioci ne bi slali podatke trećoj strani.

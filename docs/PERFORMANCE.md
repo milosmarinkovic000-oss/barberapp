@@ -88,6 +88,7 @@ Server:
 - `./gradlew :app:verifyRoborazziDebug` — unit, UI i 78 snimaka ekrana (početna, salon, zakazivanje, termini, kalendar, prijava; mali, veliki, preklopni telefon,
   tablet; svetla i tamna tema; slova 200 %; četiri stila), plus test cele aplikacije (`AppJourneyTest`):
   prava `MainActivity` sa lažnim backendom, scenariji klijenta, vlasnika i frizera, rad bez interneta i
-  provera da svaki element na ekranu ima naziv za TalkBack.
+  provera da svaki element na ekranu ima naziv za TalkBack; i 11 snimaka za javni sajt
+  (`hosting/public/screens`, demo saloni sa fotografijama iz seed-a).
 - StrictMode (debug) beleži čitanja/upise diska i mrežu na glavnoj niti; LeakCanary (debug) curenja
   memorije.

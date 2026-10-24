@@ -414,12 +414,12 @@ fun StaffAppointmentDetailScreen(appointmentId: String, onBack: (() -> Unit)?) {
             }
         }
     }
-    state.reschedule?.let { r -> RescheduleSheet(r, viewModel) }
+    state.reschedule?.let { r -> RescheduleSheet(r, state.now.atZone(BelgradeZone).toLocalDate(), viewModel) }
 }
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-private fun RescheduleSheet(r: RescheduleState, viewModel: StaffAppointmentDetailViewModel) {
+private fun RescheduleSheet(r: RescheduleState, today: LocalDate, viewModel: StaffAppointmentDetailViewModel) {
     val f = formatter
     val spacing = TerminTheme.spacing
     TerminBottomSheet(viewModel::dismissReschedule) {
@@ -431,7 +431,7 @@ private fun RescheduleSheet(r: RescheduleState, viewModel: StaffAppointmentDetai
             verticalArrangement = Arrangement.spacedBy(spacing.md),
         ) {
             Text(stringResource(R.string.staff_reschedule), style = TerminTheme.type.title2, color = TerminTheme.colors.text, modifier = Modifier.semantics { heading() })
-            DateField(stringResource(R.string.manual_when), r.date, viewModel::rescheduleDate, Modifier.fillMaxWidth(), min = LocalDate.now(BelgradeZone))
+            DateField(stringResource(R.string.manual_when), r.date, viewModel::rescheduleDate, Modifier.fillMaxWidth(), min = today)
             when {
                 r.loading -> SkeletonLines(2)
                 r.slots.isNullOrEmpty() -> Notice(stringResource(R.string.manual_no_slots), tone = NoticeTone.Warning)

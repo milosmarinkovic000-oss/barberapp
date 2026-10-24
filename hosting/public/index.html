@@ -4,22 +4,201 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Termin</title>
-  <meta name="description" content="Termin — zakazivanje termina u frizerskim salonima u Srbiji.">
+  <meta name="description" content="Termin — zakazivanje termina u frizerskim salonima u Srbiji. Pronađi salon, izaberi frizera i vreme i zakaži za par dodira.">
+  <meta name="theme-color" content="#FAF8F5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121110" media="(prefers-color-scheme: dark)">
+  <!-- Snimci u screens/ su prava aplikacija sa demo podacima (WebsiteScreenshotsTest), fontovi su isti kao u aplikaciji. -->
   <style>
-    :root { --bg: #FAF8F5; --text: #1C1B1A; --muted: #6E6A64; --accent: #8C6A3F; --on-accent: #FFFFFF; }
-    @media (prefers-color-scheme: dark) { :root { --bg: #121110; --text: #F2EEE8; --muted: #B5AFA6; --accent: #D4B47A; --on-accent: #1C1B1A; } }
-    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: var(--bg); color: var(--text);
-      font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; padding: 24px 16px; text-align: center; }
-    h1 { font: 600 40px/1.2 Georgia, "Times New Roman", serif; margin: 0 0 8px; }
-    p { color: var(--muted); margin: 0 0 24px; }
-    a { display: inline-block; padding: 14px 24px; border-radius: 12px; background: var(--accent); color: var(--on-accent); text-decoration: none; font-weight: 600; }
+    @font-face { font-family: "Fraunces"; src: url("fonts/fraunces-semibold.ttf") format("truetype"); font-weight: 600; font-display: swap; }
+    @font-face { font-family: "Inter"; src: url("fonts/inter-regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+    @font-face { font-family: "Inter"; src: url("fonts/inter-semibold.ttf") format("truetype"); font-weight: 600; font-display: swap; }
+
+    :root {
+      --bg: #FAF8F5; --surface: #FFFFFF; --surface-muted: #F1ECE4; --text: #1C1B1A; --muted: #6E6A64;
+      --divider: #E7E1D8; --accent: #8C6A3F; --accent-text: #7A5C36; --on-accent: #FFFFFF;
+      --shadow: 0 1px 2px rgba(28, 27, 26, .06), 0 12px 32px rgba(28, 27, 26, .10);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121110; --surface: #1C1A18; --surface-muted: #24211E; --text: #F2EEE8; --muted: #B5AFA6;
+        --divider: #34302B; --accent: #D4B47A; --accent-text: #D4B47A; --on-accent: #1C1B1A;
+        --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 12px 32px rgba(0, 0, 0, .45);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 400 17px/1.6 Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    a { color: var(--accent-text); }
+    a:focus-visible, .button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    img { display: block; max-width: 100%; height: auto; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+    h1, h2 { font-family: Fraunces, Georgia, "Times New Roman", serif; font-weight: 600; letter-spacing: -.01em; margin: 0; }
+    h1 { font-size: clamp(40px, 7vw, 64px); line-height: 1.05; }
+    h2 { font-size: clamp(28px, 4.5vw, 40px); line-height: 1.15; }
+    h3 { font-size: 18px; line-height: 1.35; margin: 0 0 4px; font-weight: 600; }
+    p { margin: 0; }
+    .lead { color: var(--muted); font-size: clamp(17px, 2.2vw, 20px); max-width: 34em; }
+    .eyebrow { color: var(--accent-text); font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+
+    header.top { display: flex; align-items: center; gap: 12px; padding: 20px 0; }
+    .monogram { width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: var(--on-accent);
+      display: grid; place-items: center; font: 600 22px/1 Fraunces, Georgia, serif; }
+    .brand { font: 600 22px/1 Fraunces, Georgia, serif; }
+
+    .hero { display: grid; gap: 40px; align-items: center; padding: 24px 0 64px; }
+    .hero .copy { display: grid; gap: 20px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 24px;
+      border-radius: 14px; background: var(--accent); color: var(--on-accent); font-weight: 600; text-decoration: none; width: fit-content; }
+    .note { color: var(--muted); font-size: 14px; }
+
+    .phone { border-radius: 28px; overflow: hidden; border: 1px solid var(--divider); background: var(--surface); box-shadow: var(--shadow); }
+    .hero .phone { width: min(320px, 78vw); justify-self: center; }
+
+    section { padding: 64px 0; border-top: 1px solid var(--divider); }
+    section > .wrap > header { display: grid; gap: 12px; margin-bottom: 32px; }
+
+    /* Koraci: na telefonu klizna traka, na većem ekranu mreža. */
+    .steps { list-style: none; margin: 0 auto; padding: 4px 16px 20px; display: grid; grid-auto-flow: column; grid-auto-columns: min(72%, 260px);
+      gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 16px; }
+    .steps li { scroll-snap-align: start; display: grid; gap: 14px; align-content: start; }
+    .steps p { color: var(--muted); font-size: 15px; }
+    .step-num { color: var(--accent-text); font-weight: 600; font-size: 14px; }
+
+    .features { display: grid; gap: 12px; margin: 32px 0 0; padding: 0; list-style: none; }
+    .features li { background: var(--surface); border: 1px solid var(--divider); border-radius: 16px; padding: 16px 18px; }
+    .features p { color: var(--muted); font-size: 15px; }
+
+    .themes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 640px; }
+    .themes figure { margin: 0; display: grid; gap: 10px; }
+    figcaption { color: var(--muted); font-size: 14px; text-align: center; }
+
+    footer.bottom { border-top: 1px solid var(--divider); padding: 32px 0 48px; color: var(--muted); font-size: 15px; }
+    footer.bottom nav { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-bottom: 12px; }
+
+    @media (min-width: 860px) {
+      .hero { grid-template-columns: 1.1fr .9fr; padding: 40px 0 88px; }
+      .steps { grid-auto-flow: row; grid-template-columns: repeat(4, minmax(0, 1fr)); overflow: visible; padding: 4px 16px 0; }
+      .features { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
   </style>
 </head>
 <body>
-  <div>
-    <h1>Termin</h1>
-    <p>Pronađi frizerski salon i zakaži termin za par dodira.</p>
-    <a href="https://play.google.com/store/apps/details?id=rs.termin.app">Preuzmi sa Google Play</a>
+  <div class="wrap">
+    <header class="top">
+      <div class="monogram" aria-hidden="true">T</div>
+      <span class="brand">Termin</span>
+    </header>
+
+    <main>
+      <div class="hero">
+        <div class="copy">
+          <p class="eyebrow">Frizerski saloni u Srbiji</p>
+          <h1>Tvoj salon, na dodir</h1>
+          <p class="lead">Pronađi frizera u blizini, pogledaj radove i cene i zakaži termin za par dodira. Bez poziva i bez čekanja na odgovor.</p>
+          <a class="button" href="https://play.google.com/store/apps/details?id=rs.termin.app">Preuzmi sa Google Play</a>
+          <p class="note">Za Android 8 i novije.</p>
+        </div>
+        <img class="phone" src="screens/pocetna.png" width="618" height="1372"
+             alt="Početni ekran aplikacije: pretraga, kategorije i saloni koji danas imaju slobodan termin.">
+      </div>
+    </main>
   </div>
+
+  <section aria-labelledby="klijenti">
+    <div class="wrap">
+      <header>
+        <p class="eyebrow">Za klijente</p>
+        <h2 id="klijenti">Termin za manje od minuta</h2>
+        <p class="lead">Izaberi usluge, frizera ili „bilo koji slobodan“, pa dan i vreme. Termin se drži za tebe dok potvrđuješ, a podsetnik stiže dan ranije i dva sata pre.</p>
+      </header>
+    </div>
+    <ol class="steps wrap">
+      <li>
+        <img class="phone" src="screens/salon.png" width="618" height="1372" loading="lazy"
+             alt="Stranica salona Atelje Lana: fotografije, ocena, radno vreme i lista usluga sa cenama.">
+        <div><span class="step-num">1</span><h3>Pronađi salon</h3><p>Fotografije, cene, radno vreme, recenzije i put do salona.</p></div>
+      </li>
+      <li>
+        <img class="phone" src="screens/zakazivanje-frizer.png" width="618" height="1372" loading="lazy"
+             alt="Izbor frizera: bilo koji slobodan ili jedan od frizera sa specijalnostima i ocenom.">
+        <div><span class="step-num">2</span><h3>Izaberi frizera</h3><p>Ili „bilo koji slobodan“ za najraniji termin.</p></div>
+      </li>
+      <li>
+        <img class="phone" src="screens/zakazivanje-vreme.png" width="618" height="1372" loading="lazy"
+             alt="Izbor dana i vremena: slobodni termini ujutru i popodne, termin je sačuvan pet minuta.">
+        <div><span class="step-num">3</span><h3>Izaberi vreme</h3><p>Samo stvarno slobodni termini, bez preklapanja.</p></div>
+      </li>
+      <li>
+        <img class="phone" src="screens/termin-potvrdjen.png" width="618" height="1372" loading="lazy"
+             alt="Potvrda: termin je potvrđen, sa dugmadima za kalendar, put do salona i deljenje.">
+        <div><span class="step-num">4</span><h3>Gotovo</h3><p>Dodaj u kalendar, a otkaži ili pomeri u roku koji salon dozvoljava.</p></div>
+      </li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="saloni">
+    <div class="wrap">
+      <header>
+        <p class="eyebrow">Za salone</p>
+        <h2 id="saloni">Ceo salon u jednom kalendaru</h2>
+        <p class="lead">Vlasnik vidi raspored celog tima, frizer svoj. Termini iz aplikacije, telefona i dolasci bez najave na istom mestu.</p>
+      </header>
+    </div>
+    <ul class="steps wrap">
+      <li>
+        <img class="phone" src="screens/kalendar.png" width="618" height="1372" loading="lazy"
+             alt="Kalendar salona za danas, po kolonama za svakog frizera, sa dugmetom Novi termin.">
+        <div><h3>Kalendar tima</h3><p>Dan ili nedelja, po frizerima; dodir na prazno mesto pravi termin.</p></div>
+      </li>
+      <li>
+        <img class="phone" src="screens/termini-salona.png" width="618" height="1372" loading="lazy"
+             alt="Lista današnjih termina salona sa klijentom, frizerom, uslugom i vremenom.">
+        <div><h3>Termini i dolasci</h3><p>Označi završen termin ili nedolazak, pomeri ili otkaži uz obaveštenje klijentu.</p></div>
+      </li>
+      <li>
+        <img class="phone" src="screens/statistika.png" width="618" height="1372" loading="lazy"
+             alt="Statistika za nedelju: procena prihoda, broj termina, stopa nedolazaka i grafikon po danima.">
+        <div><h3>Statistika</h3><p>Prihod, broj termina, nedolasci, najtraženije usluge i frizeri.</p></div>
+      </li>
+    </ul>
+    <div class="wrap">
+      <ul class="features">
+        <li><h3>Bez duplih termina</h3><p>Dva klijenta ne mogu da uzmu isto vreme; drugi odmah dobija nove slobodne termine.</p></li>
+        <li><h3>Odsustva i blokade</h3><p>Godišnji odmor, pauza ili obuka: slobodni termini nestaju istog trenutka.</p></li>
+        <li><h3>Spoljni kalendari</h3><p>Povezivanje sa Google Calendar-om, Calendly-jem i Cal.com-om.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="teme">
+    <div class="wrap">
+      <header>
+        <h2 id="teme">Svetla i tamna tema</h2>
+        <p class="lead">Aplikacija prati temu telefona, radi sa uvećanim slovima i sa čitačem ekrana TalkBack.</p>
+      </header>
+      <div class="themes">
+        <figure>
+          <img class="phone" src="screens/salon.png" width="618" height="1372" loading="lazy" alt="Stranica salona u svetloj temi.">
+          <figcaption>Svetla</figcaption>
+        </figure>
+        <figure>
+          <img class="phone" src="screens/salon-tamna-tema.png" width="618" height="1372" loading="lazy" alt="Stranica salona u tamnoj temi.">
+          <figcaption>Tamna</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bottom">
+    <div class="wrap">
+      <nav aria-label="Pravne informacije">
+        <a href="privatnost.html">Politika privatnosti</a>
+        <a href="brisanje-naloga.html">Brisanje naloga</a>
+      </nav>
+      <p>Termin — zakazivanje termina u frizerskim salonima.</p>
+    </div>
+  </footer>
 </body>
 </html>

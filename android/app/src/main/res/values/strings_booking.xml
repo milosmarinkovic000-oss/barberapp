@@ -44,7 +44,7 @@
     <string name="booking_current">Trenutni termin: %1$s</string>
 
     <string name="success_title">Termin je potvrđen!</string>
-    <string name="success_subtitle">%1$s te čeka %2$s.</string>
+    <string name="success_subtitle">%1$s te čeka: %2$s.</string>
     <string name="success_add_calendar">Dodaj u kalendar</string>
     <string name="success_share">Podeli</string>
     <string name="success_share_text">Imam termin: %1$s, %2$s.</string>

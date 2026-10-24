@@ -115,7 +115,7 @@ fun CalendarScreen(
     var sheet by rememberSaveable(stateSaver = SheetRequestSaver) { mutableStateOf(null) }
     var counter by rememberSaveable { mutableStateOf(0) }
     val session = state.session
-    val today = (state.now.takeIf { it != Instant.EPOCH } ?: Instant.now()).atZone(BelgradeZone).toLocalDate()
+    val today = state.now.atZone(BelgradeZone).toLocalDate()
 
     fun open(block: Boolean, stylistId: String?, date: LocalDate, start: Instant?) {
         counter += 1

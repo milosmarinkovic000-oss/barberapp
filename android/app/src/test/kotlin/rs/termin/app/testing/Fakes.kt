@@ -64,27 +64,41 @@ import rs.termin.app.core.domain.repository.StaffRepository
 import rs.termin.app.core.domain.repository.StylistEdit
 import rs.termin.app.core.domain.repository.SyncResult
 import rs.termin.app.core.domain.repository.UserRepository
+import java.time.DayOfWeek
 import java.time.Duration
 import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalTime
 
-/** Salon iz memorije: jedan salon, usluge i frizeri iz [TestData]. */
+/**
+ * Saloni iz memorije: [salon] sa uslugama, frizerima i recenzijama iz [TestData], a [others] se
+ * pojavljuju samo u listama (početna, pretraga). Test može da promeni podatke pre pokretanja ekrana.
+ */
 class FakeSalonRepository(
-    val salon: Salon = TestData.salon(),
-    val services: List<Service> = listOf(TestData.service("cut"), TestData.service("color", listOf("b"), duration = 90, price = 6000)),
-    val stylists: List<Stylist> = listOf(TestData.stylist("a", "Ana"), TestData.stylist("b", "Bojan")),
+    var salon: Salon = TestData.salon(),
+    var services: List<Service> = listOf(TestData.service("cut"), TestData.service("color", listOf("b"), duration = 90, price = 6000)),
+    var stylists: List<Stylist> = listOf(TestData.stylist("a", "Ana"), TestData.stylist("b", "Bojan")),
 ) : SalonRepository {
-    override fun observeSalon(salonId: String): Flow<Salon?> = MutableStateFlow(salon.takeIf { it.id == salonId })
+    var others: List<Salon> = emptyList()
+    var reviews: List<Review> = emptyList()
+    private val all: List<Salon> get() = listOf(salon) + others
+
+    override fun observeSalon(salonId: String): Flow<Salon?> = MutableStateFlow(all.firstOrNull { it.id == salonId })
     override fun observeServices(salonId: String, includeInactive: Boolean): Flow<List<Service>> = MutableStateFlow(services)
     override fun observeStylists(salonId: String, includeInactive: Boolean): Flow<List<Stylist>> = MutableStateFlow(stylists)
-    override fun observeReviews(salonId: String, limit: Long): Flow<List<Review>> = MutableStateFlow(emptyList())
-    override suspend fun topSalons(limit: Long, cursor: Any?): SalonPage = SalonPage(listOf(salon), null)
-    override suspend fun freeToday(limit: Long): List<Salon> = listOf(salon)
-    override suspend fun nearby(center: GeoLocation, radiusKm: Double): List<SalonListItem> = listOf(SalonListItem(salon, 1.2))
-    override suspend fun search(filters: SearchFilters, location: GeoLocation?): List<SalonListItem> = listOf(SalonListItem(salon, null))
-    override suspend fun salonsByIds(ids: Collection<String>): List<Salon> = listOf(salon).filter { it.id in ids }
-    override suspend fun salonIdForSlug(slugOrId: String): String? = salon.id.takeIf { slugOrId == salon.id || slugOrId == salon.slug }
+    override fun observeReviews(salonId: String, limit: Long): Flow<List<Review>> = MutableStateFlow(reviews)
+    override suspend fun topSalons(limit: Long, cursor: Any?): SalonPage = SalonPage(all, null)
+    override suspend fun freeToday(limit: Long): List<Salon> = all
+    override suspend fun nearby(center: GeoLocation, radiusKm: Double): List<SalonListItem> =
+        all.mapIndexed { i, s -> SalonListItem(s, NEAREST_KM + i * NEARBY_STEP_KM) }
+    override suspend fun search(filters: SearchFilters, location: GeoLocation?): List<SalonListItem> = all.map { SalonListItem(it, null) }
+    override suspend fun salonsByIds(ids: Collection<String>): List<Salon> = all.filter { it.id in ids }
+    override suspend fun salonIdForSlug(slugOrId: String): String? = all.firstOrNull { slugOrId == it.id || slugOrId == it.slug }?.id
+
+    private companion object {
+        const val NEAREST_KM = 1.2
+        const val NEARBY_STEP_KM = 1.5
+    }
 }
 
 /**
@@ -161,7 +175,17 @@ class FakeBookingRepository(private val clock: java.time.Clock, val salons: Fake
         val hold = holds.remove(appointmentId) ?: throw BookingError.NotFound
         val services = holdServices.remove(appointmentId).orEmpty().map { BookedService(it.id, it.name, it.price, it.durationMin) }
         val appointment = TestData.appointment(id = appointmentId, start = hold.start, durationMin = hold.durationMin)
-            .copy(stylistId = hold.stylistId, stylistName = hold.stylistName, note = note, totalPrice = hold.totalPrice, services = services)
+            .copy(
+                salonId = salons.salon.id,
+                salonName = salons.salon.name,
+                salonPhone = salons.salon.phone,
+                salonAddress = "${salons.salon.address}, ${salons.salon.city}",
+                stylistId = hold.stylistId,
+                stylistName = hold.stylistName,
+                note = note,
+                totalPrice = hold.totalPrice,
+                services = services,
+            )
         confirmed = confirmed + appointment
         return appointment
     }
@@ -406,9 +430,14 @@ class FakeStaffRepository(private val bookings: FakeBookingRepository? = null) :
         return appointment
     }
     override suspend fun replyToReview(salonId: String, reviewId: String, text: String) = unused()
-    /** Statistika nad terminima iz [bookings] (bez obzira na period). */
+    /** Statistika nad terminima iz [bookings] u danu, nedelji (od ponedeljka) ili mesecu kojem pripada [date]. */
     override suspend fun stats(salonId: String, period: StatsPeriod, date: LocalDate): SalonStats {
-        val list = bookings?.confirmed.orEmpty()
+        val range = when (period) {
+            StatsPeriod.Day -> date..date
+            StatsPeriod.Week -> date.with(DayOfWeek.MONDAY).let { it..it.plusDays(6) }
+            StatsPeriod.Month -> date.withDayOfMonth(1).let { it..it.plusMonths(1).minusDays(1) }
+        }
+        val list = bookings?.confirmed.orEmpty().filter { it.start.atZone(BelgradeZone).toLocalDate() in range }
         val done = list.filter { it.status == AppointmentStatus.Completed || it.status == AppointmentStatus.Confirmed }
         val noShow = list.count { it.status == AppointmentStatus.NoShow }
         fun ranked(key: (Appointment) -> List<Pair<String, String>>) = done.flatMap(key)
@@ -424,9 +453,10 @@ class FakeStaffRepository(private val bookings: FakeBookingRepository? = null) :
             noShowRate = if (list.isEmpty()) 0.0 else noShow.toDouble() / list.size,
             topServices = ranked { a -> a.services.map { it.id to it.name } },
             topStylists = ranked { a -> listOf(a.stylistId to a.stylistName) },
-            series = done.groupBy { it.start.atZone(BelgradeZone).toLocalDate() }
-                .map { (day, items) -> DayPoint(day, items.size, items.sumOf { it.totalPrice }) }
-                .sortedBy { it.date },
+            series = generateSequence(range.start) { it.plusDays(1) }.takeWhile { it <= range.endInclusive }.map { day ->
+                val items = done.filter { it.start.atZone(BelgradeZone).toLocalDate() == day }
+                DayPoint(day, items.size, items.sumOf { it.totalPrice })
+            }.toList(),
         )
     }
 

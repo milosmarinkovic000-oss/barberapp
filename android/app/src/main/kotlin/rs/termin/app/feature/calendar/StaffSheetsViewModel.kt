@@ -204,6 +204,8 @@ data class BlockTimeUiState(
     val stylists: List<Stylist> = emptyList(),
     val stylistId: String? = null,
     val kind: TimeOffKind = TimeOffKind.Block,
+    /** Najraniji dan koji može da se blokira. */
+    val today: LocalDate = LocalDate.MIN,
     val date: LocalDate = LocalDate.MIN,
     val allDay: Boolean = false,
     val from: LocalTime = LocalTime.of(DEFAULT_FROM, 0),
@@ -235,8 +237,9 @@ data class BlockOutcome(val conflicts: Int)
 class BlockTimeViewModel @Inject constructor(
     private val salons: SalonRepository,
     private val staff: StaffRepository,
+    clock: Clock,
 ) : ViewModel() {
-    private val state = MutableStateFlow(BlockTimeUiState())
+    private val state = MutableStateFlow(BlockTimeUiState(today = LocalDate.now(clock.withZone(BelgradeZone))))
     val uiState: StateFlow<BlockTimeUiState> = state.asStateFlow()
 
     fun prepare(session: StaffSession, stylistId: String?, date: LocalDate, from: LocalTime?) {

@@ -41,7 +41,6 @@ import rs.termin.app.core.designsystem.component.TerminSwitchRow
 import rs.termin.app.core.designsystem.component.TerminTextField
 import rs.termin.app.core.designsystem.icon.TerminIcon
 import rs.termin.app.core.domain.StaffSession
-import rs.termin.app.core.domain.model.BelgradeZone
 import rs.termin.app.core.domain.model.TimeOffKind
 import rs.termin.app.core.ui.DateField
 import rs.termin.app.core.ui.Stepper
@@ -202,7 +201,6 @@ fun BlockTimeSheet(
 ) {
     val viewModel = hiltViewModel<BlockTimeViewModel>(key = key)
     val state by viewModel.uiState.collectAsStateWithLifecycle()
-    val today = LocalDate.now(BelgradeZone)
     LaunchedEffect(key) { viewModel.prepare(session, stylistId, date, from) }
     TerminBottomSheet(onDismiss) {
         Column(
@@ -239,7 +237,7 @@ fun BlockTimeSheet(
                     TerminChip(timeOffKindLabel(kind), selected = kind == state.kind, onClick = { viewModel.selectKind(kind) })
                 }
             }
-            DateField(stringResource(R.string.block_from), state.date, viewModel::setDate, Modifier.fillMaxWidth(), min = today)
+            DateField(stringResource(R.string.block_from), state.date, viewModel::setDate, Modifier.fillMaxWidth(), min = state.today)
             TerminSwitchRow(stringResource(R.string.block_all_day), state.allDay, viewModel::setAllDay)
             if (state.allDay) {
                 Stepper(

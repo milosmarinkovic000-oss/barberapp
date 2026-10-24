@@ -53,13 +53,32 @@ npm test                                   # Functions: dostupnost, istovremeni 
 npm run lint                               # ESLint + TypeScript
 cd android
 ./gradlew lintDebug                        # lint, upozorenja su greške
-./gradlew verifyRoborazziDebug             # unit, UI, cela aplikacija (Hilt + lažni backend) i 78 snimaka ekrana
-./gradlew recordRoborazziDebug             # ponovno snimanje referentnih snimaka (posle namerne izmene izgleda)
+./gradlew verifyRoborazziDebug             # unit, UI, cela aplikacija (Hilt + lažni backend), 78 snimaka ekrana i snimci za sajt
+./gradlew recordRoborazziDebug             # ponovno snimanje referentnih snimaka i snimaka za sajt (posle namerne izmene izgleda)
 ./gradlew :baselineprofile:connectedBenchmarkReleaseAndroidTest   # Macrobenchmark (uređaj + `npm run demo`)
 ./gradlew :app:generateBaselineProfile     # baseline profil (uređaj + `npm run demo`)
 ```
 
 CI (GitHub Actions) pokreće isto: `.github/workflows/android.yml` i `.github/workflows/functions.yml`.
+
+## Javni sajt na GitHub Pages
+
+`hosting/public` je javni sajt aplikacije: početna sa snimcima ekrana, politika privatnosti i stranica za
+brisanje naloga (Google Play traži javne adrese za obe). Objavljuje ga workflow `Pages`:
+
+1. Na GitHub-u, jednom: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+2. Svaka izmena u `hosting/public` na grani `main` objavljuje sajt; ručno: **Actions → Pages → Run workflow**.
+
+Adresa je `https://<korisnik>.github.io/<repozitorijum>/`, za ovaj repozitorijum
+<https://milosmarinkovic000-oss.github.io/barberapp/> (politika privatnosti: `privatnost.html`, brisanje
+naloga: `brisanje-naloga.html`).
+
+Na GitHub Pages ide samo sajt. Aplikacija i dalje koristi Firebase (prijava, baza, zakazivanje, obaveštenja),
+a deljeni linkovi salona (`/s/{id}`, App Links) ostaju na Firebase Hosting-u, jer GitHub Pages ne podržava
+preusmeravanja ni `.well-known` na korenu domena projekta.
+
+Snimci u `hosting/public/screens` su prava aplikacija sa demo salonima (`WebsiteScreenshotsTest`) i proveravaju
+se sa ostalim snimcima, pa ih `./gradlew recordRoborazziDebug` osvežava posle izmene izgleda.
 
 ## Prelazak na produkciju
 

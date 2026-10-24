@@ -26,13 +26,13 @@
     <string name="appointment_reschedule">Promeni termin</string>
     <string name="appointment_cancel">Otkaži termin</string>
     <string name="appointment_cancel_title">Otkaži termin?</string>
-    <string name="appointment_cancel_text">Termin %1$s biće otkazan, a vreme oslobođeno za druge.</string>
+    <string name="appointment_cancel_text">Otkazuješ termin: %1$s. Vreme će biti oslobođeno za druge.</string>
     <string name="appointment_cancel_confirm">Da, otkaži</string>
     <string name="appointment_keep">Zadrži termin</string>
     <string name="appointment_canceled">Termin je otkazan.</string>
     <string name="appointment_deadline_title">Pozovi salon</string>
     <string name="appointment_deadline_text">Rok za otkazivanje i promenu (%1$d h pre termina) je prošao. Pozovi salon i dogovorite se direktno.</string>
-    <string name="appointment_deadline_until">Promena i otkazivanje mogući su do %1$s.</string>
+    <string name="appointment_deadline_until">Rok za promenu i otkazivanje: %1$s.</string>
     <string name="appointment_call_salon">Pozovi salon</string>
     <string name="appointment_not_found">Termin nije pronađen.</string>
     <string name="appointment_review_title">Kako je bilo?</string>

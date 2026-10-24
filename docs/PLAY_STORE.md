@@ -14,8 +14,8 @@ Podaci za stranicu aplikacije i obrasce u Play Console-u.
 | Zemlje | Srbija (i druge po želji) |
 | Cena | besplatno, bez reklama i kupovina u aplikaciji |
 | E-pošta podrške | adresa tima (obavezna; politika privatnosti i stranica za brisanje naloga upućuju na nju) |
-| Politika privatnosti | `https://<projekat>.web.app/privatnost` — isti tekst kao ekran u aplikaciji (Profil → Politika privatnosti) |
-| Brisanje naloga (web) | `https://<projekat>.web.app/brisanje-naloga` |
+| Politika privatnosti | `https://<projekat>.web.app/privatnost` ili na GitHub Pages `https://<korisnik>.github.io/<repozitorijum>/privatnost.html` — isti tekst kao ekran u aplikaciji (Profil → Politika privatnosti) |
+| Brisanje naloga (web) | `https://<projekat>.web.app/brisanje-naloga` ili `https://<korisnik>.github.io/<repozitorijum>/brisanje-naloga.html` |
 
 ## Kratak opis (≤ 80 znakova)
 

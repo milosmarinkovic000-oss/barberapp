@@ -68,7 +68,6 @@ import rs.termin.app.feature.calendar.BlockTimeSheet
 import rs.termin.app.feature.calendar.timeOffKindLabel
 import java.time.Clock
 import java.time.Instant
-import java.time.LocalDate
 import java.time.LocalTime
 
 data class TimeOffUiState(
@@ -207,7 +206,7 @@ fun TimeOffScreen(stylistId: String, onBack: () -> Unit) {
         BlockTimeSheet(
             session = session,
             stylistId = stylistId,
-            date = LocalDate.now(BelgradeZone),
+            date = state.now.atZone(BelgradeZone).toLocalDate(),
             from = null,
             key = key,
             onDismiss = { sheetKey = null },

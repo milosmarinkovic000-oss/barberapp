@@ -103,7 +103,7 @@ class CalendarViewModel @Inject constructor(
     private val clock: Clock,
 ) : ViewModel() {
 
-    private val local = MutableStateFlow(CalendarUiState(date = LocalDate.now(clock.withZone(BelgradeZone))))
+    private val local = MutableStateFlow(CalendarUiState(date = LocalDate.now(clock.withZone(BelgradeZone)), now = clock.instant()))
     private val retry = MutableStateFlow(0)
 
     private val ticker: Flow<Instant> = flow {

@@ -1,0 +1,42 @@
+name: Pages
+
+# Javni sajt (hosting/public: početna sa snimcima aplikacije, politika privatnosti, brisanje naloga)
+# na GitHub Pages. Backend i deljeni linkovi salona ostaju na Firebase-u (README, „Prelazak na produkciju“).
+on:
+  push:
+    branches: [main]
+    paths:
+      - "hosting/public/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Jedno objavljivanje u isto vreme; započeto se ne prekida.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: hosting/public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

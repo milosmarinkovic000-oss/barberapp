@@ -78,7 +78,6 @@ import rs.termin.app.core.designsystem.component.TerminPhoto
 import rs.termin.app.core.designsystem.component.raised
 import rs.termin.app.core.designsystem.icon.TerminIcon
 import rs.termin.app.core.designsystem.icon.TerminIconImage
-import rs.termin.app.core.domain.model.BelgradeZone
 import rs.termin.app.core.domain.model.Review
 import rs.termin.app.core.domain.model.Salon
 import rs.termin.app.core.domain.model.Service
@@ -194,6 +193,7 @@ private fun SalonLoaded(
     val listState = rememberLazyListState()
     val motion = TerminTheme.motion
     val f = formatter
+    val today = f.date(state.now)
     val tabs = buildList {
         add(SalonTab.Services)
         add(SalonTab.Stylists)
@@ -213,7 +213,7 @@ private fun SalonLoaded(
                 )
             }
             item(key = "title", contentType = "title") {
-                TitleBlock(data.salon, state.favorite, onToggleFavorite)
+                TitleBlock(data.salon, state.favorite, today, onToggleFavorite)
             }
             stickyHeader(key = "tabs", contentType = "tabs") {
                 SalonTabs(tabs, state.tab, onTab)
@@ -222,7 +222,7 @@ private fun SalonLoaded(
                 SalonTab.Services -> servicesTab(data, state, onToggleService, f)
                 SalonTab.Stylists -> stylistsTab(data, state, onOpenStylist, f)
                 SalonTab.Reviews -> reviewsTab(data.reviews, f)
-                SalonTab.Info -> item(key = "info", contentType = "info") { InfoTab(data.salon, f) }
+                SalonTab.Info -> item(key = "info", contentType = "info") { InfoTab(data.salon, today, f) }
             }
         }
         BookingBar(
@@ -273,12 +273,11 @@ private fun Gallery(salon: Salon, modifier: Modifier) {
 }
 
 @Composable
-private fun TitleBlock(salon: Salon, favorite: Boolean, onToggleFavorite: () -> Unit) {
+private fun TitleBlock(salon: Salon, favorite: Boolean, today: LocalDate, onToggleFavorite: () -> Unit) {
     val colors = TerminTheme.colors
     val spacing = TerminTheme.spacing
     val f = formatter
     val context = LocalContext.current
-    val today = LocalDate.now(BelgradeZone)
     val hoursToday = salon.workingHours.on(today.dayOfWeek)
     val shareText = stringResource(R.string.salon_share_text, salon.name, salon.address, Actions.salonLink(salon.id))
     val shareTitle = stringResource(R.string.salon_share_title)
@@ -514,11 +513,10 @@ fun StarsRow(rating: Int) {
 }
 
 @Composable
-private fun InfoTab(salon: Salon, f: Formatter) {
+private fun InfoTab(salon: Salon, today: LocalDate, f: Formatter) {
     val colors = TerminTheme.colors
     val spacing = TerminTheme.spacing
     val context = LocalContext.current
-    val today = LocalDate.now(BelgradeZone).dayOfWeek
     Column(Modifier.padding(spacing.gutter), verticalArrangement = Arrangement.spacedBy(spacing.md)) {
         if (salon.description.isNotBlank()) {
             InfoSection(stringResource(R.string.salon_about)) { Text(salon.description, style = TerminTheme.type.body, color = colors.text) }
@@ -526,17 +524,17 @@ private fun InfoTab(salon: Salon, f: Formatter) {
         InfoSection(stringResource(R.string.salon_hours)) {
             DayOfWeek.entries.forEach { day ->
                 val ranges = salon.workingHours.on(day)
-                val weekday = f.dayLong(LocalDate.now(BelgradeZone).with(java.time.temporal.TemporalAdjusters.nextOrSame(day))).substringBefore(',')
+                val weekday = f.dayLong(today.with(java.time.temporal.TemporalAdjusters.nextOrSame(day))).substringBefore(',')
                 Row(Modifier.fillMaxWidth().padding(vertical = 2.dp)) {
                     Text(
                         weekday.replaceFirstChar { it.uppercase() },
-                        style = if (day == today) TerminTheme.type.bodyStrong else TerminTheme.type.body,
+                        style = if (day == today.dayOfWeek) TerminTheme.type.bodyStrong else TerminTheme.type.body,
                         color = colors.text,
                         modifier = Modifier.weight(1f),
                     )
                     Text(
                         if (ranges.isEmpty()) stringResource(R.string.salon_closed) else ranges.joinToString(", ") { "${f.time(it.start)}–${f.time(it.end)}" },
-                        style = if (day == today) TerminTheme.type.bodyStrong else TerminTheme.type.body,
+                        style = if (day == today.dayOfWeek) TerminTheme.type.bodyStrong else TerminTheme.type.body,
                         color = if (ranges.isEmpty()) colors.textSecondary else colors.text,
                     )
                 }

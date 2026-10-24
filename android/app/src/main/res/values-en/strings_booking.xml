@@ -44,7 +44,7 @@
     <string name="booking_current">Current appointment: %1$s</string>
 
     <string name="success_title">You\'re booked!</string>
-    <string name="success_subtitle">%1$s is expecting you %2$s.</string>
+    <string name="success_subtitle">%1$s is expecting you: %2$s.</string>
     <string name="success_add_calendar">Add to calendar</string>
     <string name="success_share">Share</string>
     <string name="success_share_text">I booked an appointment: %1$s, %2$s.</string>
