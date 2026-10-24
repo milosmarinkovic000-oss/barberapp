@@ -64,7 +64,7 @@ data class ManualBookingUiState(
     val error: Throwable? = null,
 ) {
     val selectedServices: List<Service> get() = services.filter { it.id in serviceIds }
-    val availableServices: List<Service> get() = services.filter { it.active && (stylistId == null || it.stylistIds.isEmpty() || stylistId in it.stylistIds) }
+    val availableServices: List<Service> get() = services.filter { it.active && (stylistId == null || stylistId in it.stylistIds) }
     val phoneE164: String? get() = phone.takeIf { it.isNotBlank() }?.let(PhoneNumbers::toE164)
     val phoneValid: Boolean get() = phone.isBlank() || phoneE164 != null
     val valid: Boolean get() = name.trim().length >= 2 && serviceIds.isNotEmpty() && stylistId != null && phoneValid && (walkIn || start != null)
@@ -99,7 +99,7 @@ class ManualBookingViewModel @Inject constructor(
 
     fun selectStylist(id: String) {
         state.update { s ->
-            val allowed = s.services.filter { id in it.stylistIds || it.stylistIds.isEmpty() }.map { it.id }.toSet()
+            val allowed = s.services.filter { id in it.stylistIds }.map { it.id }.toSet()
             s.copy(stylistId = id, serviceIds = s.serviceIds.intersect(allowed))
         }
         refreshSlots()

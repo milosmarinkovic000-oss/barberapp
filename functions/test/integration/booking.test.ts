@@ -307,6 +307,8 @@ describe("nalozi", () => {
     expect(synced.stylistId).toBe(invite.stylistId);
     const stylist = await db.collection("salons").doc(salon.salonId).collection("stylists").doc(invite.stylistId).get();
     expect(stylist.data()?.uid).toBe("newbie");
+    const haircut = await db.collection("salons").doc(salon.salonId).collection("services").doc(salon.haircut).get();
+    expect(haircut.data()?.stylistIds).toContain(invite.stylistId);
   });
 
   it("brisanje naloga oslobađa buduće termine i briše lične podatke", async () => {

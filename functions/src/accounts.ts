@@ -137,6 +137,13 @@ export async function inviteStylist(caller: Caller, input: Input<"inviteStylist"
     createdAt: FieldValue.serverTimestamp(),
     updatedAt: FieldValue.serverTimestamp(),
   });
+  // Novi frizer podrazumevano radi sve aktivne usluge; vlasnik to menja u izmeni usluge.
+  const services = await col.services(input.salonId).where("active", "==", true).get();
+  if (!services.empty) {
+    const batch = db.batch();
+    services.docs.forEach((d) => batch.update(d.ref, { stylistIds: FieldValue.arrayUnion(ref.id) }));
+    await batch.commit();
+  }
 
   const existingUid = await auth
     .getUserByPhoneNumber(input.phone)
