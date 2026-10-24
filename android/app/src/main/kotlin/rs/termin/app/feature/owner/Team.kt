@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -57,11 +56,11 @@ import rs.termin.app.core.designsystem.component.SkeletonLines
 import rs.termin.app.core.designsystem.component.TerminBottomSheet
 import rs.termin.app.core.designsystem.component.TerminButton
 import rs.termin.app.core.designsystem.component.TerminCard
+import rs.termin.app.core.designsystem.component.TerminExtendedFab
 import rs.termin.app.core.designsystem.component.TerminListItem
 import rs.termin.app.core.designsystem.component.TerminTextField
 import rs.termin.app.core.designsystem.component.TerminTopBar
 import rs.termin.app.core.designsystem.icon.TerminIcon
-import rs.termin.app.core.designsystem.icon.TerminIconImage
 import rs.termin.app.core.domain.PhoneNumbers
 import rs.termin.app.core.domain.StaffSession
 import rs.termin.app.core.domain.model.Stylist
@@ -167,13 +166,7 @@ fun TeamScreen(onBack: () -> Unit, onOpenStylist: (String) -> Unit, viewModel: T
         containerColor = colors.background,
         topBar = { TerminTopBar(stringResource(R.string.team_title), onBack = onBack) },
         floatingActionButton = {
-            ExtendedFloatingActionButton(
-                onClick = viewModel::openInvite,
-                containerColor = colors.accent,
-                contentColor = colors.onAccent,
-                icon = { TerminIconImage(TerminIcon.PersonAdd, contentDescription = null, tint = colors.onAccent) },
-                text = { Text(stringResource(R.string.team_invite), style = TerminTheme.type.button) },
-            )
+            TerminExtendedFab(stringResource(R.string.team_invite), TerminIcon.PersonAdd, viewModel::openInvite)
         },
     ) { padding ->
         when (val list = state.stylists) {

@@ -11,9 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -66,12 +64,12 @@ import rs.termin.app.core.designsystem.component.TerminButton
 import rs.termin.app.core.designsystem.component.TerminCard
 import rs.termin.app.core.designsystem.component.TerminChip
 import rs.termin.app.core.designsystem.component.TerminDialog
+import rs.termin.app.core.designsystem.component.TerminExtendedFab
 import rs.termin.app.core.designsystem.component.TerminListItem
 import rs.termin.app.core.designsystem.component.TerminSwitchRow
 import rs.termin.app.core.designsystem.component.TerminTextField
 import rs.termin.app.core.designsystem.component.TerminTopBar
 import rs.termin.app.core.designsystem.icon.TerminIcon
-import rs.termin.app.core.designsystem.icon.TerminIconImage
 import rs.termin.app.core.domain.model.Service
 import rs.termin.app.core.domain.model.ServiceCategory
 import rs.termin.app.core.domain.model.Stylist
@@ -123,13 +121,7 @@ fun ServicesScreen(onBack: () -> Unit, onEdit: (serviceId: String?) -> Unit, vie
         containerColor = colors.background,
         topBar = { TerminTopBar(stringResource(R.string.services_title), onBack = onBack) },
         floatingActionButton = {
-            ExtendedFloatingActionButton(
-                onClick = { onEdit(null) },
-                containerColor = colors.accent,
-                contentColor = colors.onAccent,
-                icon = { TerminIconImage(TerminIcon.Add, contentDescription = null, tint = colors.onAccent) },
-                text = { Text(stringResource(R.string.services_add), style = TerminTheme.type.button) },
-            )
+            TerminExtendedFab(stringResource(R.string.services_add), TerminIcon.Add, { onEdit(null) })
         },
     ) { padding ->
         when (val list = services) {

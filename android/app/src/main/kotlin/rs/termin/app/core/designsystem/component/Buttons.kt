@@ -15,6 +15,7 @@ import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -165,4 +166,21 @@ fun TerminIconButton(
             TerminIconImage(icon, contentDescription, tint = tint)
         }
     }
+}
+
+/**
+ * Prošireno plutajuće dugme (ikonica i natpis). Material3 skriva natpis od čitača ekrana i čita opis
+ * ikonice, pa je natpis ujedno i opis ikonice: TalkBack izgovara isto što piše na dugmetu.
+ */
+@Composable
+fun TerminExtendedFab(label: String, icon: TerminIcon, onClick: () -> Unit, modifier: Modifier = Modifier) {
+    val colors = TerminTheme.colors
+    ExtendedFloatingActionButton(
+        onClick = onClick,
+        modifier = modifier,
+        containerColor = colors.accent,
+        contentColor = colors.onAccent,
+        icon = { TerminIconImage(icon, contentDescription = label, tint = colors.onAccent) },
+        text = { Text(label, style = TerminTheme.type.button) },
+    )
 }

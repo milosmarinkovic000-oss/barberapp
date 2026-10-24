@@ -7,9 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -51,11 +49,11 @@ import rs.termin.app.core.designsystem.component.NoticeTone
 import rs.termin.app.core.designsystem.component.SkeletonLines
 import rs.termin.app.core.designsystem.component.TerminCard
 import rs.termin.app.core.designsystem.component.TerminDialog
+import rs.termin.app.core.designsystem.component.TerminExtendedFab
 import rs.termin.app.core.designsystem.component.TerminIconButton
 import rs.termin.app.core.designsystem.component.TerminListItem
 import rs.termin.app.core.designsystem.component.TerminTopBar
 import rs.termin.app.core.designsystem.icon.TerminIcon
-import rs.termin.app.core.designsystem.icon.TerminIconImage
 import rs.termin.app.core.domain.StaffSession
 import rs.termin.app.core.domain.model.BelgradeZone
 import rs.termin.app.core.domain.model.TimeOff
@@ -155,16 +153,10 @@ fun TimeOffScreen(stylistId: String, onBack: () -> Unit) {
         topBar = { TerminTopBar(stringResource(R.string.time_off_title), onBack = onBack) },
         floatingActionButton = {
             if (state.session != null) {
-                ExtendedFloatingActionButton(
-                    onClick = {
+                TerminExtendedFab(stringResource(R.string.time_off_add), TerminIcon.Add, {
                         counter += 1
                         sheetKey = "timeoff-sheet-$counter"
-                    },
-                    containerColor = colors.accent,
-                    contentColor = colors.onAccent,
-                    icon = { TerminIconImage(TerminIcon.Add, contentDescription = null, tint = colors.onAccent) },
-                    text = { Text(stringResource(R.string.time_off_add), style = TerminTheme.type.button) },
-                )
+                })
             }
         },
     ) { padding ->

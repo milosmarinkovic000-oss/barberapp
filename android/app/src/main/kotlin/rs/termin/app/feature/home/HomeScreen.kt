@@ -45,6 +45,7 @@ import rs.termin.app.core.designsystem.component.EmptyState
 import rs.termin.app.core.designsystem.component.ErrorState
 import rs.termin.app.core.designsystem.component.Illustration
 import rs.termin.app.core.designsystem.component.Notice
+import rs.termin.app.core.designsystem.component.OfflineBanner
 import rs.termin.app.core.designsystem.component.SectionHeader
 import rs.termin.app.core.designsystem.component.SkeletonBox
 import rs.termin.app.core.designsystem.component.TerminButton
@@ -117,6 +118,7 @@ fun HomeContent(
         ),
         verticalArrangement = Arrangement.spacedBy(spacing.md),
     ) {
+        if (!state.online) fullWidth("offline") { OfflineBanner() }
         fullWidth("header") { Header(state.firstName, onSearch) }
         fullWidth("categories") { Categories(onSearch) }
         fullWidth("free-today") { FreeToday(state, onOpenSalon, onSearch, onToggleFavorite) }

@@ -21,7 +21,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -65,6 +64,7 @@ import rs.termin.app.core.designsystem.component.SkeletonBox
 import rs.termin.app.core.designsystem.component.TerminCard
 import rs.termin.app.core.designsystem.component.TerminChip
 import rs.termin.app.core.designsystem.component.TerminDivider
+import rs.termin.app.core.designsystem.component.TerminExtendedFab
 import rs.termin.app.core.designsystem.component.TerminIconButton
 import rs.termin.app.core.designsystem.icon.TerminIcon
 import rs.termin.app.core.designsystem.icon.TerminIconImage
@@ -199,13 +199,7 @@ fun CalendarScreen(
                 ) {
                     TerminIconImage(TerminIcon.Block, contentDescription = stringResource(R.string.calendar_block))
                 }
-                ExtendedFloatingActionButton(
-                    onClick = { open(false, session.stylistFilter, state.date, null) },
-                    containerColor = colors.accent,
-                    contentColor = colors.onAccent,
-                    icon = { TerminIconImage(TerminIcon.Add, contentDescription = null, tint = colors.onAccent) },
-                    text = { Text(stringResource(R.string.calendar_new), style = TerminTheme.type.button) },
-                )
+                TerminExtendedFab(stringResource(R.string.calendar_new), TerminIcon.Add, { open(false, session.stylistFilter, state.date, null) })
             }
         }
     }

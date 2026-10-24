@@ -62,6 +62,7 @@ import rs.termin.app.core.designsystem.component.EmptyState
 import rs.termin.app.core.designsystem.component.ErrorState
 import rs.termin.app.core.designsystem.component.Illustration
 import rs.termin.app.core.designsystem.component.Notice
+import rs.termin.app.core.designsystem.component.OfflineBanner
 import rs.termin.app.core.designsystem.component.SegmentedControl
 import rs.termin.app.core.designsystem.component.SkeletonBox
 import rs.termin.app.core.designsystem.component.TerminBottomSheet
@@ -138,6 +139,7 @@ fun SearchContent(
             .padding(top = contentPadding.calculateTopPadding()),
     ) {
         Column(Modifier.weight(if (wide) 0.45f else 1f).fillMaxHeight()) {
+            if (!state.online) OfflineBanner()
             SearchHeader(state, onQuery, onSubmit, onView, onOpenFilters = { showFilters = true }, onFocusConsumed = onFocusConsumed)
             Results(state, contentPadding, onRecent, onResetFilters, onRetry, onOpenSalon)
         }

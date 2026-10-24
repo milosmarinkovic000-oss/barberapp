@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.CircleShape
@@ -304,14 +305,16 @@ fun SalonBrandingScreen(onBack: () -> Unit, viewModel: SalonBrandingViewModel = 
             Notice(stringResource(R.string.branding_cover_none), icon = TerminIcon.PhotoLibrary)
         } else {
             LazyRow(Modifier.selectableGroup(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                items(salon.photos, key = { it }) { path ->
+                itemsIndexed(salon.photos, key = { _, path -> path }) { index, path ->
                     val selected = path == state.cover
+                    val label = stringResource(R.string.branding_cover_option, index + 1)
                     Box(
                         Modifier
                             .width(140.dp)
                             .clip(TerminTheme.radii.mediumShape)
                             .border(BorderStroke(if (selected) 3.dp else 0.dp, colors.accent), TerminTheme.radii.mediumShape)
-                            .selectable(selected = selected, onClick = { viewModel.selectCover(path) }, role = Role.RadioButton),
+                            .selectable(selected = selected, onClick = { viewModel.selectCover(path) }, role = Role.RadioButton)
+                            .semantics { contentDescription = label },
                     ) {
                         TerminPhoto(images.url(path, ImageSize.Thumb), contentDescription = null, modifier = Modifier.fillMaxWidth().aspectRatio(4f / 3f))
                         if (selected) {

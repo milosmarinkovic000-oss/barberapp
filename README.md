@@ -53,7 +53,7 @@ npm test                                   # Functions: dostupnost, istovremeni 
 npm run lint                               # ESLint + TypeScript
 cd android
 ./gradlew lintDebug                        # lint, upozorenja su greške
-./gradlew verifyRoborazziDebug             # unit + UI test toka zakazivanja + 78 snimaka ekrana
+./gradlew verifyRoborazziDebug             # unit, UI, cela aplikacija (Hilt + lažni backend) i 78 snimaka ekrana
 ./gradlew recordRoborazziDebug             # ponovno snimanje referentnih snimaka (posle namerne izmene izgleda)
 ./gradlew :baselineprofile:connectedBenchmarkReleaseAndroidTest   # Macrobenchmark (uređaj + `npm run demo`)
 ./gradlew :app:generateBaselineProfile     # baseline profil (uređaj + `npm run demo`)

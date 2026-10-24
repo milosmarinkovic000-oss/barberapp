@@ -143,6 +143,15 @@ postoji u interfejsu: svaki ulaz (meni, dugme, ekran, tab) proverava zastavicu.
   prave ručno sa lažnim repozitorijumima u memoriji (`testing/Fakes.kt`), koji simuliraju server
   (zauzeti slotovi, `SLOT_TAKEN` sa osveženim slotovima). MockK se koristi za use case-ove, Turbine za
   tokove stanja.
+- **Test cele aplikacije** (`AppJourneyTest`): pošto ovde nema Android emulatora, prava `MainActivity` se
+  pokreće pod Robolectric-om sa Hilt-om (`HiltTestApplication`), a `@TestInstallIn` menja samo sloj
+  podataka (`FakeDataModule`) i sat (`TestCommonModule`, nepomerljiv: ponedeljak 2. 11. 2026. u 8:00).
+  Sve ostalo je kao u produkciji: faze, navigacija, deep linkovi, ViewModel-i i ekrani. Korisnik prolazi
+  kroz uvod, prijavu, zakazivanje, otkazivanje, rad bez interneta, a vlasnik i frizer kroz kalendar,
+  ručni unos i blokadu vremena.
+- **Provera za čitač ekrana**: na svakom ekranu klijenta i vlasnika test proverava da svako dugme i polje
+  ima naziv koji TalkBack izgovara (tekst ili opis). Material3 1.4 skriva natpis proširenog plutajućeg
+  dugmeta i čita opis ikonice, pa `TerminExtendedFab` isti natpis daje i ikonici.
 - **Snimci ekrana**: Roborazzi (Robolectric „native graphics“ crta pravi Compose sa pravim fontovima).
   Snimci su upola smanjeni da repozitorijum ostane mali; matrica: mali, veliki i preklopni telefon i
   tablet; svetla i tamna tema; slova 200 %; stil A i stilovi B, D, E.

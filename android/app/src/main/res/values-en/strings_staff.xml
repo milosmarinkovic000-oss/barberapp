@@ -248,6 +248,7 @@
     <string name="branding_accent">Salon color</string>
     <string name="branding_accent_text">The color is used on the salon page and during booking.</string>
     <string name="branding_accent_option">Color %1$d</string>
+    <string name="branding_cover_option">Cover photo %1$d</string>
     <string name="branding_preview">How customers see the salon</string>
     <string name="branding_saved">Appearance saved.</string>
 </resources>
