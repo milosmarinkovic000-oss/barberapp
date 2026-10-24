@@ -323,7 +323,17 @@ fun SalonInfoScreen(onBack: () -> Unit, viewModel: SalonInfoViewModel = hiltView
                 TerminDivider()
                 Stepper(stringResource(R.string.info_horizon), r.horizonDays, { v -> viewModel.edit { it.copy(rules = r.copy(horizonDays = v)) } }, 1..90, 1, { it.toString() })
                 TerminDivider()
-                Stepper(stringResource(R.string.info_slot_step), r.slotStepMin, { v -> viewModel.edit { it.copy(rules = r.copy(slotStepMin = v)) } }, 5..60, 5, { f.duration(it) })
+                // Isti skup vrednosti koji dozvoljavaju pravila baze (firestore.rules).
+                Text(stringResource(R.string.info_slot_step), style = TerminTheme.type.callout, color = colors.textSecondary, modifier = Modifier.padding(top = 8.dp))
+                SegmentedControl(
+                    options = SLOT_STEPS,
+                    selected = r.slotStepMin.takeIf { it in SLOT_STEPS } ?: DEFAULT_SLOT_STEP,
+                    label = { it.toString() },
+                    onSelect = { v -> viewModel.edit { it.copy(rules = r.copy(slotStepMin = v)) } },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 8.dp),
+                )
                 TerminDivider()
                 Stepper(stringResource(R.string.info_buffer), r.bufferMin, { v -> viewModel.edit { it.copy(rules = r.copy(bufferMin = v)) } }, 0..60, 5, { f.duration(it) })
             }
@@ -361,6 +371,8 @@ fun SalonInfoScreen(onBack: () -> Unit, viewModel: SalonInfoViewModel = hiltView
     }
 }
 
+private val SLOT_STEPS = listOf(5, 10, 15, 20, 30, 60)
+private const val DEFAULT_SLOT_STEP = 15
 private const val MAX_FIELD = 80
 private const val MAX_DESCRIPTION = 600
 private const val MAX_PHONE = 20

@@ -102,7 +102,7 @@
     <string name="privacy_why_title">Why we process it</string>
     <string name="privacy_why_body">To create and confirm bookings, send reminders and changes, prevent abuse (rate limiting and app integrity checks) and fix bugs. We do not sell data or use it for advertising.</string>
     <string name="privacy_who_title">Who sees your data</string>
-    <string name="privacy_who_body">The salon you book with sees your name, phone number, appointment and note, and your visit history at that salon. A stylist sees their own appointments. Ratings are shown publicly with your first name. Data is stored on Google Firebase infrastructure in the European Union.</string>
+    <string name="privacy_who_body">The salon you book with sees your name, phone number, appointment and note, and your visit history at that salon. A stylist sees their own appointments. Ratings are shown publicly with your first name and last initial. Data is stored on Google Firebase infrastructure in the European Union.</string>
     <string name="privacy_calendars_title">Staff calendars</string>
     <string name="privacy_calendars_body">When a stylist connects Google Calendar, Calendly or Cal.com, the server stores encrypted access tokens and uses them only to sync busy times and add appointments. The connection can be removed at any time.</string>
     <string name="privacy_retention_title">How long</string>

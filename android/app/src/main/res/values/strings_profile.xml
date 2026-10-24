@@ -102,7 +102,7 @@
     <string name="privacy_why_title">Zašto ih obrađujemo</string>
     <string name="privacy_why_body">Da bismo napravili i potvrdili rezervaciju, poslali podsetnike i promene termina, sprečili zloupotrebe (ograničenje broja zahteva i provera ispravnosti aplikacije) i ispravili greške. Ne prodajemo podatke i ne koristimo ih za reklame.</string>
     <string name="privacy_who_title">Ko vidi tvoje podatke</string>
-    <string name="privacy_who_body">Salon kod kog zakažeš vidi tvoje ime, broj telefona, termin i napomenu, kao i istoriju tvojih poseta tom salonu. Frizer vidi svoje termine. Ocene se prikazuju javno sa imenom (bez prezimena). Podaci se čuvaju na Google Firebase infrastrukturi u Evropskoj uniji.</string>
+    <string name="privacy_who_body">Salon kod kog zakažeš vidi tvoje ime, broj telefona, termin i napomenu, kao i istoriju tvojih poseta tom salonu. Frizer vidi svoje termine. Ocene se prikazuju javno sa imenom i početnim slovom prezimena. Podaci se čuvaju na Google Firebase infrastrukturi u Evropskoj uniji.</string>
     <string name="privacy_calendars_title">Kalendari osoblja</string>
     <string name="privacy_calendars_body">Kada frizer poveže Google Calendar, Calendly ili Cal.com, server čuva šifrovane pristupne tokene i koristi ih isključivo za usklađivanje zauzetosti i upis termina. Veza se može prekinuti u svakom trenutku.</string>
     <string name="privacy_retention_title">Koliko dugo</string>
