@@ -1,8 +1,8 @@
 name: Functions
 
+# Na svaki push (svaka grana) i pull request.
 on:
   push:
-    branches: [main]
     paths:
       - "functions/**"
       - "seed/**"

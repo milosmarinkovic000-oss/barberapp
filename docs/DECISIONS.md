@@ -169,7 +169,8 @@ postoji u interfejsu: svaki ulaz (meni, dugme, ekran, tab) proverava zastavicu.
 ## Javni sajt
 
 - **GitHub Pages** objavljuje samo statički sajt (`hosting/public`: početna sa snimcima, politika privatnosti,
-  brisanje naloga), workflow `.github/workflows/pages.yml` sa grane `main`. Backend ne može na GitHub Pages
+  brisanje naloga), workflow `.github/workflows/pages.yml` sa podrazumevane grane repozitorijuma (u ovom
+  repozitorijumu nema grane `main`). Backend ne može na GitHub Pages
   (nema servera, baze ni funkcija), pa ostaje na Firebase-u.
 - **Deljeni linkovi salona** ostaju na Firebase Hosting-u (`<projekat>.web.app/s/{id}`): traže preusmeravanje
   `/s/** → s.html` i `/.well-known/assetlinks.json` na korenu domena, a GitHub Pages projekta nema ni jedno.

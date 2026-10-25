@@ -67,7 +67,8 @@ CI (GitHub Actions) pokreće isto: `.github/workflows/android.yml` i `.github/wo
 brisanje naloga (Google Play traži javne adrese za obe). Objavljuje ga workflow `Pages`:
 
 1. Na GitHub-u, jednom: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-2. Svaka izmena u `hosting/public` na grani `main` objavljuje sajt; ručno: **Actions → Pages → Run workflow**.
+2. Svaka izmena u `hosting/public` na podrazumevanoj grani repozitorijuma (**Settings → General → Default
+   branch**) objavljuje sajt; ručno: **Actions → Pages → Run workflow** (za podrazumevanu granu).
 
 Adresa je `https://<korisnik>.github.io/<repozitorijum>/`, za ovaj repozitorijum
 <https://milosmarinkovic000-oss.github.io/barberapp/> (politika privatnosti: `privatnost.html`, brisanje

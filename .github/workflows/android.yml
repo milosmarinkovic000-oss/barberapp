@@ -1,11 +1,11 @@
 name: Android
 
+# Na svaki push (svaka grana) i pull request. Snimci za sajt zavise i od seed fotografija.
 on:
   push:
-    branches: [main]
-    paths: ["android/**", ".github/workflows/android.yml"]
+    paths: ["android/**", "hosting/public/screens/**", "seed/images/**", ".github/workflows/android.yml"]
   pull_request:
-    paths: ["android/**", ".github/workflows/android.yml"]
+    paths: ["android/**", "hosting/public/screens/**", "seed/images/**", ".github/workflows/android.yml"]
   workflow_dispatch:
 
 concurrency:
